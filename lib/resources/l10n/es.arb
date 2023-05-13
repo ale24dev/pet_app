@@ -1,0 +1,107 @@
+{
+  "@@locale": "es",
+
+  "seeAll": "Ver todo",
+
+  "onboardingFirstPageTitle": "Compra desde la comodidad de tu casa",
+  "onboardingFirstPageContent": "Puedes comprar todo lo que necesitan tus familiares en cuba desde la comodidad de tu casa",
+  "onboardingSecondPageTitle": "Tu familia lo recibirá desde su hogar",
+  "onboardingSecondPageContent": "Puedes comprar todo lo que necesitan tus familiares en cuba desde la comodidad de tu casa",
+  "onboardingThirdPageTitle": "Disfruta de la compra junto a tu familia",
+  "onboardingThirdPageContent": "Puedes comprar todo lo que necesitan tus familiares en cuba desde la comodidad de tu casa",
+  "skipOnboardingButton": "Saltar",
+  "finishOnboardingButton": "Comenzar",
+
+  "loginOrSignupLoginButton": "Iniciar sesión",
+  "loginOrSignupSignupButton": "Crear cuenta",
+  "loginScreenLoginTitle": "Inicia sesión",
+  "loginScreenLoginButton": "Iniciar sesión",
+  "loginScreenEmail": "Correo electrónico",
+  "loginScreenPassword": "Contraseña",
+  "loginScreenSwitchRemeber": "Recordarme",
+  "loginScreenForgotPassword": "¿Olvidaste tu contraseña?",
+  "loginScreenNewUser": "¿Nuevo usuario?",
+  "loginScreenCreateAccount": "Crear cuenta",
+
+  "signupScreenTitle": "Crear cuenta",
+  "signupScreenButton": "Crear cuenta",
+  "signupScreenName": "Nombre",
+  "signupScreenLastname": "Apellidos",
+  "signupScreenPhone": "Teléfono",
+  "signupScreenEmail": "Correo electrónico",
+  "signupScreenPassword": "Contraseña",
+  "signupScreenConfirmPassword": "Confirmar contraseña",
+  "signupScreenHaveAccount": "¿Ya tienes cuenta?",
+  "signupScreenAccess": "Acceder",
+  "signupScreenSearchCountry": "Buscar país",
+  "signupScreenInvalidNumber": "Número de teléfono inválido",
+
+  "filterScreenTitle": "Filtros",
+  "filterScreenCategoriesSection": "CATEGORÍAS",
+  "filterScreenReviewSection": "VALORACIÓN",
+  "filterScreenOthersSection": "OTROS",
+  "searchBarHint": "¿Que estás buscando?",
+
+  "profileScreenTitle": "Mi perfil",
+  "profileScreenSectionMyAccount": "MI CUENTA",
+  "profileScreenWishlist": "Lista de deseos",
+  "profileScreenRecipient": "Mis destinatarios",
+  "profileScreenMyOrders": "Mis órdenes",
+  "profileScreenLogout": "Cerrar sesión",
+  "profileScreenDeleteAccount": "Eliminar cuenta",
+  "profileScreenSectionOthers": "OTROS DE INTERÉS",
+  "profileScreenAboutUs": "Sobre nosotros",
+  "profileScreenShipments": "Envíos",
+  "profileScreenPayments": "Pagos",
+  "profileScreenFAQ": "Preguntas frecuentes",
+  "profileScreenSectionContacts": "CONTACTOS",
+  "profileScreenPhone": "Teléfono",
+  "profileScreenWeb": "Sitio web",
+  "profileScreenEmail": "Email",
+
+  "categoriesScreenTitle": "Categorías",
+  "categoriesScreenTopSellerSection": "Productos más vendidos",
+
+  "subCategoryScreenRecentSection": "Más recientes",
+
+  "menu": "Menú",
+
+  "cartAddToCart" : "Añadir al carrito",
+  "cartTotal": "Total:",
+
+  "locationScreenAppBarTitle": "Mi ubicación",
+  "locationScreenInfoLocation": "Serán mostrados los productos de la tienda que pueden ser entregados en la provincia / municipio que seleccione. \n\nSi lo desea luego de culminar una compra puede cambiar el destino para una nueva compra.",
+  "locationScreenInfoCart": "Ahora podrá personalizar su carrito para cada provincia que desee realizar una compra.",
+  "locationScreenTown": "Municipio",
+  "locationScreenProvince": "Provincia",
+
+  "productsHomeCategoriesSection": "Categorías",
+  "productsHomeOfferSection": "Ofertas",
+  "productsHomeRecentSection": "Más recientes",
+  "productsHomeDeliveryAt": "Entrega en: ",
+
+  "productDetailTitle": "Detalles",
+  "productDetailReviewSectionSubtitle": "Valoración de los clientes",
+
+  "productDetailReviewsAmount" : "{count, plural, zero{No hay valoraciones} one{1 valoración} other{{count} valoraciones}}",
+  "@productDetailReviewsAmount" : {
+    "description" : "Amount of reviews in the product detail screen",
+    "placeholders": {
+      "count": {}
+    }
+  },
+
+  "profileEditChangePassword": "Cambiar contraseña",
+  "profileEditCurrentPassword": "Contraseña actual",
+  "profileEditNewPassword": "Nueva contraseña",
+  "profileEditConfirmPassword": "Confirmar contraseña",
+  "profileEditSavePassword": "Guardar",
+  "profileEditTitle": "Editar perfil",
+  "profileEditDoYouWantToChangePassword": "¿Desea cambiar su contraseña?",
+  "profileEditChange": "Cambiar",
+
+   "cartScreenTitle": "Mi carrito",
+   "cartScreenCheckout": "Ir a pagar",
+   "cartScreenFreeShipping": "Envíos gratis"
+}
+

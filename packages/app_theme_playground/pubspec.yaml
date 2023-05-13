@@ -1,0 +1,19 @@
+name: app_theme_playground
+description: A place to tweak your theme and see how it affects material widgets.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+  flutter: 3.3.0
+
+dependencies:
+  material_playground:
+    git:
+      url: https://github.com/fabiancrx/material_playground
+      ref: e11a85f
+  app_theme:
+    path: ../app_theme
+
+flutter:
+  uses-material-design: true
