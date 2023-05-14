@@ -16,6 +16,16 @@
   "loginScreenPassword": "Contraseña",
   "loginScreenLoginButton": "Iniciar Sesión",
   "loginScreenHaveAccount": "¿No tienes cuenta?",
-  "loginScreenRegisterButton": "Registrarse"
+  "loginScreenRegisterButton": "Registrarse",
+  
+  "signupScreenTitle": "Crear cuenta",
+  "signupScreenEmail": "Correo electrónico",
+  "signupScreenPassword": "Contraseña",
+  "signupScreenConfirmPassword": "Confirmar contraseña",
+  "signupScreenCreateAccountButton": "Crear cuenta",
+  "signupScreenHaveAccount": "¿Ya tienes cuenta?",
+  "signupScreenLogin": "Iniciar sesión"
+
+
 }
 

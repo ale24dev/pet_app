@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/src/feature/auth/login_screen.dart';
+import 'package:pet_app/src/feature/auth/signup_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pet_app/src/core/services/providers.dart';
@@ -79,7 +80,7 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
             name: AppRoute.signUp.name,
             pageBuilder: (context, state) => MaterialPage(
               key: state.pageKey,
-              child: NotFoundScreen.unimplemented(name: state.location),
+              child: const SignupScreen(),
             ),
           ),
         ],
