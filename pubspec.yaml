@@ -57,3 +57,6 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat-VariableFont_wght.ttf
+    - family:  PetIcon
+      fonts:
+       - asset: assets/fonts/PetIcon.ttf

@@ -80,7 +80,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       builder:
                           (BuildContext context, WidgetRef ref, Widget? child) {
                         return GenericButton(
-                            text: context.l10n.onboardingScreenGetStartedButton,
+                            widget: Text(
+                                context.l10n.onboardingScreenGetStartedButton),
                             function: () async {
                               await ref.read(preferencesProvider).setBool(
                                   LocalStorageKey.isFirstOpen.key, false);

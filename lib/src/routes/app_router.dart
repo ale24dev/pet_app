@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pet_app/src/feature/auth/login_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pet_app/src/core/services/providers.dart';
@@ -70,7 +71,7 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
             name: AppRoute.login.name,
             pageBuilder: (context, state) => MaterialPage(
               key: state.pageKey,
-              child: NotFoundScreen.unimplemented(name: state.location),
+              child: const LoginScreen(),
             ),
           ),
           GoRoute(
@@ -81,14 +82,6 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
               child: NotFoundScreen.unimplemented(name: state.location),
             ),
           ),
-          // GoRoute(
-          //   path: 'home',
-          //   name: AppRoute.home.name,
-          //   pageBuilder: (context, state) => MaterialPage(
-          //     key: state.pageKey,
-          //     child: NotFoundScreen.unimplemented(name: state.location),
-          //   ),
-          // ),
         ],
       ),
     ],
