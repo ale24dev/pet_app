@@ -28,12 +28,11 @@ class AppTextStyle {
       );
 
   TextStyle get onboardTitle => _default.copyWith(
-        fontSize: 30,
-        fontWeight: FontWeight.w600,
-        color: AppColor.onboardText,
-        letterSpacing: -.6,
-        height: 1.15,
-      );
+      fontSize: 30,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -.2,
+      height: 1.15,
+      fontFamily: fontFamily);
 
   TextStyle get onboardSubTitle => _default.copyWith(
         fontSize: 13,
@@ -51,7 +50,7 @@ class AppTextStyle {
         height: 1.3,
       );
 
-  TextStyle get frostButton => TextStyle(
+  TextStyle get frostButton => const TextStyle(
         fontFamily: secondaryFontFamily,
         fontSize: 12,
         color: Colors.white,
@@ -145,8 +144,11 @@ class AppTextStyle {
         color: AppColor.headerText,
       );
 
-  TextStyle get primaryButtonLeading =>
-      _default.copyWith(fontSize: 15, letterSpacing: -.2, fontWeight: FontWeight.w500, height: .9);
+  TextStyle get primaryButtonLeading => _default.copyWith(
+      fontSize: 15,
+      letterSpacing: -.2,
+      fontWeight: FontWeight.w500,
+      height: .9);
 
   TextStyle get primaryButtonTrailing => _default.copyWith(
         fontSize: 14,
@@ -201,11 +203,15 @@ class AppTextStyle {
         letterSpacing: -.6,
       );
 
-  TextStyle get body => _default.copyWith(fontSize: 14, fontWeight: FontWeight.w400);
+  TextStyle get body =>
+      _default.copyWith(fontSize: 14, fontWeight: FontWeight.w400);
 
-  TextStyle get title => _default.copyWith(fontSize: 28, fontWeight: FontWeight.w400);
+  TextStyle get title =>
+      _default.copyWith(fontSize: 28, fontWeight: FontWeight.w400);
 
-  TextStyle get label => _default.copyWith(fontSize: 20, fontWeight: FontWeight.w400);
+  TextStyle get label =>
+      _default.copyWith(fontSize: 20, fontWeight: FontWeight.w400);
 
-  TextStyle headline = _default.copyWith(fontSize: 35, fontWeight: FontWeight.w700);
+  TextStyle headline =
+      _default.copyWith(fontSize: 35, fontWeight: FontWeight.w700);
 }

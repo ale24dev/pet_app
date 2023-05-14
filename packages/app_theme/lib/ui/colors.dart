@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 /// App color palette. These colors can and should be used to construct a custom Theme
 abstract class AppColor {
-  static const primary = Color(0xFF65BE46);
+  static const primary = Color(0xFFFD9340);
   static const secondary = Color(0xFFFFB70A);
   static const container = Color(0xFFFBFEFB);
   static const containerDark = Color(0xFF2B2B2B);
@@ -22,4 +22,8 @@ abstract class AppColor {
   static const frostButtonText = Color(0xFFD9D9D9);
   static const divider = Color(0x1A707070);
   static const deliveryText = Color(0xFFACACAC);
+  static const success = Color(0xFF58C423);
+  static const warning = Color(0xFFFAAD14);
+  static const fail = Color(0xFFFF4D4F);
+  static const info = Color(0xFF1890FF);
 }

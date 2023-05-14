@@ -27,6 +27,7 @@ class AppTheme {
           ///
           outlinedButtonBorderWidth: 1,
           outlinedButtonOutlineSchemeColor: SchemeColor.primary,
+          elevatedButtonRadius: 50,
 
           ///
           inputDecoratorFillColor: AppColor.container,
@@ -76,7 +77,8 @@ class AppTheme {
   ThemeData _postProcess(ThemeData theme) {
     return theme.copyWith(
       useMaterial3: true,
-      dividerTheme: theme.dividerTheme.copyWith(thickness: 1, color: AppColor.divider),
+      dividerTheme:
+          theme.dividerTheme.copyWith(thickness: 1, color: AppColor.divider),
       textTheme: AppTextStyle().textTheme(theme.textTheme),
       appBarTheme: theme.appBarTheme.copyWith(
         color: theme.colorScheme.primaryContainer,
@@ -90,8 +92,10 @@ class AppTheme {
         ),
         surfaceTintColor: theme.colorScheme.primaryContainer,
       ),
-      bottomSheetTheme: theme.bottomSheetTheme.copyWith(surfaceTintColor: theme.colorScheme.onPrimary),
-      dialogTheme: theme.dialogTheme.copyWith(surfaceTintColor: theme.colorScheme.primaryContainer),
+      bottomSheetTheme: theme.bottomSheetTheme
+          .copyWith(surfaceTintColor: theme.colorScheme.onPrimary),
+      dialogTheme: theme.dialogTheme
+          .copyWith(surfaceTintColor: theme.colorScheme.primaryContainer),
       cardTheme: theme.cardTheme.copyWith(
           color: theme.colorScheme.surface,
           surfaceTintColor: theme.colorScheme.surface,
@@ -107,10 +111,12 @@ class AppTheme {
       ),
       searchBarTheme: theme.searchBarTheme.copyWith(
           surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent),
-          shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+          shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
           constraints: const BoxConstraints(maxHeight: 42)),
       chipTheme: theme.chipTheme.copyWith(
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           showCheckmark: false,
           backgroundColor: theme.colorScheme.onPrimary,
           selectedColor: theme.primaryColor,
@@ -125,8 +131,13 @@ class AppTheme {
     );
   }
 
-  static final defaultShadow = [const BoxShadow(color: AppColor.shadow, blurRadius: 15, offset: Offset(0, 15))];
-  static final shortShadow = [const BoxShadow(color: AppColor.shadow, blurRadius: 5, offset: Offset(0, 5))];
+  static final defaultShadow = [
+    const BoxShadow(
+        color: AppColor.shadow, blurRadius: 15, offset: Offset(0, 15))
+  ];
+  static final shortShadow = [
+    const BoxShadow(color: AppColor.shadow, blurRadius: 5, offset: Offset(0, 5))
+  ];
 }
 
 const FlexSchemeData _appFlexScheme = FlexSchemeData(
