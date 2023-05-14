@@ -32,13 +32,13 @@ class LoginScreen extends StatelessWidget {
                 textInputType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 obscureText: true),
-            const SizedBox.square(dimension: 40),
+            const SizedBox.square(dimension: 30),
             GenericButton(
                 widget: Text(context.l10n.loginScreenLoginButton),
                 function: () {
                   context.goNamed(AppRoute.home.name);
                 }),
-            const SizedBox.square(dimension: 20),
+            const SizedBox.square(dimension: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
