@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class GenericButton extends StatelessWidget {
   const GenericButton({
     super.key,
-    required this.text,
+    required this.widget,
     required this.function,
   });
 
-  final String text;
+  final Widget widget;
   final VoidCallback function;
 
   @override
@@ -21,7 +21,7 @@ class GenericButton extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
               padding: const EdgeInsets.all(8.0),
-              child: Text(text),
+              child: widget,
             )));
   }
 }

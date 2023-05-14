@@ -9,6 +9,13 @@
   "onboardingScreenThirdPageText": "Con nosotros, puedes llevar un registro detallado de la salud y el bienestar de tus mascotas, establecer recordatorios importantes para su cuidado.",
   "onboardingScreenFourPageTitle": "Gracias por elegirnos",
   "onboardingScreenFourPageText": "¡Gracias por elegir nuestra aplicación para cuidar de tus mascotas! Con nosotros, puedes mantener un registro completo de la información de tu mascota, acceder a veterinarios y tiendas de mascotas cercanas, y conectar con otros amantes de los animales.",
-  "onboardingScreenGetStartedButton": "Comenzar"
+  "onboardingScreenGetStartedButton": "Comenzar",
+
+  "loginScreenTitle": "Iniciar Sesión",
+  "loginScreenEmail": "Correo electrónico",
+  "loginScreenPassword": "Contraseña",
+  "loginScreenLoginButton": "Iniciar Sesión",
+  "loginScreenHaveAccount": "¿No tienes cuenta?",
+  "loginScreenRegisterButton": "Registrarse"
 }
 
