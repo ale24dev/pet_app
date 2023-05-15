@@ -1,9 +1,8 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'shared_preferences_storage_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pet_app/src/core/exceptions.dart';
-import 'package:pet_app/src/core/services/auth_service.dart';
 
 part 'providers.g.dart';
 
@@ -11,4 +10,7 @@ part 'providers.g.dart';
 AppPreferencesService preferences(PreferencesRef ref) =>
     throw ProviderNotOverriddenException(name: 'storageProvider');
 
-final authFormProvider = StateNotifierProvider((ref) => AuthFormNotifier(AuthForm()));
+// @Riverpod()
+// AuthFormNotifier authService(AuthServiceRef ref) => AuthFormNotifier(AuthForm());
+
+// final authFormProvider = StateNotifierProvider((ref) => AuthFormNotifier(AuthForm()));

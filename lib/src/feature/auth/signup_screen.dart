@@ -8,7 +8,6 @@ import 'package:pet_app/src/core/constants.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/routes/app_router.dart';
 import 'package:pet_app/src/widgets/generic_button.dart';
-import 'package:pet_app/src/core/services/providers.dart';
 import 'package:pet_app/src/core/services/auth_service.dart';
 import 'package:pet_app/src/core/widgets/generic_text_field.dart';
 import 'package:pet_app/src/feature/auth/constants/aut_form_type.dart';
@@ -35,8 +34,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var autFormService = ref.watch(authFormProvider) as AuthForm;
-
+    var autFormService = ref.watch(authFormServiceProvider);
     //*Navigate to Home Screen
     WidgetsBinding.instance.addPostFrameCallback(((timeStamp) {
       if (autFormService.isSubmited &&
@@ -92,7 +90,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     widget: Text(context.l10n.signupScreenCreateAccountButton),
                     function: () {
                       ref
-                          .read(authFormProvider.notifier)
+                          .read(authFormServiceProvider.notifier)
                           .onSubmitRegisterButton(
                               email: emailController.text,
                               password: passwordController.text,

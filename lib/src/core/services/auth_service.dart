@@ -1,6 +1,8 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pet_app/src/core/utils.dart';
+
+part 'auth_service.g.dart';
 
 enum FormErrorMessage { none, email, password, confirmPassword }
 
@@ -40,17 +42,21 @@ class AuthForm {
   }
 }
 
-class AuthFormNotifier extends StateNotifier<AuthForm> {
-  AuthFormNotifier(super._state);
-
-  init() {
-    state = state.copyWith(
-        email: '',
-        confirmPassword: '',
-        password: '',
-        errorMessage: null,
-        isSubmited: false);
+@riverpod
+class AuthFormService extends _$AuthFormService {
+  @override
+  AuthForm build() {
+    return AuthForm();
   }
+
+  // resetState() {
+  //   state = state.copyWith(
+  //       email: '',
+  //       password: '',
+  //       confirmPassword: '',
+  //       errorMessage: FormErrorMessage.none,
+  //       isSubmited: null);
+  // }
 
   onSubmitRegisterButton(
       {required String email,
@@ -63,6 +69,8 @@ class AuthFormNotifier extends StateNotifier<AuthForm> {
     state = state.copyWith(
         isSubmited: true,
         email: email,
+        password: password,
+        confirmPassword: confirmPassword,
         errorMessage: !emailValid
             ? FormErrorMessage.email
             : !passwordValid
