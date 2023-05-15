@@ -79,14 +79,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Consumer(
                       builder:
                           (BuildContext context, WidgetRef ref, Widget? child) {
-                        return GenericButton(
-                            widget: Text(
-                                context.l10n.onboardingScreenGetStartedButton),
-                            function: () async {
-                              await ref.read(preferencesProvider).setBool(
-                                  LocalStorageKey.isFirstOpen.key, false);
-                              if (mounted) context.goNamed(AppRoute.home.name);
-                            });
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: GenericButton(
+                              widget: Text(
+                                  context.l10n.onboardingScreenGetStartedButton),
+                              function: () async {
+                                await ref.read(preferencesProvider).setBool(
+                                    LocalStorageKey.isFirstOpen.key, false);
+                                if (mounted) context.goNamed(AppRoute.home.name);
+                              }),
+                        );
                       },
                     ),
                   ),
