@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:pet_app/resources/pet_icon.dart';
 
 class GenericTextField extends StatefulWidget {
-  const GenericTextField(
-      {super.key,
-      required this.labelText,
-      required this.textInputType,
-      required this.textInputAction,
-      this.obscureText});
+  const GenericTextField({
+    super.key,
+    required this.labelText,
+    required this.textInputType,
+    required this.textInputAction,
+    this.obscureText,
+    required this.textEditingController,
+    this.errorText,
+  });
 
   final String labelText;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
   final bool? obscureText;
+  final TextEditingController textEditingController;
+  final String? errorText;
 
   @override
   State<GenericTextField> createState() => _GenericTextFieldState();
@@ -39,6 +44,7 @@ class _GenericTextFieldState extends State<GenericTextField> {
         keyboardType: widget.textInputType,
         textInputAction: widget.textInputAction,
         obscureText: showPassword,
+        controller: widget.textEditingController,
         decoration: InputDecoration(
             labelText: widget.labelText,
             suffixIcon: widget.obscureText == null
@@ -51,7 +57,8 @@ class _GenericTextFieldState extends State<GenericTextField> {
                     },
                     icon: showPassword
                         ? const Icon(PetIcon.eye)
-                        : const Icon(PetIcon.eye_closed))),
+                        : const Icon(PetIcon.eye_closed)),
+            errorText: widget.errorText),
       ),
     );
   }

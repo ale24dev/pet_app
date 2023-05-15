@@ -17,15 +17,18 @@
   "loginScreenLoginButton": "Iniciar Sesión",
   "loginScreenHaveAccount": "¿No tienes cuenta?",
   "loginScreenRegisterButton": "Registrarse",
+  "loginScreenInvalidEmail": "Correo electrónico incorrecto",
+  "loginScreenPasswordWeek": "La contraseña debe ser mayor de 4 caracteres",
   
   "signupScreenTitle": "Crear cuenta",
   "signupScreenEmail": "Correo electrónico",
   "signupScreenPassword": "Contraseña",
+  "signupScreenInvalidEmail": "Correo electrónico incorrecto",
+  "signupScreenPasswordWeek": "La contraseña debe ser mayor de 4 caracteres",
+  "signupScreenPasswordDontMatch": "Las contraseñas no coinciden",
   "signupScreenConfirmPassword": "Confirmar contraseña",
   "signupScreenCreateAccountButton": "Crear cuenta",
   "signupScreenHaveAccount": "¿Ya tienes cuenta?",
   "signupScreenLogin": "Iniciar sesión"
-
-
 }
 
