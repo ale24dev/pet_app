@@ -9,4 +9,5 @@ class AppKeys {
 
   static const splashScreen = Key('splash-screen');
   static const onboardScreen = Key('onboarding-screen');
+  static const navBar = Key('navigation-bar');
 }

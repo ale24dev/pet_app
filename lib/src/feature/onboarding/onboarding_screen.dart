@@ -82,12 +82,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         return Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: GenericButton(
-                              widget: Text(
-                                  context.l10n.onboardingScreenGetStartedButton),
+                              widget: Text(context
+                                  .l10n.onboardingScreenGetStartedButton),
                               function: () async {
                                 await ref.read(preferencesProvider).setBool(
                                     LocalStorageKey.isFirstOpen.key, false);
-                                if (mounted) context.goNamed(AppRoute.home.name);
+                                if (mounted) {
+                                  context.goNamed(AppRoute.layout.name);
+                                }
                               }),
                         );
                       },

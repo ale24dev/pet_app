@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/src/feature/auth/login_screen.dart';
 import 'package:pet_app/src/feature/auth/signup_screen.dart';
+import 'package:pet_app/src/feature/layout/layout_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pet_app/src/core/services/providers.dart';
@@ -21,7 +22,8 @@ enum AppRoute {
   login,
   signUp,
   // Authenticated routes
-  home
+  layout,
+  route,
 }
 
 @Riverpod(keepAlive: true)
@@ -40,7 +42,7 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
     routes: [
       GoRoute(
         path: '/',
-        name: AppRoute.home.name,
+        name: AppRoute.route.name,
         builder: (context, state) => const AllRoutesScreen(),
         routes: [
           GoRoute(
@@ -81,6 +83,14 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
             pageBuilder: (context, state) => MaterialPage(
               key: state.pageKey,
               child: const SignupScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'layout',
+            name: AppRoute.layout.name,
+            pageBuilder: (context, state) => MaterialPage(
+              key: state.pageKey,
+              child: const LayoutScreen(),
             ),
           ),
         ],

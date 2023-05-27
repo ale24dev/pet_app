@@ -1,6 +1,10 @@
 {
   "@@locale": "es",
 
+  "navigationBarHome": "Inicio",
+  "navigationBarPets": "Mis mascotas",
+  "navigationBarSettings": "Configuración",
+
   "onboardingScreenFirstPageTitle": "Bienvenido a Pet Care",
   "onboardingScreenFirstPageText": "¡Bienvenido a nuestra aplicación de mascotas! Estamos emocionados de tenerte a bordo y ayudarte a cuidar a tus peludos amigos de la mejor manera posible.",
   "onboardingScreenSecondPageTitle": "Adopta un amigo",

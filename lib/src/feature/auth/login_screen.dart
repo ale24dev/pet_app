@@ -37,7 +37,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     WidgetsBinding.instance.addPostFrameCallback(((timeStamp) {
       if (autFormService.isSubmited &&
           autFormService.errorMessage == FormErrorMessage.none) {
-        context.goNamed(AppRoute.home.name);
+        context.goNamed(AppRoute.layout.name);
       }
     }));
     return Scaffold(

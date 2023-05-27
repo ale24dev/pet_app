@@ -39,7 +39,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     WidgetsBinding.instance.addPostFrameCallback(((timeStamp) {
       if (autFormService.isSubmited &&
           autFormService.errorMessage == FormErrorMessage.none) {
-        context.goNamed(AppRoute.home.name);
+        context.goNamed(AppRoute.layout.name);
       }
     }));
 

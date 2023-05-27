@@ -12,6 +12,10 @@
 ///       - asset: fonts/PetIcon.ttf
 ///
 /// 
+/// * Iconic, Copyright (C) 2012 by P.J. Onori
+///         Author:    P.J. Onori
+///         License:   SIL (http://scripts.sil.org/OFL)
+///         Homepage:  http://somerandomdude.com/work/iconic/
 /// * Material Design Icons, Copyright (C) Google, Inc
 ///         Author:    Google
 ///         License:   Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
@@ -29,7 +33,9 @@ class PetIcon {
   static const _kFontFam = 'PetIcon';
   static const String? _kFontPkg = null;
 
+  static const IconData cog = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData pets = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData home_1 = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData eye_closed = IconData(0xf366, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData eye = IconData(0xf3a8, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
