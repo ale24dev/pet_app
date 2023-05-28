@@ -380,6 +380,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.18.0"
+  intl_phone_field:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "7cf5df40bb6cbd82f64d1bb310de8587beacbd8b"
+      url: "https://github.com/ale24dev/intl_phone_field/"
+    source: git
+    version: "0.0.1+1"
   io:
     dependency: transitive
     description:

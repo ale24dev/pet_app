@@ -33,6 +33,12 @@
   "signupScreenConfirmPassword": "Confirmar contraseña",
   "signupScreenCreateAccountButton": "Crear cuenta",
   "signupScreenHaveAccount": "¿Ya tienes cuenta?",
-  "signupScreenLogin": "Iniciar sesión"
+  "signupScreenLogin": "Iniciar sesión",
+  "signupScreenSearchCountry": "Buscar país",
+  "signupScreenPhone": "Número de teléfono",
+  
+
+  "noResults": "No se encontraron resultados",
+  "signupScreenInvalidNumber": "El número ingresado es inválido"
 }
 

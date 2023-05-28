@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_app/src/core/utils.dart';
 import 'package:pet_app/src/core/constants.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
+import 'package:pet_app/src/core/widgets/phone_text_field.dart';
 import 'package:pet_app/src/routes/app_router.dart';
 import 'package:pet_app/src/widgets/generic_button.dart';
 import 'package:pet_app/src/core/services/auth_service.dart';
@@ -23,12 +24,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
+    for (final controller in [
+      emailController,
+      passwordController,
+      confirmPasswordController,
+      phoneController
+    ]) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -64,6 +71,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       authFormType: AuthFormType.email),
                 ),
                 const SizedBox.square(dimension: 20),
+                PhoneTextField(controller: phoneController),
                 GenericTextField(
                     labelText: context.l10n.signupScreenPassword,
                     textInputType: TextInputType.text,

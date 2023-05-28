@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pet_app/src/feature/auth/login_screen.dart';
-import 'package:pet_app/src/feature/auth/signup_screen.dart';
+import 'package:pet_app/src/feature/auth/views/login_screen.dart';
+import 'package:pet_app/src/feature/auth/views/signup_screen.dart';
 import 'package:pet_app/src/feature/layout/layout_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -30,6 +30,9 @@ dependencies:
   app_theme:
     path: packages/app_theme
 
+  intl_phone_field:
+    git: https://github.com/ale24dev/intl_phone_field/
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
