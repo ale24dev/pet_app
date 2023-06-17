@@ -6,8 +6,9 @@ class AuthRepository {
   final SupabaseClient supabaseClient;
 
   Future<void> login({required String email, required String password}) async {
-    await supabaseClient.auth
+    final error = await supabaseClient.auth
         .signInWithPassword(email: email, password: password);
+        print('error');
   }
 
   Future<void> logout() async {

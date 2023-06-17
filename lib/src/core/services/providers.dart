@@ -1,8 +1,9 @@
 
+import 'package:pet_app/src/core/exceptions/exceptions.dart';
+
 import 'shared_preferences_storage_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:pet_app/src/core/exceptions.dart';
 
 part 'providers.g.dart';
 

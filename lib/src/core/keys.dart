@@ -9,4 +9,6 @@ class AppKeys {
 
   static const splashScreen = Key('splash-screen');
   static const onboardScreen = Key('onboarding-screen');
+  static const dialog = Key('dialog');
+  static const errorDialog = Key('error-dialog');
 }

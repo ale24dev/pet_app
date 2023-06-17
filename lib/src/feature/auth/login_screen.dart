@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet_app/src/core/async_value.dart';
 
 import 'package:pet_app/src/core/utils.dart';
 import 'package:pet_app/src/core/constants.dart';
@@ -34,6 +35,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authControllerProvider);
+     ref.listen(authControllerProvider,
+        (_, state) => state.showAlertDialogOnError(context),);
     var autFormService = ref.watch(authFormServiceProvider);
     //*Navigate to Home Screen
     WidgetsBinding.instance.addPostFrameCallback(((timeStamp) {

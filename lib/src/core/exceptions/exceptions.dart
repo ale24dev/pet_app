@@ -1,24 +1,8 @@
-/// Custom exception used with Http requests
-class HttpException implements Exception {
-  /// Creates a new instance of [HttpException]
-  HttpException({
-    this.title,
-    this.message,
-    this.statusCode,
-  });
 
-  /// Exception title
-  final String? title;
-
-  /// Exception message
-  final String? message;
-
-  /// Exception http response code
-  final int? statusCode;
-}
+part 'server_exception.dart';
 
 /// Base class from which all exceptions that are specific to the app should extend.
-abstract class AppException implements Exception {
+sealed class AppException implements Exception {
   final String? message;
 
   const AppException([this.message]);
@@ -30,4 +14,13 @@ class ProviderNotOverriddenException implements Exception {
   final String message;
 
   ProviderNotOverriddenException({required String name}) : message = "The provider '$name' was not overridden'";
+}
+
+class NavigationException<T> implements AppException {
+  @override
+  final String message;
+
+  NavigationException({required String path})
+      : message = 'GoRouter Route [$path] requires an extra parameter of type $T. '
+            'Remember to pass an object of type $T : `context.go("$path",extra: object)` ';
 }
