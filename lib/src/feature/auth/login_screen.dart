@@ -6,8 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_app/src/core/utils.dart';
 import 'package:pet_app/src/core/constants.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
+import 'package:pet_app/src/core/widgets/pet_async_generic_button.dart';
+import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 import 'package:pet_app/src/routes/app_router.dart';
-import 'package:pet_app/src/widgets/generic_button.dart';
 import 'package:pet_app/src/core/services/auth_service.dart';
 import 'package:pet_app/src/core/widgets/generic_text_field.dart';
 import 'package:pet_app/src/feature/auth/constants/aut_form_type.dart';
@@ -32,6 +33,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
     var autFormService = ref.watch(authFormServiceProvider);
     //*Navigate to Home Screen
     WidgetsBinding.instance.addPostFrameCallback(((timeStamp) {
@@ -71,15 +73,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     formErrorMessage: autFormService.errorMessage,
                     authFormType: AuthFormType.password)),
             const SizedBox.square(dimension: 30),
-            GenericButton(
-                widget: Text(context.l10n.loginScreenLoginButton),
-                function: () {
-                  ref
-                      .read(authFormServiceProvider.notifier)
-                      .onSubmitLoginButton(
-                          email: emailController.text,
-                          password: passwordController.text);
-                }),
+            Center(
+              child: AsyncGenericButton(
+                  asyncValue: authState,
+                  child: Text(context.l10n.loginScreenLoginButton),
+                  onTap: () async {
+                    final success = await ref
+                        .read(authControllerProvider.notifier)
+                        .login(
+                            email: emailController.text,
+                            password: passwordController.text);
+
+                    if (context.mounted && success) {
+                      print(success);
+                    }else{
+                      print(authState.error);
+                    }
+                  }),
+            ),
             const SizedBox.square(dimension: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
