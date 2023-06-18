@@ -5,15 +5,46 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:pet_app/src/routes/app_router.dart';
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = AppTheme();
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+}
 
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    // / Listen for authentication events and redirect to
+    // / correct page when key events are detected.
+    // Supabase.instance.client.auth.onAuthStateChange.listen((authState) {
+    //   final event = authState.event;
+    //   final session = authState.session;
+    //   if (event == AuthChangeEvent.signedIn) {
+    //     if (session != null) {
+
+    //       // _appRouter
+    //       //   ..popUntilRoot()
+    //       //   ..replae(HomeRoute(user: session.user));
+    //     } else {
+    //       // getIt<AuthRepository>().signOut();
+    //     }
+    //   } else if (event == AuthChangeEvent.signedOut) {
+    //     // _appRouter
+    //     //   ..popUntilRoot()
+    //     //   ..replace(const SignInRoute());
+    //   }
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final goRouter = ref.watch(goRouterProvider());
+
+    final theme = AppTheme();
+    // init();
     return MaterialApp.router(
       title: 'Pet Care',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
