@@ -1,29 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:app_theme/app_theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MyApp extends StatelessWidget {
+import 'package:pet_app/src/routes/app_router.dart';
+
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    // / Listen for authentication events and redirect to
+    // / correct page when key events are detected.
+    // Supabase.instance.client.auth.onAuthStateChange.listen((authState) {
+    //   final event = authState.event;
+    //   final session = authState.session;
+    //   if (event == AuthChangeEvent.signedIn) {
+    //     if (session != null) {
+
+    //       // _appRouter
+    //       //   ..popUntilRoot()
+    //       //   ..replae(HomeRoute(user: session.user));
+    //     } else {
+    //       // getIt<AuthRepository>().signOut();
+    //     }
+    //   } else if (event == AuthChangeEvent.signedOut) {
+    //     // _appRouter
+    //     //   ..popUntilRoot()
+    //     //   ..replace(const SignInRoute());
+    //   }
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final goRouter = ref.watch(goRouterProvider());
 
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'), // English
-        Locale('es'), // Spanish
-      ],
-      home: const Text('Flutter Demo Home Page'),
+    final theme = AppTheme();
+    // init();
+    return MaterialApp.router(
+      title: 'Pet Care',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      theme: theme.light,
+      darkTheme: theme.dark,
+      themeMode: ThemeMode.light,
+      routerConfig: goRouter,
     );
   }
 }
