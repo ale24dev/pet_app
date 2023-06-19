@@ -45,4 +45,18 @@ abstract class Utils {
     }
     return null;
   }
+
+  ///This method get one route from last authEvent
+  // static String getRouteFromAuthEvent(String? authEvent) {
+  //   if (authEvent != null) {
+  //     return '/onboard';
+  //   }
+  //   switch (authEvent) {
+  //     // case 'signIn': return '/layout';
+  //     case 'signedIn':
+  //       return '/';
+  //     default:
+  //       return '/login';
+  //   }
+  // }
 }
