@@ -80,12 +80,6 @@ class AppTextStyle {
         color: AppColor.headerText,
       );
 
-  TextStyle get profileName => _default.copyWith(
-        fontSize: 19,
-        fontWeight: FontWeight.w600,
-        color: AppColor.headerText,
-        letterSpacing: -.6,
-      );
 
   TextStyle get profileEmail => _default.copyWith(
         fontSize: 12,
@@ -100,50 +94,7 @@ class AppTextStyle {
         color: AppColor.headerText,
         letterSpacing: -.6,
       );
-
-  TextStyle get sectionTitle => _default.copyWith(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        color: AppColor.headerText,
-        letterSpacing: -.6,
-      );
-
-  TextStyle get ratingText => _default.copyWith(
-        fontSize: 10,
-        fontWeight: FontWeight.w500,
-        color: AppColor.headerText,
-        letterSpacing: -.6,
-      );
-
-  TextStyle productCardFinalPrice(BuildContext context) => _default.copyWith(
-        fontSize: 15,
-        fontWeight: FontWeight.w600,
-        color: Theme.of(context).primaryColor,
-        letterSpacing: -.6,
-      );
-
-  TextStyle get productCardPrice => _default.copyWith(
-        fontSize: 9,
-        fontWeight: FontWeight.w400,
-        color: AppColor.switchTrackUnfocused,
-        decoration: TextDecoration.lineThrough,
-        letterSpacing: -.6,
-      );
-
-  TextStyle get productCardTitle => _default.copyWith(
-        fontSize: 13,
-        fontWeight: FontWeight.w500,
-        color: AppColor.bodyText,
-        letterSpacing: -.6,
-      );
-
-  TextStyle get seeAll => _default.copyWith(
-        fontSize: 14,
-        letterSpacing: 0,
-        fontWeight: FontWeight.w500,
-        color: AppColor.headerText,
-      );
-
+      
   TextStyle get primaryButtonLeading => _default.copyWith(
       fontSize: 15,
       letterSpacing: -.2,
@@ -156,51 +107,16 @@ class AppTextStyle {
         fontWeight: FontWeight.w500,
       );
 
-  TextStyle get deliveryText => _default.copyWith(
-        fontSize: 15,
-        letterSpacing: 0,
-        color: AppColor.deliveryText,
-        fontWeight: FontWeight.w400,
-      );
-
-  TextStyle get popupName => _default.copyWith(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        color: AppColor.headerText,
-        letterSpacing: -.6,
-      );
-
-  TextStyle get popupEmail => _default.copyWith(
-        fontSize: 11,
-        fontWeight: FontWeight.w400,
-        color: AppColor.headerText,
-        letterSpacing: -.6,
-      );
-
-  TextStyle get productDetailsTitle => _default.copyWith(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        color: AppColor.bodyText,
-        letterSpacing: -.6,
-      );
-
-  TextStyle get productDetailsBody => _default.copyWith(
-        fontSize: 13,
-        fontWeight: FontWeight.w400,
-        color: AppColor.headerText,
-        letterSpacing: -.6,
-      );
-  TextStyle get productReviewTitle => _default.copyWith(
+  TextStyle get profilePublication => _default.copyWith(
         fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: AppColor.bodyText,
-        letterSpacing: -.6,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w500,
       );
-  TextStyle get productReviewAmount => _default.copyWith(
-        fontSize: 11,
-        fontWeight: FontWeight.w300,
-        color: AppColor.headerText,
-        letterSpacing: -.6,
+  TextStyle get likesAndChat => _default.copyWith(
+        fontSize: 14,
+        letterSpacing: 0,
+        color: Colors.grey,
+        fontWeight: FontWeight.w500,
       );
 
   TextStyle get body =>

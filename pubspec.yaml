@@ -52,6 +52,7 @@ flutter:
   assets: # Lists assets, such as image files
     - assets/fonts/
     - assets/images/
+    - assets/vectors/
     - .env
     
   fonts:

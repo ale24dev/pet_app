@@ -2,7 +2,9 @@ import 'package:flutter/widgets.dart';
 
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/core/services/auth_service.dart';
+import 'package:pet_app/src/core/services/navbar_service.dart';
 import 'package:pet_app/src/feature/auth/constants/aut_form_type.dart';
+import 'package:pet_app/src/feature/home/home_screen.dart';
 
 abstract class Utils {
   //*Check if an email is valid
@@ -44,6 +46,16 @@ abstract class Utils {
       }
     }
     return null;
+  }
+
+  static Widget getLayoutFromNavbarItem(NavbarItem navbarItem) {
+    switch (navbarItem) {
+      case NavbarItem.home:
+        return const HomeScreen();
+
+      default:
+        return Center(child: Text(navbarItem.name));
+    }
   }
 
   ///This method get one route from last authEvent
