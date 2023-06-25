@@ -9,7 +9,7 @@ import 'package:pet_app/src/feature/auth/data/model/user_model.dart';
 part 'publication_model.freezed.dart';
 part 'publication_model.g.dart';
 
-List<PublicationModel> productsFromJson(List<dynamic> str) => str.map((x) => PublicationModel.fromJson(x as Json)).toList();
+List<PublicationModel> publicationFromJson(List<dynamic> str) => str.map((x) => PublicationModel.fromJson(x as Json)).toList();
 
 // String PublicationModelToMap(PublicationModel data) => json.encode(data.());
 

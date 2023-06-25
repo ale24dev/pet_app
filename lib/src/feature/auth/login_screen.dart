@@ -35,8 +35,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authControllerProvider);
-     ref.listen(authControllerProvider,
-        (_, state) => state.showAlertDialogOnError(context),);
+    ref.listen(
+      authControllerProvider,
+      (_, state) => state.showAlertDialogOnError(context),
+    );
     var autFormService = ref.watch(authFormServiceProvider);
     //*Navigate to Home Screen
     WidgetsBinding.instance.addPostFrameCallback(((timeStamp) {
@@ -88,9 +90,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             password: passwordController.text);
 
                     if (context.mounted && success) {
-                      print(success);
-                    }else{
-                      print(authState.error);
+                      context.goNamed(AppRoute.layout.name);
                     }
                   }),
             ),

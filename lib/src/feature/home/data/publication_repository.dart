@@ -20,7 +20,7 @@ class PublicationRepository implements BaseRepository<Publication> {
     ApiResult apiResult = ApiResult();
     final resp = await supabaseClient.from('publication').select('id, created_at, text, images, user(id, updated_at, username, full_name, avatar_url)').eq('id', id);
     // print();
-    apiResult.responseObject = productsFromJson(resp);
+    apiResult.responseObject =publicationFromJson(resp);
     return apiResult;
   }
 

@@ -101,9 +101,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                 password: passwordController.text);
 
                         if (context.mounted && success) {
-                          print(success);
-                        } else {
-                          print(authState.error);
+                          context.goNamed(AppRoute.layout.name);
                         }
                       }),
                 ),

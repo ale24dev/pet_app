@@ -48,18 +48,17 @@ class AuthController extends _$AuthController {
   }
 
   Future<bool> logout() async {
-    // final authRepository = ref.read(authRepositoryProvider);
+    final authRepository = ref.read(authRepositoryProvider);
 
-    // state = const AsyncValue.loading();
-    // state = await AsyncValue.guard(
-    //     () => authRepository.signOut());
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(
+        () => authRepository.logout());
 
-    // final success = state.hasError == false;
+    final success = state.hasError == false;
     // if (success) unawaited(authRepository.getUser());
     // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
 
-    // return success;
-    return true;
+    return success;
   }
 }
 
