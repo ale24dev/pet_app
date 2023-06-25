@@ -13,9 +13,7 @@ _$_PublicationModel _$$_PublicationModelFromJson(Map<String, dynamic> json) =>
       text: json['text'] as String,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      user: json['user'] == null
-          ? null
-          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_PublicationModelToJson(_$_PublicationModel instance) =>

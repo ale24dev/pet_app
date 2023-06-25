@@ -60,7 +60,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       theme: theme.light,
       darkTheme: theme.dark,
       themeMode: ThemeMode.light,
-      routerConfig: goRouter.value,
+      routerConfig: goRouter,
     );
   }
 }

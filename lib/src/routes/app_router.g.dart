@@ -6,7 +6,7 @@ part of 'app_router.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$goRouterHash() => r'ff8eba25d22a827e89264cc3a1426f062550e672';
+String _$goRouterHash() => r'de9006770294fed8f231587e4ba230e034ce47ca';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,14 +29,14 @@ class _SystemHash {
   }
 }
 
-typedef GoRouterRef = FutureProviderRef<GoRouter>;
+typedef GoRouterRef = ProviderRef<GoRouter>;
 
 /// See also [goRouter].
 @ProviderFor(goRouter)
 const goRouterProvider = GoRouterFamily();
 
 /// See also [goRouter].
-class GoRouterFamily extends Family<AsyncValue<GoRouter>> {
+class GoRouterFamily extends Family<GoRouter> {
   /// See also [goRouter].
   const GoRouterFamily();
 
@@ -74,7 +74,7 @@ class GoRouterFamily extends Family<AsyncValue<GoRouter>> {
 }
 
 /// See also [goRouter].
-class GoRouterProvider extends FutureProvider<GoRouter> {
+class GoRouterProvider extends Provider<GoRouter> {
   /// See also [goRouter].
   GoRouterProvider({
     this.initialLocation,

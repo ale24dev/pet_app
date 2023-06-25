@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/core/utils/datetimes.dart';
-import 'package:pet_app/src/feature/home/data/model/publication_model.dart';
+import 'package:pet_app/src/feature/home/data/publication.dart';
 
 class PublicationCard extends StatelessWidget {
   const PublicationCard({
@@ -12,7 +12,7 @@ class PublicationCard extends StatelessWidget {
     required this.publication,
   });
 
-  final PublicationModel publication;
+  final Publication publication;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,12 @@ class PublicationCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             color: Colors.white,
             boxShadow: AppTheme.shortShadow),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(children: [
                 Container(
                   height: 40,
                   width: 40,
@@ -44,7 +44,7 @@ class PublicationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      publication.user!.username!,
+                      publication.user.username!,
                       style: AppTextStyle().profilePublication,
                     ),
                     Text(
@@ -58,18 +58,27 @@ class PublicationCard extends StatelessWidget {
                 const Spacer(),
                 const Icon(Icons.more_horiz),
               ]),
-              const SizedBox.square(
-                dimension: 10,
-              ),
+            ),
+            const SizedBox.square(
+              dimension: 10,
+            ),
+            if (publication.hasImage())
               Container(
-                height: 300,
+                height: 400,
+                width: double.infinity,
                 decoration: BoxDecoration(
                     color: Colors.red, borderRadius: BorderRadius.circular(12)),
+                child: Image.network(
+                  publication.images![0],
+                  fit: BoxFit.fitWidth,
+                ),
               ),
-              const SizedBox.square(
-                dimension: 10,
-              ),
-              Column(
+            const SizedBox.square(
+              dimension: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
@@ -84,12 +93,12 @@ class PublicationCard extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.w600))
                 ],
               ),
-              const SizedBox.square(
-                dimension: 10,
-              ),
-              const _SocialSection()
-            ],
-          ),
+            ),
+            const SizedBox.square(
+              dimension: 10,
+            ),
+            const _SocialSection()
+          ],
         ),
       ),
     );
@@ -101,22 +110,25 @@ class _SocialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SvgPicture.asset(AppAsset.heart),
-        const SizedBox.square(
-          dimension: 2,
-        ),
-        Text('15k', style: AppTextStyle().likesAndChat),
-        const SizedBox.square(
-          dimension: 10,
-        ),
-        SvgPicture.asset(AppAsset.chat),
-        const SizedBox.square(
-          dimension: 2,
-        ),
-        Text('20k', style: AppTextStyle().likesAndChat),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+        children: [
+          SvgPicture.asset(AppAsset.heart),
+          const SizedBox.square(
+            dimension: 2,
+          ),
+          Text('15k', style: AppTextStyle().likesAndChat),
+          const SizedBox.square(
+            dimension: 10,
+          ),
+          SvgPicture.asset(AppAsset.chat),
+          const SizedBox.square(
+            dimension: 2,
+          ),
+          Text('20k', style: AppTextStyle().likesAndChat),
+        ],
+      ),
     );
   }
 }

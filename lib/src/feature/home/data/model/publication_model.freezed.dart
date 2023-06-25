@@ -25,7 +25,7 @@ mixin _$PublicationModel {
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   List<String>? get images => throw _privateConstructorUsedError;
-  UserModel? get user => throw _privateConstructorUsedError;
+  UserModel get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,9 +44,9 @@ abstract class $PublicationModelCopyWith<$Res> {
       @JsonKey(name: 'created_at') DateTime createdAt,
       String text,
       List<String>? images,
-      UserModel? user});
+      UserModel user});
 
-  $UserModelCopyWith<$Res>? get user;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -66,7 +66,7 @@ class _$PublicationModelCopyWithImpl<$Res, $Val extends PublicationModel>
     Object? createdAt = null,
     Object? text = null,
     Object? images = freezed,
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -85,21 +85,17 @@ class _$PublicationModelCopyWithImpl<$Res, $Val extends PublicationModel>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
+              as UserModel,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $UserModelCopyWith<$Res>(_value.user!, (value) {
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -118,10 +114,10 @@ abstract class _$$_PublicationModelCopyWith<$Res>
       @JsonKey(name: 'created_at') DateTime createdAt,
       String text,
       List<String>? images,
-      UserModel? user});
+      UserModel user});
 
   @override
-  $UserModelCopyWith<$Res>? get user;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -139,7 +135,7 @@ class __$$_PublicationModelCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? text = null,
     Object? images = freezed,
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$_PublicationModel(
       id: null == id
@@ -158,10 +154,10 @@ class __$$_PublicationModelCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
+              as UserModel,
     ));
   }
 }
@@ -174,7 +170,7 @@ class _$_PublicationModel implements _PublicationModel {
       @JsonKey(name: 'created_at') required this.createdAt,
       required this.text,
       final List<String>? images,
-      this.user})
+      required this.user})
       : _images = images;
 
   factory _$_PublicationModel.fromJson(Map<String, dynamic> json) =>
@@ -198,7 +194,7 @@ class _$_PublicationModel implements _PublicationModel {
   }
 
   @override
-  final UserModel? user;
+  final UserModel user;
 
   @override
   String toString() {
@@ -243,7 +239,7 @@ abstract class _PublicationModel implements PublicationModel {
       @JsonKey(name: 'created_at') required final DateTime createdAt,
       required final String text,
       final List<String>? images,
-      final UserModel? user}) = _$_PublicationModel;
+      required final UserModel user}) = _$_PublicationModel;
 
   factory _PublicationModel.fromJson(Map<String, dynamic> json) =
       _$_PublicationModel.fromJson;
@@ -258,7 +254,7 @@ abstract class _PublicationModel implements PublicationModel {
   @override
   List<String>? get images;
   @override
-  UserModel? get user;
+  UserModel get user;
   @override
   @JsonKey(ignore: true)
   _$$_PublicationModelCopyWith<_$_PublicationModel> get copyWith =>

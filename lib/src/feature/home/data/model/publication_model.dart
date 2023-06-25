@@ -5,23 +5,25 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pet_app/src/core/extension.dart';
 import 'package:pet_app/src/feature/auth/data/model/user_model.dart';
+import 'package:pet_app/src/feature/home/data/publication.dart';
 
 part 'publication_model.freezed.dart';
 part 'publication_model.g.dart';
 
-List<PublicationModel> publicationFromJson(List<dynamic> str) => str.map((x) => PublicationModel.fromJson(x as Json)).toList();
+List<PublicationModel> publicationFromJson(List<dynamic> str) =>
+    str.map((x) => PublicationModel.fromJson(x as Json)).toList();
 
 // String PublicationModelToMap(PublicationModel data) => json.encode(data.());
 
 @freezed
-class PublicationModel with _$PublicationModel{
-    const factory PublicationModel({
-        required int id,
-        @JsonKey(name: 'created_at') required DateTime createdAt,
-        required String text,
-        List<String>? images,
-        UserModel? user
-    }) = _PublicationModel;
+class PublicationModel with _$PublicationModel implements Publication {
+  const factory PublicationModel(
+      {required int id,
+      @JsonKey(name: 'created_at') required DateTime createdAt,
+      required String text,
+      List<String>? images,
+      required UserModel user}) = _PublicationModel;
 
-    factory PublicationModel.fromJson(Map<String, dynamic> json) => _$PublicationModelFromJson(json);
+  factory PublicationModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicationModelFromJson(json);
 }

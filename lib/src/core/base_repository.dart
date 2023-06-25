@@ -6,6 +6,9 @@ abstract class BaseRepository<T> {
   ///Get <T> by id
   Future<ApiResult> getById(int id);
 
+  ///Get <T> by id
+  Future<ApiResult> getAll();
+
   ///Insert a <T> object to database
   Future<ApiResult> insert(T value);
 

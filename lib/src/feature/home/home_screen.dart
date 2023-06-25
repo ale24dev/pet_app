@@ -1,45 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:pet_app/src/core/services/supabase_service.dart';
-import 'package:pet_app/src/feature/home/data/publication_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet_app/src/core/async_value.dart';
+import 'package:pet_app/src/feature/home/controller/publication_controller.dart';
+import 'package:pet_app/src/feature/home/data/publication.dart';
 import 'package:pet_app/src/feature/home/widgets/publication_card.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
+//18294
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final publicationRepository =
-        PublicationRepository(supabaseClient: SupabaseService.supabaseClient);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final publicationController = ref.watch(publicationControllerProvider);
     return Padding(
         padding: const EdgeInsets.all(20.0),
-        child: FutureBuilder(
-          future: publicationRepository.getById(1),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const CircularProgressIndicator();
-            } else {
-              final data = snapshot.data;
-              return ListView.builder(
-                itemCount: data!.responseObject.length,
-                itemBuilder: (context, index) {
-                  final publication =
-                      data.responseObject[index];
-                  return PublicationCard(
-                    publication: publication,
-                  );
-                },
-              );
-            }
+        child: AsyncValueWidget(
+          value: publicationController,
+          data: (value) {
+              List<Publication> listPublications = value.responseObject;
+            return ListView.builder(
+              itemCount: listPublications.length,
+              itemBuilder: (context, index){
+              return PublicationCard(publication: listPublications[index]);
+            });
           },
         ));
   }
