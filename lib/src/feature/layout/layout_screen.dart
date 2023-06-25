@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_app/src/core/services/navbar_service.dart';
 import 'package:pet_app/src/core/utils.dart';
 import 'package:pet_app/src/core/widgets/generic_bottom_navbar.dart';
+import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 
 class LayoutScreen extends ConsumerWidget {
   const LayoutScreen({super.key});
@@ -13,7 +14,13 @@ class LayoutScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: const Icon(Icons.menu),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            ///This is for test
+            ref.read(authControllerProvider.notifier).logout();
+          },
+        ),
         actions: const [
           _ActionIconButtons(icon: Icon(Icons.search)),
           _ActionIconButtons(icon: Icon(Icons.notifications_outlined)),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/src/core/utils/datetimes.dart';
-import 'package:pet_app/src/feature/home/data/publication.dart';
+import 'package:pet_app/src/feature/home/data/model/publication_model.dart';
 
 class PublicationCard extends StatelessWidget {
   const PublicationCard({
@@ -11,7 +11,7 @@ class PublicationCard extends StatelessWidget {
     required this.publication,
   });
 
-  final Publication publication;
+  final PublicationModel publication;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class PublicationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      publication.user.name,
+                      publication.user!.username!,
                       style: AppTextStyle().profilePublication,
                     ),
                     Text(
