@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pet_app/src/core/services/auth_event.dart';
 import 'package:pet_app/src/feature/auth/login_screen.dart';
 import 'package:pet_app/src/feature/auth/signup_screen.dart';
 import 'package:pet_app/src/feature/layout/layout_screen.dart';
+import 'package:pet_app/src/feature/splash/splash_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:pet_app/src/core/services/providers.dart';
 import 'package:pet_app/src/core/widgets/not_found_screen.dart';
 import 'package:pet_app/src/feature/onboarding/onboarding_screen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 import 'custom_pages.dart';
 
@@ -32,27 +31,9 @@ enum AppRoute {
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
   final appPreferences = ref.watch(preferencesProvider);
-  final screen = ref.watch(authStateSupabaseProvider).when(
-    data: (authState) {
-      print(authState!.event);
-      if (authState.event == supabase.AuthChangeEvent.signedIn) {
-        return '/${AppRoute.layout.name}';
-      }
-      if (authState.event == supabase.AuthChangeEvent.signedOut) {
-        return '/${AppRoute.signUp.name}';
-      }
-      //context.goNamed(AppRoute.layout.name);
-    },
-    error: (error, stackTrace) {
-      print(error.toString());
-    },
-    loading: () {
-      print('Loading...');
-    },
-  );
-
+ 
   return GoRouter(
-    initialLocation: screen ?? ((appPreferences.isFirstOpen()) ? '/onboard' : '/layout'),
+    initialLocation: ((appPreferences.isFirstOpen()) ? '/onboard' : '/splash'),
     debugLogDiagnostics: kDebugMode,
     redirect: (context, state) {
       if (appPreferences.isFirstOpen()) return '/onboard';
@@ -70,7 +51,7 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
             name: AppRoute.splash.name,
             pageBuilder: (context, state) => adaptivePageRoute(
               key: state.pageKey,
-              child: NotFoundScreen.unimplemented(name: state.location),
+              child: const SplashScreen(),
             ),
           ),
           GoRoute(

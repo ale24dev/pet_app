@@ -35,6 +35,8 @@
   "signupScreenConfirmPassword": "Confirmar contraseña",
   "signupScreenCreateAccountButton": "Crear cuenta",
   "signupScreenHaveAccount": "¿Ya tienes cuenta?",
-  "signupScreenLogin": "Iniciar sesión"
+  "signupScreenLogin": "Iniciar sesión",
+
+  "publicationScreenSeeMore": "Ver más"
 }
 

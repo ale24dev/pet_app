@@ -8,7 +8,14 @@ class AuthRepository {
   Future<void> login({required String email, required String password}) async {
     final error = await supabaseClient.auth
         .signInWithPassword(email: email, password: password);
-        print('error');
+    print('error');
+  }
+
+  Future<void> signup({required String email, required String password}) async {
+    final error =
+        await supabaseClient.auth.signUp(email: email, password: password);
+    int a = 0;
+    print('error');
   }
 
   Future<void> logout() async {

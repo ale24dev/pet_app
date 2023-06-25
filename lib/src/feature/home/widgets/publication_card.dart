@@ -2,8 +2,9 @@ import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_app/resources/assets.dart';
+import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/core/utils/datetimes.dart';
-import 'package:pet_app/src/feature/home/data/publication.dart';
+import 'package:pet_app/src/feature/home/data/model/publication_model.dart';
 
 class PublicationCard extends StatelessWidget {
   const PublicationCard({
@@ -11,7 +12,7 @@ class PublicationCard extends StatelessWidget {
     required this.publication,
   });
 
-  final Publication publication;
+  final PublicationModel publication;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class PublicationCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(children: [
                 Container(
@@ -42,7 +44,7 @@ class PublicationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      publication.user.name,
+                      publication.user!.username!,
                       style: AppTextStyle().profilePublication,
                     ),
                     Text(
@@ -63,6 +65,24 @@ class PublicationCard extends StatelessWidget {
                 height: 300,
                 decoration: BoxDecoration(
                     color: Colors.red, borderRadius: BorderRadius.circular(12)),
+              ),
+              const SizedBox.square(
+                dimension: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      height: 40,
+                      child: Text(
+                        publication.text,
+                        style: AppTextStyle().textPublication,
+                      )),
+                  Text(context.l10n.publicationScreenSeeMore,
+                      style: AppTextStyle()
+                          .textPublication
+                          .copyWith(fontWeight: FontWeight.w600))
+                ],
               ),
               const SizedBox.square(
                 dimension: 10,

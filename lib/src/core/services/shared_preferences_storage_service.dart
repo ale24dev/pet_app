@@ -1,8 +1,10 @@
+import 'package:pet_app/src/core/utils/last_auth_event.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum LocalStorageKey {
   isFirstOpen('is_first_open'),
   email('email'),
+  lastAuthEvent('last_auth_event'),
   rememberEmail('remember_email');
 
   const LocalStorageKey(this.key);
@@ -17,6 +19,9 @@ class AppPreferencesService {
 
   /// True if the user has opened the app before and completed the onboarding.
   bool isFirstOpen() => _preferences.getBool(LocalStorageKey.isFirstOpen.key) ?? true;
+ 
+  /// Get last event auth register in the app.
+  String lastAuthEvent() => LastAuthEvent.getRouterByLastSession(_preferences.getString(LocalStorageKey.lastAuthEvent.name)!);
 
   /// Returns the stored email if the user chose to remember it.
   /// [Null] otherwise.

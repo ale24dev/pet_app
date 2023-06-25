@@ -112,6 +112,11 @@ class AppTextStyle {
         letterSpacing: 0,
         fontWeight: FontWeight.w500,
       );
+  TextStyle get textPublication => _default.copyWith(
+        fontSize: 12,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w400,
+      );
   TextStyle get likesAndChat => _default.copyWith(
         fontSize: 14,
         letterSpacing: 0,
