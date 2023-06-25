@@ -8,7 +8,7 @@ abstract class AppColor {
   static const secondary = Color(0xFFFFB70A);
   static const container = Color(0xFFFBFEFB);
   static const containerDark = Color(0xFF2B2B2B);
-  static const shadow = Color(0x4D8FC5AA);
+  static const shadow = Color.fromARGB(11, 0, 0, 0);
   static const headerText = Color(0xFF2B3445);
   static const settingsTitleText = Color(0xFFA0A4AB);
   static const bodyText = Color(0xFF323233);

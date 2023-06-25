@@ -34,8 +34,8 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
   final appPreferences = ref.watch(preferencesProvider);
   final screen = ref.watch(authStateSupabaseProvider).when(
     data: (authState) {
-      
-      if (authState!.event == supabase.AuthChangeEvent.signedIn) {
+      print(authState!.event);
+      if (authState.event == supabase.AuthChangeEvent.signedIn) {
         return '/${AppRoute.layout.name}';
       }
       if (authState.event == supabase.AuthChangeEvent.signedOut) {
@@ -52,7 +52,7 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
   );
 
   return GoRouter(
-    initialLocation: screen ?? '/onboard',
+    initialLocation: screen ?? ((appPreferences.isFirstOpen()) ? '/onboard' : '/layout'),
     debugLogDiagnostics: kDebugMode,
     redirect: (context, state) {
       if (appPreferences.isFirstOpen()) return '/onboard';
@@ -118,7 +118,6 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
-
 }
 
 class AllRoutesScreen extends StatelessWidget {
