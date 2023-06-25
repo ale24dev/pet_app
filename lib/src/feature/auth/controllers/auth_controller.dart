@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:core';
 
 import 'package:pet_app/src/core/services/supabase_service.dart';
 import 'package:pet_app/src/feature/auth/data/auth_repository.dart';
