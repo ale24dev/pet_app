@@ -5,6 +5,7 @@ import 'package:pet_app/src/core/services/auth_service.dart';
 import 'package:pet_app/src/core/services/navbar_service.dart';
 import 'package:pet_app/src/feature/auth/constants/aut_form_type.dart';
 import 'package:pet_app/src/feature/home/home_screen.dart';
+import 'package:pet_app/src/feature/pets/pets_screen.dart';
 
 abstract class Utils {
   //*Check if an email is valid
@@ -52,6 +53,8 @@ abstract class Utils {
     switch (navbarItem) {
       case NavbarItem.home:
         return const HomeScreen();
+      case NavbarItem.pet:
+        return const PetsScreen();
 
       default:
         return Center(child: Text(navbarItem.name));

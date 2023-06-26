@@ -12,7 +12,7 @@ class LayoutScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final navbarController = ref.watch(navbarControllerProvider);
     return Scaffold(
-      appBar: AppBar(
+      appBar: navbarController.index == 0 ? AppBar(
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.menu),
@@ -28,7 +28,7 @@ class LayoutScreen extends ConsumerWidget {
             dimension: 10,
           )
         ],
-      ),
+      ) : null,
       body: Utils.getLayoutFromNavbarItem(navbarController.navbarItem),
       bottomNavigationBar: const GenericBottomNavbar(),
     );
