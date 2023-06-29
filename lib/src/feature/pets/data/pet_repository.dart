@@ -1,4 +1,5 @@
 import 'package:pet_app/src/core/api_result.dart';
+import 'package:pet_app/src/core/query_supabase.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -11,9 +12,7 @@ class PetRepository {
     final userId = supabaseClient.auth.currentSession?.user.id ?? '0';
     final response = await supabaseClient
         .from('pet')
-        .select(
-            'id, name, height, weight, age, birthday, description, color, gender, image, user(id, updated_at, username, full_name, avatar_url), pet_type(id, name), breed(id, name), pet_status(id, status, primary_status(id, status))')
-        // .eq('user.id', userId);
+        .select(QuerySupabase.pet)
         .eq('user', userId);
 
     apiResult.responseObject = petFromJson(response);
