@@ -89,17 +89,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                         formErrorMessage: autFormService.errorMessage,
                         authFormType: AuthFormType.confirmPassword)),
                 const SizedBox.square(dimension: 30),
-                Center(
+                SizedBox(
+                  width: double.infinity,
                   child: AsyncGenericButton(
                       asyncValue: authState,
-                      child: Text(context.l10n.loginScreenLoginButton),
+                      child: Text(context.l10n.signupScreenCreateAccountButton),
                       onTap: () async {
                         final success = await ref
                             .read(authControllerProvider.notifier)
                             .signup(
                                 email: emailController.text,
                                 password: passwordController.text);
-
+                
                         if (context.mounted && success) {
                           context.goNamed(AppRoute.layout.name);
                         }

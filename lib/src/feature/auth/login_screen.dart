@@ -78,7 +78,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     formErrorMessage: autFormService.errorMessage,
                     authFormType: AuthFormType.password)),
             const SizedBox.square(dimension: 30),
-            Center(
+            SizedBox(
+              width: double.infinity,
               child: AsyncGenericButton(
                   asyncValue: authState,
                   child: Text(context.l10n.loginScreenLoginButton),
