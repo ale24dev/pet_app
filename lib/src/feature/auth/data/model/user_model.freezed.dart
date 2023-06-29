@@ -23,9 +23,10 @@ mixin _$UserModel {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  String? get username => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
   String? get fullname => throw _privateConstructorUsedError;
-  String? get avatarUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avatar_url')
+  String get avatarUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,9 +42,9 @@ abstract class $UserModelCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(name: 'updated_at') DateTime updatedAt,
-      String? username,
+      String username,
       String? fullname,
-      String? avatarUrl});
+      @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
@@ -61,9 +62,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   $Res call({
     Object? id = null,
     Object? updatedAt = null,
-    Object? username = freezed,
+    Object? username = null,
     Object? fullname = freezed,
-    Object? avatarUrl = freezed,
+    Object? avatarUrl = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -74,18 +75,18 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      username: freezed == username
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       fullname: freezed == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String?,
-      avatarUrl: freezed == avatarUrl
+      avatarUrl: null == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -100,9 +101,9 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(name: 'updated_at') DateTime updatedAt,
-      String? username,
+      String username,
       String? fullname,
-      String? avatarUrl});
+      @JsonKey(name: 'avatar_url') String avatarUrl});
 }
 
 /// @nodoc
@@ -118,9 +119,9 @@ class __$$_UserModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? updatedAt = null,
-    Object? username = freezed,
+    Object? username = null,
     Object? fullname = freezed,
-    Object? avatarUrl = freezed,
+    Object? avatarUrl = null,
   }) {
     return _then(_$_UserModel(
       id: null == id
@@ -131,18 +132,18 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      username: freezed == username
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       fullname: freezed == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String?,
-      avatarUrl: freezed == avatarUrl
+      avatarUrl: null == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -153,9 +154,9 @@ class _$_UserModel implements _UserModel {
   const _$_UserModel(
       {required this.id,
       @JsonKey(name: 'updated_at') required this.updatedAt,
-      this.username,
+      required this.username,
       this.fullname,
-      this.avatarUrl});
+      @JsonKey(name: 'avatar_url') required this.avatarUrl});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -166,11 +167,12 @@ class _$_UserModel implements _UserModel {
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
   @override
-  final String? username;
+  final String username;
   @override
   final String? fullname;
   @override
-  final String? avatarUrl;
+  @JsonKey(name: 'avatar_url')
+  final String avatarUrl;
 
   @override
   String toString() {
@@ -214,11 +216,12 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {required final String id,
-      @JsonKey(name: 'updated_at') required final DateTime updatedAt,
-      final String? username,
-      final String? fullname,
-      final String? avatarUrl}) = _$_UserModel;
+          {required final String id,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt,
+          required final String username,
+          final String? fullname,
+          @JsonKey(name: 'avatar_url') required final String avatarUrl}) =
+      _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -229,11 +232,12 @@ abstract class _UserModel implements UserModel {
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
   @override
-  String? get username;
+  String get username;
   @override
   String? get fullname;
   @override
-  String? get avatarUrl;
+  @JsonKey(name: 'avatar_url')
+  String get avatarUrl;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

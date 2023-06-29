@@ -1,9 +1,14 @@
 class User {
   final String id;
-  final String name;
-  final String lastName;
+  final String username;
+  final DateTime updatedAt;
+  final String? fullname;
+  final String avatarUrl;
 
-  const User({required this.id, required this.name, required this.lastName});
+  const User(
+      {required this.id,
+      required this.username,
+      this.fullname,
+      required this.updatedAt,
+      required this.avatarUrl});
 }
-
-const userMock = User(id: "1", name: "Selena", lastName: 'Caramony');

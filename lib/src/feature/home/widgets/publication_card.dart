@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/core/utils/datetimes.dart';
+import 'package:pet_app/src/core/widgets/generic_profile_image.dart';
 import 'package:pet_app/src/feature/home/data/publication.dart';
 
 class PublicationCard extends StatelessWidget {
@@ -29,14 +30,7 @@ class PublicationCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(children: [
-                Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
+                GenericProfileImage(image: publication.user.avatarUrl),
                 const SizedBox.square(
                   dimension: 10,
                 ),
@@ -44,7 +38,7 @@ class PublicationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      publication.user.username!,
+                      publication.user.username,
                       style: AppTextStyle().profilePublication,
                     ),
                     Text(
