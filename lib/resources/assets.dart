@@ -9,5 +9,8 @@ class AppAsset {
   ///Home Screen
   static const String heart = 'assets/vectors/heart.svg';
   static const String chat = 'assets/vectors/chat.svg';
-  
+
+  ///Pets Screen
+  static const String dog = 'assets/images/dog.png';
+  static const String cat = 'assets/images/cat.png';
 }
