@@ -18,4 +18,14 @@ class PetRepository {
     apiResult.responseObject = petFromJson(response);
     return apiResult;
   }
+
+  Future<bool> create(PetModel pet) async {
+    await supabaseClient.from('pet').insert(pet.toJson());
+    return true;
+  }
+
+  Future<bool> delete(int petId) async {
+    await supabaseClient.from('pet').delete().eq('id', petId);
+    return true;
+  }
 }

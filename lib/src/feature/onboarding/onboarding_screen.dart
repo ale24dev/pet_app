@@ -84,7 +84,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           child: GenericButton(
                               widget: Text(
                                   context.l10n.onboardingScreenGetStartedButton),
-                              function: () async {
+                              onPressed: () async {
                                 await ref.read(preferencesProvider).setBool(
                                     LocalStorageKey.isFirstOpen.key, false);
                                 if (mounted) context.goNamed(AppRoute.home.name);
