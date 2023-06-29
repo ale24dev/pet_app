@@ -42,7 +42,7 @@ class PetCard extends StatelessWidget {
                       style: AppTextStyle().body.copyWith(fontSize: 16),
                     ),
                     Text(
-                      'Husky siberiano',
+                      pet.breedModel.name,
                       style: AppTextStyle().body.copyWith(color: Colors.grey),
                     ),
                   ],
