@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:pet_app/src/core/services/supabase_service.dart';
 import 'package:pet_app/src/feature/auth/data/auth_repository.dart';
+import 'package:pet_app/src/feature/auth/domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controller.g.dart';
@@ -23,7 +24,7 @@ class AuthController extends _$AuthController {
         () => authRepository.login(email: email, password: password));
 
     final success = state.hasError == false;
-    // if (success) unawaited(authRepository.getUser());
+    if (success) unawaited(authRepository.getUser());
     // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
 
     return success;
@@ -41,7 +42,7 @@ class AuthController extends _$AuthController {
         () => authRepository.signup(email: email, password: password));
 
     final success = state.hasError == false;
-    // if (success) unawaited(authRepository.getUser());
+    if (success) unawaited(authRepository.getUser());
     // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
 
     return success;
@@ -55,13 +56,18 @@ class AuthController extends _$AuthController {
         () => authRepository.logout());
 
     final success = state.hasError == false;
-    // if (success) unawaited(authRepository.getUser());
-    // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
 
     return success;
   }
+
+
 }
 
 @Riverpod(keepAlive: true)
 AuthRepository authRepository(AuthRepositoryRef ref) =>
     AuthRepository(supabaseClient: SupabaseService.supabaseClient);
+
+@Riverpod(keepAlive: true)
+Stream<User?> currentUser(CurrentUserRef ref) {
+  return ref.watch(authRepositoryProvider.select((value) => value.authStateChanges()));
+}

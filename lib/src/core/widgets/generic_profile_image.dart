@@ -21,7 +21,7 @@ class GenericProfileImage extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(2.0),
-          child: Image.network(image, color: Colors.white,),
+          child: Image.network(image),
         ),
       ),
     );
