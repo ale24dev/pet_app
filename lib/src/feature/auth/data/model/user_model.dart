@@ -1,17 +1,15 @@
 // To parse this JSON data, do
 //
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
+import 'package:pet_app/src/core/extension.dart';
 
-import 'package:pet_app/src/feature/auth/data/user.dart';
+import 'package:pet_app/src/feature/auth/domain/user.dart';
 
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
-UserModel UserModelFromMap(String str) => UserModel.fromJson(json.decode(str));
-
-// String UserModelToMap(UserModel data) => json.encode(data.());
+UserModel userModelFromMap(Json str) => UserModel.fromJson(str);
 
 @freezed
 class UserModel with _$UserModel implements User{
