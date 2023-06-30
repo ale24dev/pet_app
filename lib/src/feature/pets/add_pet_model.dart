@@ -64,7 +64,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
   Widget build(BuildContext context) {
     final petController = ref.watch(petControllerProvider);
 
-    final user = ref.watch(authControllerProvider).value;
+    final currentUser = ref.watch(authControllerProvider).value;
 
     return Padding(
       padding: context.responsiveContentPadding,
@@ -160,7 +160,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                               weight: weightController.text.isNotEmpty
                                   ? double.parse(weightController.text)
                                   : null,
-                              user: user!.parseToModel(),
+                              user: currentUser!.user!.parseToModel(),
                               petType: const PetType(id: 1, name: 'A'),
                               petStatusModel: const PetStatusModel(
                                   id: 1, status: 'perdido'),
