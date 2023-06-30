@@ -20,3 +20,19 @@ final userMock = UserModel(
     updatedAt: DateTime.now(),
     username: 'username',
     avatarUrl: 'avatarUrl');
+
+extension UserX on User {
+  UserModel parseToModel() {
+    return UserModel(
+        id: id, updatedAt: updatedAt, username: username, avatarUrl: avatarUrl);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'username': username,
+      'updated_at': updatedAt,
+      'full_name': fullname,
+      'avatar_url': avatarUrl,
+    };
+  }
+}

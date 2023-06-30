@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet_app/src/core/async_value.dart';
 import 'package:pet_app/src/core/constants.dart';
 import 'package:pet_app/src/core/services/navbar_service.dart';
 import 'package:pet_app/src/core/utils.dart';
@@ -13,6 +14,8 @@ class LayoutScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final navbarController = ref.watch(navbarControllerProvider);
+    final authController = ref.watch(authControllerProvider);
+
     return Scaffold(
       appBar: navbarController.index == 0
           ? AppBar(
@@ -24,16 +27,13 @@ class LayoutScreen extends ConsumerWidget {
                   ref.read(authControllerProvider.notifier).logout();
                 },
               ),
-              actions: const [
-                // GenericProfileImage(
-                //     image: User. currentUser?.avatarUrl ??
-                //         Constants.DEFAULT_PROFILE_IMAGE),
-
-                // _ActionIconButtons(icon: Icon(Icons.search)),
-                // _ActionIconButtons(icon: Icon(Icons.notifications_outlined)),
-                SizedBox.square(
-                  dimension: 10,
-                )
+              actions: [
+                AsyncValueWidget(
+                    value: authController,
+                    data: (user) {
+                      return GenericProfileImage(image: user!.avatarUrl);
+                    }), 
+                    const SizedBox.square(dimension: 20,)
               ],
             )
           : null,

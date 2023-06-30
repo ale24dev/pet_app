@@ -49,7 +49,6 @@ class _GenericTextFieldState extends State<GenericTextField> {
         textInputAction: widget.textInputAction,
         obscureText: showPassword,
         controller: widget.textEditingController,
-        maxLines: widget.maxLines,
         autofocus: widget.autofocus,
         decoration: InputDecoration(
             labelText: widget.labelText,
