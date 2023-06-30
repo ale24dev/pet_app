@@ -13,7 +13,6 @@ class LayoutScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final navbarController = ref.watch(navbarControllerProvider);
-    final currentUser = ref.watch(currentUserProvider).value;
     return Scaffold(
       appBar: navbarController.index == 0
           ? AppBar(
@@ -25,14 +24,14 @@ class LayoutScreen extends ConsumerWidget {
                   ref.read(authControllerProvider.notifier).logout();
                 },
               ),
-              actions: [
-                GenericProfileImage(
-                    image: currentUser?.avatarUrl ??
-                        Constants.DEFAULT_PROFILE_IMAGE),
+              actions: const [
+                // GenericProfileImage(
+                //     image: User. currentUser?.avatarUrl ??
+                //         Constants.DEFAULT_PROFILE_IMAGE),
 
                 // _ActionIconButtons(icon: Icon(Icons.search)),
                 // _ActionIconButtons(icon: Icon(Icons.notifications_outlined)),
-                const SizedBox.square(
+                SizedBox.square(
                   dimension: 10,
                 )
               ],

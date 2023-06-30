@@ -4,12 +4,45 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/src/core/async_value.dart';
+import 'package:pet_app/src/feature/pets/add_pet_model.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_card.dart';
 import 'package:pet_app/src/widgets/generic_button.dart';
 
 class PetsScreen extends ConsumerWidget {
   const PetsScreen({super.key});
+
+  void showAddPetBottomSheet(
+      BuildContext context,
+    ) {
+      // ignore: inference_failure_on_function_invocation
+      showModalBottomSheet(
+        showDragHandle: true,
+        isScrollControlled: true,
+        enableDrag: true,
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25),
+          ),
+        ),
+        builder: (context) => DraggableScrollableSheet(
+          initialChildSize: 0.62,
+          maxChildSize: 0.65,
+          minChildSize: 0.2,
+          expand: false,
+          builder: (context, scrollController) {
+            return SingleChildScrollView(
+              controller: scrollController,
+              child: const SizedBox(
+                width: double.infinity,
+                child: AddPetFormModel(),
+              ),
+            );
+          },
+        ),
+      );
+    }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -137,7 +170,9 @@ class PetsScreen extends ConsumerWidget {
             bottom: 24,
             right: 24,
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                showAddPetBottomSheet(context);
+              },
               child: const Icon(Icons.add),
             ))
       ],

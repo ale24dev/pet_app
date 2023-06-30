@@ -1,10 +1,11 @@
 import 'package:pet_app/src/feature/auth/data/model/user_model.dart';
+import 'package:pet_app/src/feature/auth/domain/user.dart';
 import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
 
 class Pet {
-  final int id;
+  final int? id;
   final int? age;
   final String name;
   final double? weight;
@@ -17,11 +18,11 @@ class Pet {
   final BreedModel breedModel;
   final PetType petType;
   final PetStatusModel petStatusModel;
-  final UserModel user;
+  final User user;
   // final String status;
 
   const Pet({
-    required this.id,
+    this.id,
     required this.name,
     required this.color,
     this.age,
@@ -56,6 +57,26 @@ final listPetsMock = List.generate(
             fullname: 'Ale Diaz'),
         petStatusModel: PetStatusModel(id: index, status: 'perdido'),
         petType: PetType(id: index, name: 'Perro'),
-        breedModel: BreedModel(id: index ,name: 'Pastor')
+        breedModel: BreedModel(id: index, name: 'Pastor')
         // status: 'Adpoción',
         ));
+
+extension PetX on Pet {
+  Map<String, dynamic> toJson() {
+    return {
+      'age': age,
+      'name': name,
+      'weight': weight,
+      'height': height,
+      'birthday': birthday?.toIso8601String(),
+      'description': description,
+      'color': color,
+      'gender': gender,
+      'image': image,
+      'breed': breedModel.id,
+      'pet_type': petType.id,
+      'pet_status': petStatusModel.id,
+      'user': user.id,
+    };
+  }
+}

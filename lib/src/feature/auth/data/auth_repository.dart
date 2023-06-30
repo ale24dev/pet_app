@@ -1,18 +1,10 @@
 import 'package:pet_app/src/core/query_supabase.dart';
 import 'package:pet_app/src/feature/auth/data/model/user_model.dart';
 import 'package:pet_app/src/feature/auth/domain/user.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 class AuthRepository {
-  /// observable to
-  final _authState = BehaviorSubject<User?>.seeded(null);
-
-  Stream<User?> authStateChanges() => _authState.stream;
-
-  User? get currentUser => _authState.value;
-
-  void dispose() => _authState.close();
+  late User currentUser;
 
   AuthRepository({required this.supabaseClient});
 
@@ -35,9 +27,7 @@ class AuthRepository {
     final userId = supabaseClient.auth.currentSession?.user.id ?? '0';
     final resp = await supabaseClient.from('user').select(QuerySupabase.user).eq('id', userId).single();
 
-    final user = userModelFromMap(resp);
-    _authState.value = user;
-
+    final User user = userModelFromMap(resp);
     return user;
   }
 }

@@ -20,7 +20,8 @@ PetModel _$PetModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PetModel {
-  int get id => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
+  int? get id => throw _privateConstructorUsedError;
   int? get age => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double? get weight => throw _privateConstructorUsedError;
@@ -50,7 +51,7 @@ abstract class $PetModelCopyWith<$Res> {
       _$PetModelCopyWithImpl<$Res, PetModel>;
   @useResult
   $Res call(
-      {int id,
+      {@JsonKey(includeIfNull: false) int? id,
       int? age,
       String name,
       double? weight,
@@ -84,7 +85,7 @@ class _$PetModelCopyWithImpl<$Res, $Val extends PetModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? age = freezed,
     Object? name = null,
     Object? weight = freezed,
@@ -100,10 +101,10 @@ class _$PetModelCopyWithImpl<$Res, $Val extends PetModel>
     Object? breedModel = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
@@ -200,7 +201,7 @@ abstract class _$$_PetModelCopyWith<$Res> implements $PetModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {@JsonKey(includeIfNull: false) int? id,
       int? age,
       String name,
       double? weight,
@@ -236,7 +237,7 @@ class __$$_PetModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? age = freezed,
     Object? name = null,
     Object? weight = freezed,
@@ -252,10 +253,10 @@ class __$$_PetModelCopyWithImpl<$Res>
     Object? breedModel = null,
   }) {
     return _then(_$_PetModel(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
@@ -316,7 +317,7 @@ class __$$_PetModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PetModel implements _PetModel {
   const _$_PetModel(
-      {required this.id,
+      {@JsonKey(includeIfNull: false) this.id = 0,
       this.age,
       required this.name,
       this.weight,
@@ -335,7 +336,8 @@ class _$_PetModel implements _PetModel {
       _$$_PetModelFromJson(json);
 
   @override
-  final int id;
+  @JsonKey(includeIfNull: false)
+  final int? id;
   @override
   final int? age;
   @override
@@ -431,7 +433,8 @@ class _$_PetModel implements _PetModel {
 
 abstract class _PetModel implements PetModel {
   const factory _PetModel(
-      {required final int id,
+      {@JsonKey(includeIfNull: false)
+          final int? id,
       final int? age,
       required final String name,
       final double? weight,
@@ -452,7 +455,8 @@ abstract class _PetModel implements PetModel {
   factory _PetModel.fromJson(Map<String, dynamic> json) = _$_PetModel.fromJson;
 
   @override
-  int get id;
+  @JsonKey(includeIfNull: false)
+  int? get id;
   @override
   int? get age;
   @override

@@ -7,7 +7,7 @@ part of 'pet_model.dart';
 // **************************************************************************
 
 _$_PetModel _$$_PetModelFromJson(Map<String, dynamic> json) => _$_PetModel(
-      id: json['id'] as int,
+      id: json['id'] as int? ?? 0,
       age: json['age'] as int?,
       name: json['name'] as String,
       weight: (json['weight'] as num?)?.toDouble(),
@@ -26,20 +26,28 @@ _$_PetModel _$$_PetModelFromJson(Map<String, dynamic> json) => _$_PetModel(
       breedModel: BreedModel.fromJson(json['breed'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PetModelToJson(_$_PetModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'age': instance.age,
-      'name': instance.name,
-      'weight': instance.weight,
-      'height': instance.height,
-      'birthday': instance.birthday?.toIso8601String(),
-      'description': instance.description,
-      'color': instance.color,
-      'gender': instance.gender,
-      'image': instance.image,
-      'user': instance.user,
-      'pet_type': instance.petType,
-      'pet_status': instance.petStatusModel,
-      'breed': instance.breedModel,
-    };
+Map<String, dynamic> _$$_PetModelToJson(_$_PetModel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['age'] = instance.age;
+  val['name'] = instance.name;
+  val['weight'] = instance.weight;
+  val['height'] = instance.height;
+  val['birthday'] = instance.birthday?.toIso8601String();
+  val['description'] = instance.description;
+  val['color'] = instance.color;
+  val['gender'] = instance.gender;
+  val['image'] = instance.image;
+  val['user'] = instance.user;
+  val['pet_type'] = instance.petType;
+  val['pet_status'] = instance.petStatusModel;
+  val['breed'] = instance.breedModel;
+  return val;
+}

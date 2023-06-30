@@ -42,7 +42,7 @@ class AuthController extends _$AuthController {
         () => authRepository.signup(email: email, password: password));
 
     final success = state.hasError == false;
-    if (success) unawaited(authRepository.getUser());
+    if (success) ref.read(currentUserProvider);
     // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
 
     return success;
@@ -59,15 +59,11 @@ class AuthController extends _$AuthController {
 
     return success;
   }
-
-
 }
 
 @Riverpod(keepAlive: true)
 AuthRepository authRepository(AuthRepositoryRef ref) =>
     AuthRepository(supabaseClient: SupabaseService.supabaseClient);
 
-@Riverpod(keepAlive: true)
-Stream<User?> currentUser(CurrentUserRef ref) {
-  return ref.watch(authRepositoryProvider.select((value) => value.authStateChanges()));
-}
+@riverpod
+FutureOr<User> currentUser(CurrentUserRef ref) => ref.read(authRepositoryProvider).getUser();
