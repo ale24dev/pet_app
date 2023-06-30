@@ -124,6 +124,12 @@ class AppTextStyle {
         fontWeight: FontWeight.w500,
       );
 
+  TextStyle get dialogTitle => _default.copyWith(
+        fontSize: 16,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w500,
+      );
+
   TextStyle get body =>
       _default.copyWith(fontSize: 14, fontWeight: FontWeight.w400);
 

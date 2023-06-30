@@ -1,6 +1,7 @@
 import 'package:pet_app/src/core/api_result.dart';
 import 'package:pet_app/src/core/query_supabase.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
+import 'package:pet_app/src/feature/pets/domain/pet.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PetRepository {
@@ -17,5 +18,21 @@ class PetRepository {
 
     apiResult.responseObject = petFromJson(response);
     return apiResult;
+  }
+
+  Future<bool> create(PetModel pet) async {
+    await supabaseClient.from('pet').insert(pet.toJson());
+    return true;
+  }
+
+  Future<bool> delete(int petId) async {
+    await supabaseClient.from('pet').delete().eq('id', petId);
+    return true;
+  }
+
+  Future<bool> add(Pet pet) async {
+    final petJson = pet.toJson();
+    await supabaseClient.from('pet').insert(petJson);
+    return true;
   }
 }

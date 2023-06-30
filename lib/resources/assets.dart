@@ -14,4 +14,5 @@ class AppAsset {
   ///Pets Screen
   static const String dog = 'assets/images/dog.png';
   static const String cat = 'assets/images/cat.png';
+  static const String petsEmpty = 'assets/images/pets_empty.png';
 }

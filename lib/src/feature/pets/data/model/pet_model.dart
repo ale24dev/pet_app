@@ -23,7 +23,7 @@ List<PetModel> petFromJson(List<dynamic> str) =>
 @freezed
 class PetModel with _$PetModel implements Pet {
   const factory PetModel({
-    required int id,
+    @JsonKey(includeIfNull: false) @Default(0) int? id,
     int? age,
     required String name,
     double? weight,

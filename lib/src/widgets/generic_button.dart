@@ -4,24 +4,25 @@ class GenericButton extends StatelessWidget {
   const GenericButton({
     super.key,
     required this.widget,
-    required this.function,
+    required this.onPressed,
+    this.style,
   });
 
   final Widget widget;
-  final VoidCallback function;
+  final VoidCallback onPressed;
+  final ButtonStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-            onPressed: () {
-              function();
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              padding: const EdgeInsets.all(8.0),
-              child: widget,
-            )));
+    return ElevatedButton(
+        onPressed: () {
+          onPressed();
+        },
+        style: style,
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.all(8.0),
+          child: widget,
+        ));
   }
 }

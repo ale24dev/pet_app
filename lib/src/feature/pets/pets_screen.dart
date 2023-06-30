@@ -1,12 +1,48 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/src/core/async_value.dart';
+import 'package:pet_app/src/feature/pets/add_pet_model.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_card.dart';
+import 'package:pet_app/src/widgets/generic_button.dart';
 
 class PetsScreen extends ConsumerWidget {
   const PetsScreen({super.key});
+
+  void showAddPetBottomSheet(
+      BuildContext context,
+    ) {
+      // ignore: inference_failure_on_function_invocation
+      showModalBottomSheet(
+        showDragHandle: true,
+        isScrollControlled: true,
+        enableDrag: true,
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25),
+          ),
+        ),
+        builder: (context) => DraggableScrollableSheet(
+          initialChildSize: 0.62,
+          maxChildSize: 0.65,
+          minChildSize: 0.2,
+          expand: false,
+          builder: (context, scrollController) {
+            return SingleChildScrollView(
+              controller: scrollController,
+              child: const SizedBox(
+                width: double.infinity,
+                child: AddPetFormModel(),
+              ),
+            );
+          },
+        ),
+      );
+    }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,46 +52,117 @@ class PetsScreen extends ConsumerWidget {
         AsyncValueWidget(
           value: petController,
           data: (apiResultPets) {
-            return Padding(
-              padding: context.responsiveContentPadding,
-              child: ListView.builder(
-                itemCount: apiResultPets.responseObject.length,
-                itemBuilder: (context, index) {
-                  final pet = apiResultPets.responseObject[index];
-                  return Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: ShapeDecoration(
-                      color: Theme.of(context).primaryColor,
-                      shape: Theme.of(context).cardTheme.shape!,
+            return AnimatedSwitcher(
+              duration: 250.ms,
+              child: apiResultPets.responseObject.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            AppAsset.petsEmpty,
+                            height: 250,
+                          ),
+                          const SizedBox.square(
+                            dimension: 4,
+                          ),
+                          SizedBox(
+                              width: context.widthPx * .6,
+                              child: const Text(
+                                'Aún no tienes mascotas. ¿Qué tal si adoptas una?',
+                                textAlign: TextAlign.center,
+                              )),
+                          const SizedBox.square(
+                            dimension: 4,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {},
+                              child: const Text('Adoptar un nuevo amigo(a)'))
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: context.responsiveContentPadding,
+                      child: ListView.builder(
+                        itemCount: apiResultPets.responseObject.length,
+                        itemBuilder: (context, index) {
+                          final pet = apiResultPets.responseObject[index];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            decoration: ShapeDecoration(
+                              color: Theme.of(context).primaryColor,
+                              shape: Theme.of(context).cardTheme.shape!,
+                            ),
+                            child: Dismissible(
+                                key: ValueKey('pet-dissmisible-${pet.id}'),
+                                confirmDismiss: (direction) async {
+                                  return await showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Text(
+                                              '¿Estás seguro(a) de eliminar a esta mascota?',
+                                              style: AppTextStyle().dialogTitle,
+                                            ),
+                                            actionsAlignment:
+                                                MainAxisAlignment.center,
+                                            content: Row(
+                                              children: [
+                                                GenericButton(
+                                                    onPressed: () {
+                                                      return context.pop(true);
+                                                    },
+                                                    widget:
+                                                        const Text('Aceptar')),
+                                                const SizedBox.square(
+                                                  dimension: 20,
+                                                ),
+                                                GenericButton(
+                                                  onPressed: () {
+                                                    return context.pop(false);
+                                                  },
+                                                  widget:
+                                                      Text('Cancelar', style: AppTextStyle().body.copyWith(color: Colors.black),),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          backgroundColor:
+                                                              Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ));
+                                },
+                                onDismissed: (direction) {
+                                  ref
+                                      .read(petControllerProvider.notifier)
+                                      .deletePet(pet.id);
+                                },
+                                direction: DismissDirection.endToStart,
+                                secondaryBackground: const Padding(
+                                  padding: EdgeInsets.only(right: 13),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: SizedBox(
+                                        height: 18,
+                                        width: 20,
+                                        child: Icon(
+                                          Icons.delete,
+                                          color: Colors.white,
+                                        )),
+                                  ),
+                                ),
+                                background: DecoratedBox(
+                                  decoration: ShapeDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    shape: Theme.of(context).cardTheme.shape!,
+                                    shadows: AppTheme.defaultShadow,
+                                  ),
+                                  child: const SizedBox.shrink(),
+                                ),
+                                child: PetCard(pet: pet)),
+                          );
+                        },
+                      ),
                     ),
-                    child: Dismissible(
-                        key: ValueKey('pet-dissmisible-${pet.id}'),
-                        direction: DismissDirection.endToStart,
-                        secondaryBackground: const Padding(
-                          padding: EdgeInsets.only(right: 13),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: SizedBox(
-                                height: 18,
-                                width: 20,
-                                child: Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                )),
-                          ),
-                        ),
-                        background: DecoratedBox(
-                          decoration: ShapeDecoration(
-                            color: Theme.of(context).primaryColor,
-                            shape: Theme.of(context).cardTheme.shape!,
-                            shadows: AppTheme.defaultShadow,
-                          ),
-                          child: const SizedBox.shrink(),
-                        ),
-                        child: PetCard(pet: pet)),
-                  );
-                },
-              ),
             );
           },
         ),
@@ -63,7 +170,9 @@ class PetsScreen extends ConsumerWidget {
             bottom: 24,
             right: 24,
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                showAddPetBottomSheet(context);
+              },
               child: const Icon(Icons.add),
             ))
       ],

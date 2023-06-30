@@ -21,11 +21,11 @@ final authRepositoryProvider = Provider<AuthRepository>.internal(
 );
 
 typedef AuthRepositoryRef = ProviderRef<AuthRepository>;
-String _$currentUserHash() => r'29ab3800401b86a712e83ba2eb269787b49b1fc7';
+String _$currentUserHash() => r'14cca9e77091c3686f211a3040d31124cbfab11a';
 
 /// See also [currentUser].
 @ProviderFor(currentUser)
-final currentUserProvider = StreamProvider<User?>.internal(
+final currentUserProvider = AutoDisposeFutureProvider<User>.internal(
   currentUser,
   name: r'currentUserProvider',
   debugGetCreateSourceHash:
@@ -34,8 +34,8 @@ final currentUserProvider = StreamProvider<User?>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef CurrentUserRef = StreamProviderRef<User?>;
-String _$authControllerHash() => r'2854a129fc02af197bfcf5b39ec7d748125a8f14';
+typedef CurrentUserRef = AutoDisposeFutureProviderRef<User>;
+String _$authControllerHash() => r'7ccd9449bb4986d804a1688bde8a55190d5ad35a';
 
 /// See also [AuthController].
 @ProviderFor(AuthController)
