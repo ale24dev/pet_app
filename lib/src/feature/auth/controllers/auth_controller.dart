@@ -7,24 +7,41 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controller.g.dart';
 
+class CurrentUser {
+  final User? user;
+  final bool initializated;
+
+  const CurrentUser({this.user, this.initializated = false});
+
+  CurrentUser copyWith({final User? user, final bool? initializated}) => CurrentUser(
+    user: user ?? this.user, initializated: initializated ?? this.initializated
+  );
+}
+
 @riverpod
 class AuthController extends _$AuthController {
+
   @override
-  FutureOr<void> build() {}
+  FutureOr<User?> build() {
+    return ref.read(authRepositoryProvider).getUser();
+  }
 
   Future<bool> login(
       {required String email,
       required String password,
       bool rememberEmail = false}) async {
-
     final authRepository = ref.read(authRepositoryProvider);
 
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
-        () => authRepository.login(email: email, password: password));
+        () =>  authRepository.login(email: email, password: password));
 
     final success = state.hasError == false;
-    if (success) unawaited(authRepository.getUser());
+    // if (success) {
+      // state = state.cop
+      // user = await authRepository.getUser();
+      // userInitializated = true;
+    // }
     // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
 
     return success;
@@ -34,7 +51,6 @@ class AuthController extends _$AuthController {
       {required String email,
       required String password,
       bool rememberEmail = false}) async {
-
     final authRepository = ref.read(authRepositoryProvider);
 
     state = const AsyncValue.loading();
@@ -42,8 +58,10 @@ class AuthController extends _$AuthController {
         () => authRepository.signup(email: email, password: password));
 
     final success = state.hasError == false;
-    if (success) ref.read(currentUserProvider);
-    // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
+    if (success) {
+      // user = await authRepository.getUser();
+      // userInitializated = true;
+    } // if (success && rememberEmail) unawaited(_rememberEmail(email: email, rememberEmail: rememberEmail));
 
     return success;
   }
@@ -52,8 +70,7 @@ class AuthController extends _$AuthController {
     final authRepository = ref.read(authRepositoryProvider);
 
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(
-        () => authRepository.logout());
+    state = await AsyncValue.guard(() => authRepository.logout());
 
     final success = state.hasError == false;
 
@@ -65,5 +82,11 @@ class AuthController extends _$AuthController {
 AuthRepository authRepository(AuthRepositoryRef ref) =>
     AuthRepository(supabaseClient: SupabaseService.supabaseClient);
 
-@riverpod
-FutureOr<User> currentUser(CurrentUserRef ref) => ref.read(authRepositoryProvider).getUser();
+// @riverpod
+// FutureOr<User> currentUser(CurrentUserRef ref) => ref.read(authRepositoryProvider).getUser();
+
+@Riverpod(keepAlive: true)
+Stream<User?> currentUser(CurrentUserRef ref) {
+  return ref.watch(
+      authRepositoryProvider.select((value) => value.authStateChanges()));
+}

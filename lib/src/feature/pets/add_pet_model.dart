@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pet_app/src/core/widgets/generic_text_field.dart';
 import 'package:pet_app/src/core/widgets/pet_async_generic_button.dart';
 import 'package:pet_app/src/core/widgets/text_field_birthday.dart';
+import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 import 'package:pet_app/src/feature/auth/domain/user.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
 import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
@@ -62,6 +63,9 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
   @override
   Widget build(BuildContext context) {
     final petController = ref.watch(petControllerProvider);
+
+    final user = ref.watch(authControllerProvider).value;
+
     return Padding(
       padding: context.responsiveContentPadding,
       child: Form(
@@ -156,7 +160,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                               weight: weightController.text.isNotEmpty
                                   ? double.parse(weightController.text)
                                   : null,
-                              user: userMock,
+                              user: user!.parseToModel(),
                               petType: const PetType(id: 1, name: 'A'),
                               petStatusModel: const PetStatusModel(
                                   id: 1, status: 'perdido'),
