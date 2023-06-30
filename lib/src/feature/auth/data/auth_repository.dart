@@ -1,5 +1,6 @@
 import 'package:pet_app/src/core/query_supabase.dart';
 import 'package:pet_app/src/feature/auth/data/model/user_model.dart';
+import 'package:pet_app/src/feature/auth/domain/current_user.dart';
 import 'package:pet_app/src/feature/auth/domain/user.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
@@ -19,7 +20,8 @@ class AuthRepository {
     _authState.close();
   }
 
-  Future<User> login({required String email, required String password}) async {
+  Future<CurrentUser> login(
+      {required String email, required String password}) async {
     await supabaseClient.auth
         .signInWithPassword(email: email, password: password);
 
@@ -28,7 +30,8 @@ class AuthRepository {
     return user;
   }
 
-  Future<User> signup({required String email, required String password}) async {
+  Future<CurrentUser> signup(
+      {required String email, required String password}) async {
     await supabaseClient.auth.signUp(email: email, password: password);
 
     final user = await getUser();
@@ -36,12 +39,15 @@ class AuthRepository {
     return user;
   }
 
-  Future<User?> logout() async {
+  Future<CurrentUser?> logout() async {
     await supabaseClient.auth.signOut();
+
+    ///Reset current user
+    CurrentUser.instance.setInitial();
     return null;
   }
 
-  Future<User> getUser() async {
+  Future<CurrentUser> getUser() async {
     final userId = supabaseClient.auth.currentSession?.user.id ?? '0';
     final resp = await supabaseClient
         .from('user')
@@ -50,8 +56,10 @@ class AuthRepository {
         .single();
 
     final User user = userModelFromMap(resp);
-    _authState.value = user;
 
-    return user;
+    if (!CurrentUser.instance.initializated) {
+      CurrentUser.instance.setUser(user);
+    }
+    return CurrentUser.instance;
   }
 }

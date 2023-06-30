@@ -21,26 +21,12 @@ final authRepositoryProvider = Provider<AuthRepository>.internal(
 );
 
 typedef AuthRepositoryRef = ProviderRef<AuthRepository>;
-String _$currentUserHash() => r'29ab3800401b86a712e83ba2eb269787b49b1fc7';
-
-/// See also [currentUser].
-@ProviderFor(currentUser)
-final currentUserProvider = StreamProvider<User?>.internal(
-  currentUser,
-  name: r'currentUserProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentUserHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef CurrentUserRef = StreamProviderRef<User?>;
-String _$authControllerHash() => r'5fa3b34f9a9ab6dde58543378f7e9fdc8ffe833f';
+String _$authControllerHash() => r'14f5337ce818c8a3d9bf820b0dfc9ea5dcc1c70b';
 
 /// See also [AuthController].
 @ProviderFor(AuthController)
 final authControllerProvider =
-    AutoDisposeAsyncNotifierProvider<AuthController, User?>.internal(
+    AutoDisposeAsyncNotifierProvider<AuthController, CurrentUser>.internal(
   AuthController.new,
   name: r'authControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -50,5 +36,5 @@ final authControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$AuthController = AutoDisposeAsyncNotifier<User?>;
+typedef _$AuthController = AutoDisposeAsyncNotifier<CurrentUser>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

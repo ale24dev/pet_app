@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pet_app/src/core/async_value.dart';
-import 'package:pet_app/src/core/constants.dart';
 import 'package:pet_app/src/core/services/navbar_service.dart';
 import 'package:pet_app/src/core/utils.dart';
 import 'package:pet_app/src/core/widgets/generic_bottom_navbar.dart';
@@ -30,8 +29,8 @@ class LayoutScreen extends ConsumerWidget {
               actions: [
                 AsyncValueWidget(
                     value: authController,
-                    data: (user) {
-                      return GenericProfileImage(image: user!.avatarUrl);
+                    data: (currentUser) {
+                      return GenericProfileImage(image: currentUser!.user!.avatarUrl);
                     }), 
                     const SizedBox.square(dimension: 20,)
               ],
