@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pet_app/src/core/widgets/generic_selectable_field.dart';
 import 'package:pet_app/src/core/widgets/generic_text_field.dart';
 import 'package:pet_app/src/core/widgets/pet_async_generic_button.dart';
-import 'package:pet_app/src/core/widgets/text_field_birthday.dart';
 import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 import 'package:pet_app/src/feature/auth/domain/user.dart';
+import 'package:pet_app/src/feature/pets/controllers/add_pet_controller.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
 import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
-import 'package:pet_app/src/feature/pets/widgets/breed_field.dart';
-import 'package:pet_app/src/feature/pets/widgets/pet_status_field.dart';
-import 'package:pet_app/src/feature/pets/widgets/pet_type_field.dart';
 
 class AddPetFormModel extends ConsumerStatefulWidget {
   const AddPetFormModel({super.key});
@@ -34,6 +32,9 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
   late final descriptionController = TextEditingController();
   late final colorController = TextEditingController();
   late final genderController = TextEditingController();
+  late final breedController = TextEditingController();
+  late final statusController = TextEditingController();
+  late final typeController = TextEditingController();
 
   DateTime? birthdaySelected;
   BreedModel? breedModelSelected;
@@ -54,6 +55,9 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
       descriptionController,
       colorController,
       genderController,
+      breedController,
+      statusController,
+      typeController,
     ]) {
       controller.dispose();
     }
@@ -69,6 +73,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
 
   @override
   Widget build(BuildContext context) {
+    print(petTypeSelected?.name);
     final petController = ref.watch(petControllerProvider);
 
     final currentUser = ref.watch(authControllerProvider).value;
@@ -158,31 +163,45 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               const SizedBox.square(
                 dimension: 20,
               ),
-              BreedField(onSuggestionSelected: (breedSelected) {
-                setState(() {
-                  breedModelSelected = breedSelected;
-                });
-              }),
+              GenericSelectableField<BreedModel>(
+                  controller: breedController,
+                  labelText: 'Raza',
+                  value: ref.watch(breedProvider.future),
+                  validator: FormBuilderValidators.required(
+                      errorText: 'Este campo es obligatorio'),
+                  onSuggestionSelected: (breedSelected) {
+                    setState(() {
+                      breedModelSelected = breedSelected;
+                    });
+                  }),
               const SizedBox.square(
                 dimension: 20,
               ),
-              PetStatusField(
-                onSuggestionSelected: (petStatusSelected) {
-                  this.petStatusSelected = petStatusSelected;
-                },
-              ),
+              GenericSelectableField<PetType>(
+                  controller: typeController,
+                  labelText: 'Tipo de mascota',
+                  value: ref.watch(petTypeProvider.future),
+                  validator: FormBuilderValidators.required(
+                      errorText: 'Este campo es obligatorio'),
+                  onSuggestionSelected: (petTypeSelected) {
+                    setState(() {
+                      this.petTypeSelected = petTypeSelected;
+                    });
+                  }),
               const SizedBox.square(
                 dimension: 20,
               ),
-              PetTypeField(onSuggestionSelected: (petTypeSelected) {
-                this.petTypeSelected = petTypeSelected;
-              }),
-              const SizedBox.square(
-                dimension: 20,
-              ),
-              TextFieldBirthday(
-                  birthdayController: birthdayController,
-                  callback: callbackSetBirthday),
+              GenericSelectableField<PetStatusModel>(
+                  controller: statusController,
+                  labelText: 'Estado',
+                  value: ref.watch(petStatusProvider.future),
+                  validator: FormBuilderValidators.required(
+                      errorText: 'Este campo es obligatorio'),
+                  onSuggestionSelected: (petStatusSelected) {
+                    setState(() {
+                      this.petStatusSelected = petStatusSelected;
+                    });
+                  }),
               const SizedBox.square(
                 dimension: 20,
               ),
@@ -193,9 +212,8 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                 maxLines: 10,
                 controller: descriptionController,
                 textInputAction: TextInputAction.done,
-                validator: 
-                  FormBuilderValidators.required(
-                      errorText: 'Este campo es requerido'),
+                validator: FormBuilderValidators.required(
+                    errorText: 'Este campo es requerido'),
               ).requiredField(),
               const SizedBox.square(
                 dimension: 20,

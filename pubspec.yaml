@@ -33,6 +33,7 @@ dependencies:
   supabase_flutter: ^1.10.3
 
   flutter_dotenv: ^5.1.0
+  reflectable: ^4.0.5
   
   app_theme:
     path: packages/app_theme
