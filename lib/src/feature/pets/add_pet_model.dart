@@ -12,6 +12,7 @@ import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
+import 'package:pet_app/src/feature/pets/widgets/pet_status_field.dart';
 
 class AddPetFormModel extends ConsumerStatefulWidget {
   const AddPetFormModel({super.key});
@@ -108,20 +109,48 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                 dimension: 20,
               ),
               GenericTextField(
-                  labelText: 'Altura',
-                  textInputAction: TextInputAction.next,
-                  textEditingController: heightController),
+                labelText: 'Altura',
+                textInputAction: TextInputAction.next,
+                textEditingController: heightController,
+                prefixIcon: SizedBox(
+                    width: 10,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'cm',
+                          style: AppTextStyle()
+                              .body
+                              .copyWith(color: Theme.of(context).primaryColor),
+                          textAlign: TextAlign.center,
+                        ))),
+              ),
               const SizedBox.square(
                 dimension: 20,
               ),
               GenericTextField(
-                  labelText: 'Peso',
-                  textInputAction: TextInputAction.next,
-                  textEditingController: weightController),
+                labelText: 'Peso',
+                textInputAction: TextInputAction.next,
+                textEditingController: weightController,
+                prefixIcon: SizedBox(
+                    width: 10,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'kg',
+                          style: AppTextStyle()
+                              .body
+                              .copyWith(color: Theme.of(context).primaryColor),
+                          textAlign: TextAlign.center,
+                        ))),
+              ),
               const SizedBox.square(
                 dimension: 20,
               ),
-              TextFieldBirthday(
+              const PetStatusField(),
+              const SizedBox.square(
+                dimension: 20,
+              ),
+              TextFieldBirthday(  
                   birthdayController: birthdayController,
                   callback: callbackSetBirthday),
               const SizedBox.square(

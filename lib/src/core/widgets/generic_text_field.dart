@@ -12,6 +12,8 @@ class GenericTextField extends StatefulWidget {
     required this.textEditingController,
     this.errorText,
     this.maxLines,
+    this.suffixIcon,
+    this.prefixIcon,
     this.autofocus = false,
   });
 
@@ -23,6 +25,8 @@ class GenericTextField extends StatefulWidget {
   final String? errorText;
   final int? maxLines;
   final bool autofocus;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   @override
   State<GenericTextField> createState() => _GenericTextFieldState();
@@ -52,6 +56,7 @@ class _GenericTextFieldState extends State<GenericTextField> {
         autofocus: widget.autofocus,
         decoration: InputDecoration(
             labelText: widget.labelText,
+            prefixIcon: widget.prefixIcon,
             suffixIcon: widget.obscureText == null
                 ? null
                 : IconButton(
@@ -89,7 +94,6 @@ extension GenericTextFieldX on GenericTextField {
 extension TextFieldX on TextField {
   Widget requiredField() {
     return Stack(
-      
       children: [
         this,
         const Positioned(
