@@ -12,6 +12,7 @@ import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
+import 'package:pet_app/src/feature/pets/widgets/breed_field.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_status_field.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_type_field.dart';
 
@@ -34,6 +35,9 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
   late final genderController = TextEditingController();
 
   DateTime? birthdaySelected;
+  BreedModel? breedModelSelected;
+  PetType? petTypeSelected;
+  PetStatusModel? petStatusSelected;
 
   late final formKey = GlobalKey<FormState>();
 
@@ -147,11 +151,25 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               const SizedBox.square(
                 dimension: 20,
               ),
-              const PetStatusField(),
+              BreedField(onSuggestionSelected: (breedSelected) {
+                setState(() {
+                  breedModelSelected = breedSelected;
+                });
+              }),
               const SizedBox.square(
                 dimension: 20,
               ),
-              const PetTypeField(),
+              PetStatusField(
+                onSuggestionSelected: (petStatusSelected) {
+                  this.petStatusSelected = petStatusSelected;
+                },
+              ),
+              const SizedBox.square(
+                dimension: 20,
+              ),
+              PetTypeField(onSuggestionSelected: (petTypeSelected){
+                this.petTypeSelected = petTypeSelected;
+              }),
               const SizedBox.square(
                 dimension: 20,
               ),
@@ -195,10 +213,9 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                                   ? double.parse(weightController.text)
                                   : null,
                               user: currentUser!.user!.parseToModel(),
-                              petType: const PetType(id: 1, name: 'A'),
-                              petStatusModel: const PetStatusModel(
-                                  id: 1, status: 'perdido'),
-                              breedModel: const BreedModel(id: 1, name: 'aa')));
+                              petType: petTypeSelected!,
+                              petStatusModel: petStatusSelected!,
+                              breedModel: breedModelSelected!));
 
                       if (context.mounted && success) {
                         context.pop();

@@ -1,5 +1,6 @@
 import 'package:pet_app/src/core/api_result.dart';
 import 'package:pet_app/src/core/query_supabase.dart';
+import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
@@ -46,5 +47,10 @@ class PetRepository {
   Future<List<PetType>> getAllPetType() async {
    final response = await supabaseClient.from('pet_type').select();
     return petTypeFromJson(response);
+  }
+
+  Future<List<BreedModel>> getAllBreeds() async {
+   final response = await supabaseClient.from('breed').select();
+    return breedsFromJson(response);
   }
 }

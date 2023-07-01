@@ -7,7 +7,10 @@ import 'package:pet_app/src/feature/pets/controllers/add_pet_controller.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
 
 class PetTypeField extends ConsumerStatefulWidget {
-  const PetTypeField({super.key});
+  const PetTypeField({super.key, this.onSuggestionSelected});
+
+    final ValueChanged<PetType>? onSuggestionSelected;
+
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -48,7 +51,7 @@ class _PetTypeFieldState extends ConsumerState<PetTypeField> {
       },
       onSuggestionSelected: (petType) {
         petTypeController.text = petType.name.capitalize;
-        // onSuggestionSelected?.call(location);
+        widget.onSuggestionSelected?.call(petType);
       },
       suggestionsBoxDecoration: SuggestionsBoxDecoration(
           borderRadius: BorderRadius.circular(10), elevation: 8),
