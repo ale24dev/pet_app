@@ -1,6 +1,7 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/src/core/widgets/generic_text_field.dart';
 import 'package:pet_app/src/core/widgets/pet_async_generic_button.dart';
@@ -85,6 +86,8 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                 labelText: 'Nombre',
                 textInputAction: TextInputAction.next,
                 textEditingController: nameController,
+                validator: FormBuilderValidators.required(
+                    errorText: 'Este campo es requerido'),
                 autofocus: true,
               ).requiredField(),
               const SizedBox.square(
@@ -98,18 +101,22 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                 dimension: 20,
               ),
               GenericTextField(
-                      labelText: 'Color',
-                      textInputAction: TextInputAction.next,
-                      textEditingController: colorController)
-                  .requiredField(),
+                labelText: 'Color',
+                textInputAction: TextInputAction.next,
+                textEditingController: colorController,
+                validator: FormBuilderValidators.required(
+                    errorText: 'Este campo es requerido'),
+              ).requiredField(),
               const SizedBox.square(
                 dimension: 20,
               ),
               GenericTextField(
-                      labelText: 'Sexo',
-                      textInputAction: TextInputAction.next,
-                      textEditingController: genderController)
-                  .requiredField(),
+                labelText: 'Sexo',
+                textInputAction: TextInputAction.next,
+                textEditingController: genderController,
+                validator: FormBuilderValidators.required(
+                    errorText: 'Este campo es requerido'),
+              ).requiredField(),
               const SizedBox.square(
                 dimension: 20,
               ),
@@ -167,7 +174,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               const SizedBox.square(
                 dimension: 20,
               ),
-              PetTypeField(onSuggestionSelected: (petTypeSelected){
+              PetTypeField(onSuggestionSelected: (petTypeSelected) {
                 this.petTypeSelected = petTypeSelected;
               }),
               const SizedBox.square(
@@ -179,13 +186,16 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               const SizedBox.square(
                 dimension: 20,
               ),
-              TextField(
+              TextFormField(
                 decoration: const InputDecoration(
                     labelText: 'Descripción', alignLabelWithHint: true),
                 minLines: 5,
                 maxLines: 10,
                 controller: descriptionController,
                 textInputAction: TextInputAction.done,
+                validator: 
+                  FormBuilderValidators.required(
+                      errorText: 'Este campo es requerido'),
               ).requiredField(),
               const SizedBox.square(
                 dimension: 20,
@@ -194,31 +204,34 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                 width: double.infinity,
                 child: AsyncGenericButton(
                     onTap: () async {
-                      final success = await ref
-                          .read(petControllerProvider.notifier)
-                          .addPet(PetModel(
-                              id: null,
-                              name: nameController.text,
-                              description: descriptionController.text,
-                              color: colorController.text,
-                              gender: genderController.text,
-                              age: ageController.text.isNotEmpty
-                                  ? int.parse(ageController.text)
-                                  : null,
-                              birthday: birthdaySelected,
-                              height: heightController.text.isNotEmpty
-                                  ? double.parse(heightController.text)
-                                  : null,
-                              weight: weightController.text.isNotEmpty
-                                  ? double.parse(weightController.text)
-                                  : null,
-                              user: currentUser!.user!.parseToModel(),
-                              petType: petTypeSelected!,
-                              petStatusModel: petStatusSelected!,
-                              breedModel: breedModelSelected!));
+                      if (formKey.currentState?.validate() ?? false) {
+                        formKey.currentState?.save();
+                        final success = await ref
+                            .read(petControllerProvider.notifier)
+                            .addPet(PetModel(
+                                id: null,
+                                name: nameController.text,
+                                description: descriptionController.text,
+                                color: colorController.text,
+                                gender: genderController.text,
+                                age: ageController.text.isNotEmpty
+                                    ? int.parse(ageController.text)
+                                    : null,
+                                birthday: birthdaySelected,
+                                height: heightController.text.isNotEmpty
+                                    ? double.parse(heightController.text)
+                                    : null,
+                                weight: weightController.text.isNotEmpty
+                                    ? double.parse(weightController.text)
+                                    : null,
+                                user: currentUser!.user!.parseToModel(),
+                                petType: petTypeSelected!,
+                                petStatusModel: petStatusSelected!,
+                                breedModel: breedModelSelected!));
 
-                      if (context.mounted && success) {
-                        context.pop();
+                        if (context.mounted && success) {
+                          context.pop();
+                        }
                       }
                     },
                     asyncValue: petController,
