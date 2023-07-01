@@ -13,6 +13,7 @@ import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_status_field.dart';
+import 'package:pet_app/src/feature/pets/widgets/pet_type_field.dart';
 
 class AddPetFormModel extends ConsumerStatefulWidget {
   const AddPetFormModel({super.key});
@@ -150,7 +151,11 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               const SizedBox.square(
                 dimension: 20,
               ),
-              TextFieldBirthday(  
+              const PetTypeField(),
+              const SizedBox.square(
+                dimension: 20,
+              ),
+              TextFieldBirthday(
                   birthdayController: birthdayController,
                   callback: callbackSetBirthday),
               const SizedBox.square(

@@ -4,50 +4,50 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:pet_app/src/core/widgets/empty_results_filed.dart';
 import 'package:pet_app/src/feature/pets/controllers/add_pet_controller.dart';
-import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
+import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
 
-class PetStatusField extends ConsumerStatefulWidget {
-  const PetStatusField({super.key});
+class PetTypeField extends ConsumerStatefulWidget {
+  const PetTypeField({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _PetStatusFieldState();
+      _PetTypeFieldState();
 }
 
-class _PetStatusFieldState extends ConsumerState<PetStatusField> {
-  final statusController = TextEditingController();
+class _PetTypeFieldState extends ConsumerState<PetTypeField> {
+  final petTypeController = TextEditingController();
 
   @override
   void dispose() {
-    statusController.dispose();
+    petTypeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final petStatusProviderValue = ref.watch(petStatusProvider.future);
-    return TypeAheadFormField<PetStatusModel>(
+    final petTypeProviderValue = ref.watch(petTypeProvider.future);
+    return TypeAheadFormField<PetType>(
       direction: AxisDirection.up,
       noItemsFoundBuilder: (_) => const EmptyResultField(),
       // validator: LocationValidator.province(context),
       textFieldConfiguration: TextFieldConfiguration(
         // textInputAction: textInputAction,
-        decoration: const InputDecoration(labelText: 'Estado'),
-        controller: statusController,
+        decoration: const InputDecoration(labelText: 'Tipo de mascota'),
+        controller: petTypeController,
       ),
       suggestionsCallback: (pattern) async {
-        final petsStatus = await petStatusProviderValue;
+        final petsType= await petTypeProviderValue;
 
-        return petsStatus.where((status) {
-          return status.status.toLowerCase().contains(pattern.toLowerCase());
+        return petsType.where((type) {
+          return type.name.toLowerCase().contains(pattern.toLowerCase());
         });
       },
-      itemBuilder: (_, PetStatusModel petsStatus) {
+      itemBuilder: (_, PetType petType) {
         return Padding(
-            padding: const EdgeInsets.all(17), child: Text(petsStatus.status));
+            padding: const EdgeInsets.all(17), child: Text(petType.name));
       },
-      onSuggestionSelected: (petStatus) {
-        statusController.text = petStatus.status.capitalize;
+      onSuggestionSelected: (petType) {
+        petTypeController.text = petType.name.capitalize;
         // onSuggestionSelected?.call(location);
       },
       suggestionsBoxDecoration: SuggestionsBoxDecoration(
@@ -55,3 +55,5 @@ class _PetStatusFieldState extends ConsumerState<PetStatusField> {
     );
   }
 }
+
+

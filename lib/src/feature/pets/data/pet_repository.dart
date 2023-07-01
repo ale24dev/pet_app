@@ -2,6 +2,7 @@ import 'package:pet_app/src/core/api_result.dart';
 import 'package:pet_app/src/core/query_supabase.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
+import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
 import 'package:pet_app/src/feature/pets/domain/pet.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -40,5 +41,10 @@ class PetRepository {
   Future<List<PetStatusModel>> getAllPetStatus() async {
    final response = await supabaseClient.from('pet_status').select();
     return petStatusFromJson(response);
+  }
+
+  Future<List<PetType>> getAllPetType() async {
+   final response = await supabaseClient.from('pet_type').select();
+    return petTypeFromJson(response);
   }
 }
