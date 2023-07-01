@@ -39,12 +39,10 @@ class AuthRepository {
     return user;
   }
 
-  Future<CurrentUser?> logout() async {
-    await supabaseClient.auth.signOut();
+  Future<bool> logout() async {
+   await supabaseClient.auth.signOut();
 
-    ///Reset current user
-    CurrentUser.instance.setInitial();
-    return null;
+   return true;
   }
 
   Future<CurrentUser> getUser() async {

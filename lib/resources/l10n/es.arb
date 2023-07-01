@@ -37,6 +37,11 @@
   "signupScreenHaveAccount": "¿Ya tienes cuenta?",
   "signupScreenLogin": "Iniciar sesión",
 
-  "publicationScreenSeeMore": "Ver más"
+  "publicationScreenSeeMore": "Ver más",
+  
+  "profileScreenLogout": "Cerrar sesión",
+  "profileScreenLogoutSuccess": "Has cerrado sesión exitosamente",
+  "profileScreenLogoutSuccess": "Has cerrado sesión exitosamente",
+  "profileScreenLogoutError": "Ha ocurrido un error al cerrar la sesión"
 }
 

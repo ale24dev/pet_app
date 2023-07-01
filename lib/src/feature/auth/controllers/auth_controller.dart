@@ -59,17 +59,7 @@ class AuthController extends _$AuthController {
     return success;
   }
 
-  Future<bool> logout() async {
-    final authRepository = ref.read(authRepositoryProvider);
-
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(
-        () => authRepository.logout() as Future<CurrentUser>);
-
-    final success = state.hasError == false;
-
-    return success;
-  }
+  
 }
 
 @Riverpod(keepAlive: true)
