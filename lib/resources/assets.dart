@@ -17,4 +17,9 @@ class AppAsset {
   static const String dog = 'assets/images/dog.png';
   static const String cat = 'assets/images/cat.png';
   static const String petsEmpty = 'assets/images/pets_empty.png';
+
+  ///Pets Details
+  static const String qr = 'assets/vectors/qr.svg';
+  static const String edit = 'assets/vectors/edit.svg';
+  static const String heartSolid = 'assets/vectors/heart_solid.svg';
 }

@@ -130,6 +130,26 @@ class AppTextStyle {
         fontWeight: FontWeight.w500,
       );
 
+  TextStyle get petDetailsName => _default.copyWith(
+        fontSize: 24,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w500,
+      );
+
+  TextStyle get petDetailsBreed => _default.copyWith(
+        fontSize: 14,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w400,
+        color: Colors.grey
+      );
+
+  TextStyle get petDetailsDescription => _default.copyWith(
+        fontSize: 14,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w400,
+        color: Colors.grey
+      );
+
   TextStyle get body =>
       _default.copyWith(fontSize: 14, fontWeight: FontWeight.w400);
 
