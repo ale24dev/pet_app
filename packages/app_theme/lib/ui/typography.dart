@@ -27,6 +27,12 @@ class AppTextStyle {
         letterSpacing: -0.25,
       );
 
+  TextStyle get snackBar => _default.copyWith(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      );
+
   TextStyle get onboardTitle => _default.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.w600,

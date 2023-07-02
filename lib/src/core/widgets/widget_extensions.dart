@@ -21,9 +21,15 @@ extension WidgetX on Widget {
 }
 
 extension ContextX on BuildContext {
-  void showSuccessSnackBar(String? text) {
+  void showSuccessSnackBar({String? text, Color? color}) {
     ScaffoldMessenger.of(this)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(text ?? l10n.success)));
+      ..showSnackBar(SnackBar(
+        content: Text(
+          text ?? l10n.success,
+          style: AppTextStyle().snackBar,
+        ),
+        backgroundColor: color ?? Theme.of(this).primaryColor,
+      ));
   }
 }

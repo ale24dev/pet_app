@@ -321,7 +321,8 @@ class _AddOrEditPetFormModelState extends ConsumerState<AddOrEditPetFormModel> {
 
                         if (context.mounted && success) {
                           context.pop();
-                          context.showSuccessSnackBar('Ha actualizado el perfil correctamente');
+                          context.showSuccessSnackBar(
+                              text: context.l10n.profileUpdatedSuccess);
                         }
                       }
                     },
