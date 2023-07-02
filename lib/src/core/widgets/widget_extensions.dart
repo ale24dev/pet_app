@@ -1,5 +1,6 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_app/resources/l10n/l10n.dart';
 
 extension WidgetX on Widget {
   Widget animatedSwitch({bool sliver = false}) {
@@ -8,7 +9,10 @@ extension WidgetX on Widget {
   }
 
   Widget padContent(BuildContext context, {bool sliver = false}) {
-    if (sliver) return SliverPadding(padding: context.responsiveContentPadding, sliver: this);
+    if (sliver) {
+      return SliverPadding(
+          padding: context.responsiveContentPadding, sliver: this);
+    }
     return Padding(padding: context.responsiveContentPadding, child: this);
   }
 
@@ -17,9 +21,9 @@ extension WidgetX on Widget {
 }
 
 extension ContextX on BuildContext {
-  void showSuccessSnackBar() {
+  void showSuccessSnackBar(String? text) {
     ScaffoldMessenger.of(this)
       ..hideCurrentSnackBar()
-      ..showSnackBar(const SnackBar(content: Text('Success')));
+      ..showSnackBar(SnackBar(content: Text(text ?? l10n.success)));
   }
 }

@@ -2,10 +2,18 @@
   "@@locale": "es",
 
   "ok": "Aceptar",
+  "accept": "Aceptar",
   "error": "Ha ocurrido un error",
   "home": "Inicio",
   "pet": "Mascotas",
   "shop": "Tienda",
+  "emptyResults": "No se encontraron resultados",
+  "success": "Operación exitosa",
+  "cm": "cm",
+  "kg": "kg",
+  "requiredField": "Este campo es obligatorio",
+  "save": "Guardar",
+  "cancel": "Cancelar",
 
   "onboardingScreenFirstPageTitle": "Bienvenido a Pet Care",
   "onboardingScreenFirstPageText": "¡Bienvenido a nuestra aplicación de mascotas! Estamos emocionados de tenerte a bordo y ayudarte a cuidar a tus peludos amigos de la mejor manera posible.",
@@ -42,6 +50,21 @@
   "profileScreenLogout": "Cerrar sesión",
   "profileScreenLogoutSuccess": "Has cerrado sesión exitosamente",
   "profileScreenLogoutSuccess": "Has cerrado sesión exitosamente",
-  "profileScreenLogoutError": "Ha ocurrido un error al cerrar la sesión"
+  "profileScreenLogoutError": "Ha ocurrido un error al cerrar la sesión",
+
+  "addPetScreenName": "Nombre",
+  "addPetScreenAge": "Edad",
+  "addPetScreenColor": "Color",
+  "addPetScreenGender": "Sexo",
+  "addPetScreenHeight": "Altura",
+  "addPetScreenWeight": "Peso",
+  "addPetScreenBreed": "Raza",
+  "addPetScreenPetType": "Tipo de mascota",
+  "addPetScreenPetStatus": "Estado de la mascota",
+  "addPetScreenDescription": "Descripción",
+  "addPetScreenDescription": "Descripción",
+  "addPetScreenDontHavePets": "Aún no tienes mascotas. ¿Qué tal si adoptas una?",
+  "addPetScreenAdoptPet": "Adoptar un nuevo amigo(a)",
+  "addPetScreenConfirmDelete": "¿Estás seguro(a) de eliminar a esta mascota?"
 }
 

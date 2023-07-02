@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/resources/assets.dart';
+import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/core/async_value.dart';
 import 'package:pet_app/src/feature/pets/add_pet_form_model.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
@@ -68,8 +69,8 @@ class PetsScreen extends ConsumerWidget {
                           ),
                           SizedBox(
                               width: context.widthPx * .6,
-                              child: const Text(
-                                'Aún no tienes mascotas. ¿Qué tal si adoptas una?',
+                              child: Text(
+                                context.l10n.addPetScreenDontHavePets,
                                 textAlign: TextAlign.center,
                               )),
                           const SizedBox.square(
@@ -77,7 +78,7 @@ class PetsScreen extends ConsumerWidget {
                           ),
                           ElevatedButton(
                               onPressed: () {},
-                              child: const Text('Adoptar un nuevo amigo(a)'))
+                              child: Text(context.l10n.addPetScreenAdoptPet))
                         ],
                       ),
                     )
@@ -100,7 +101,7 @@ class PetsScreen extends ConsumerWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             title: Text(
-                                              '¿Estás seguro(a) de eliminar a esta mascota?',
+                                              context.l10n.addPetScreenConfirmDelete,
                                               style: AppTextStyle().dialogTitle,
                                             ),
                                             actionsAlignment:
@@ -112,7 +113,7 @@ class PetsScreen extends ConsumerWidget {
                                                       return context.pop(true);
                                                     },
                                                     widget:
-                                                        const Text('Aceptar')),
+                                                        Text(context.l10n.accept)),
                                                 const SizedBox.square(
                                                   dimension: 20,
                                                 ),
@@ -121,7 +122,7 @@ class PetsScreen extends ConsumerWidget {
                                                     return context.pop(false);
                                                   },
                                                   widget:
-                                                      Text('Cancelar', style: AppTextStyle().body.copyWith(color: Colors.black),),
+                                                      Text(context.l10n.cancel, style: AppTextStyle().body.copyWith(color: Colors.black),),
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                           backgroundColor:
