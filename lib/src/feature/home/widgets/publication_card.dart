@@ -1,4 +1,5 @@
 import 'package:app_theme/app_theme.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_app/resources/assets.dart';
@@ -57,15 +58,15 @@ class PublicationCard extends StatelessWidget {
               dimension: 10,
             ),
             if (publication.hasImage())
-              Container(
+              CachedNetworkImage(
                 height: 400,
+                imageUrl: publication.images![0],
                 width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(12)),
-                child: Image.network(
-                  publication.images![0],
-                  fit: BoxFit.fitWidth,
-                ),
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) =>
+                    Image.asset(AppAsset.noImage),
               ),
             const SizedBox.square(
               dimension: 10,
