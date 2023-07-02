@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/core/async_value.dart';
-import 'package:pet_app/src/feature/pets/add_pet_form_model.dart';
+import 'package:pet_app/src/feature/pets/add_or_edit_pet_form_model.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
 import 'package:pet_app/src/feature/pets/widgets/empty_pets.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_card.dart';
@@ -38,7 +38,7 @@ class PetsScreen extends ConsumerWidget {
             controller: scrollController,
             child: const SizedBox(
               width: double.infinity,
-              child: AddPetFormModel(),
+              child: AddOrEditPetFormModel(),
             ),
           );
         },

@@ -1,33 +1,44 @@
 import 'package:app_theme/app_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
+import 'package:pet_app/src/core/async_value.dart';
+import 'package:pet_app/src/feature/pets/add_or_edit_pet_form_model.dart';
+import 'package:pet_app/src/feature/pets/controllers/profile_pet_controller.dart';
 import 'package:pet_app/src/feature/pets/domain/pet.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_detail_box.dart';
 import 'package:pet_app/src/widgets/generic_button.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class PetDetails extends StatelessWidget {
+class PetDetails extends ConsumerWidget {
   const PetDetails({super.key, required this.pet});
 
   final Pet pet;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profilePetController =
+        ref.watch(profilePetControllerProvider(pet.id!));
     return Scaffold(
-      body: SizedBox(
-        height: context.heightPx,
-        child: Stack(
-          children: [
-            _HeaderDetails(pet: pet),
-            _FooterDetails(
-              pet: pet,
-            )
-          ],
-        ),
+      body: AsyncValueWidget(
+        value: profilePetController,
+        data: (pet) {
+          return SizedBox(
+            height: context.heightPx,
+            child: Stack(
+              children: [
+                _HeaderDetails(pet: pet),
+                _FooterDetails(
+                  pet: pet,
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -56,7 +67,6 @@ class _FooterDetails extends StatelessWidget {
             padding:
                 context.responsiveContentPadding.copyWith(left: 25, top: 0),
             child: ListView(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +93,7 @@ class _FooterDetails extends StatelessWidget {
                   children: [
                     PetDetailBox(
                         title: context.l10n.addPetScreenAge,
-                        description: pet.age.toString()),
+                        description: pet.age?.toString() ?? '?'),
                     PetDetailBox(
                         title: context.l10n.addPetScreenGender,
                         description: pet.gender),
@@ -117,6 +127,38 @@ class _HeaderDetails extends StatelessWidget {
 
   final Pet pet;
 
+  void showAddPetBottomSheet(
+    BuildContext context,
+  ) {
+    // ignore: inference_failure_on_function_invocation
+    showModalBottomSheet(
+      showDragHandle: true,
+      isScrollControlled: true,
+      enableDrag: true,
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25),
+        ),
+      ),
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.62,
+        maxChildSize: 0.65,
+        minChildSize: 0.2,
+        expand: false,
+        builder: (context, scrollController) {
+          return SingleChildScrollView(
+            controller: scrollController,
+            child: SizedBox(
+              width: double.infinity,
+              child: AddOrEditPetFormModel(edit: true, pet: pet),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   showQRDialog(BuildContext context) async {
     return await showDialog(
         context: context,
@@ -131,7 +173,7 @@ class _HeaderDetails extends StatelessWidget {
                   width: 150,
                   child: Center(
                     child: QrImageView(
-                      data: pet.id.toString(),  
+                      data: pet.id.toString(),
                       version: QrVersions.auto,
                       size: 150.0,
                       embeddedImageStyle: const QrEmbeddedImageStyle(
@@ -143,7 +185,9 @@ class _HeaderDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox.square(dimension: 20,),
+                const SizedBox.square(
+                  dimension: 20,
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -227,17 +271,22 @@ class _HeaderDetails extends StatelessWidget {
                 const SizedBox.square(
                   dimension: 8,
                 ),
-                Container(
-                    height: 42,
-                    width: 42,
-                    decoration: BoxDecoration(
-                        boxShadow: AppTheme.shortShadow,
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(AppAsset.edit),
-                    )),
+                InkWell(
+                  onTap: () {
+                    showAddPetBottomSheet(context);
+                  },
+                  child: Container(
+                      height: 42,
+                      width: 42,
+                      decoration: BoxDecoration(
+                          boxShadow: AppTheme.shortShadow,
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SvgPicture.asset(AppAsset.edit),
+                      )),
+                ),
               ],
             ),
           ),

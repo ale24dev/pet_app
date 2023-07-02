@@ -4,27 +4,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
+import 'package:pet_app/src/core/utils/datetimes.dart';
 import 'package:pet_app/src/core/widgets/generic_selectable_field.dart';
 import 'package:pet_app/src/core/widgets/generic_text_field.dart';
 import 'package:pet_app/src/core/widgets/pet_async_generic_button.dart';
+import 'package:pet_app/src/core/widgets/text_field_birthday.dart';
+import 'package:pet_app/src/core/widgets/widget_extensions.dart';
 import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 import 'package:pet_app/src/feature/auth/domain/user.dart';
 import 'package:pet_app/src/feature/pets/controllers/add_pet_controller.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
+import 'package:pet_app/src/feature/pets/controllers/profile_pet_controller.dart';
 import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
+import 'package:pet_app/src/feature/pets/domain/pet.dart';
 
-class AddPetFormModel extends ConsumerStatefulWidget {
-  const AddPetFormModel({super.key});
+class AddOrEditPetFormModel extends ConsumerStatefulWidget {
+  const AddOrEditPetFormModel({super.key, this.edit = false, this.pet});
+
+  ///This flag indicate if a modal is for edit pet
+  final bool edit;
+
+  ///Pet to edit
+  final Pet? pet;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddPetFormModelState();
+      _AddOrEditPetFormModelState();
 }
 
-class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
+class _AddOrEditPetFormModelState extends ConsumerState<AddOrEditPetFormModel> {
   late final nameController = TextEditingController();
   late final heightController = TextEditingController();
   late final weightController = TextEditingController();
@@ -43,6 +54,31 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
   PetStatusModel? petStatusSelected;
 
   late final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    if (widget.edit) {
+      nameController.text = widget.pet!.name;
+      heightController.text = widget.pet!.height?.toString() ?? '';
+      weightController.text = widget.pet!.weight?.toString() ?? '';
+      ageController.text = widget.pet!.age?.toString() ?? '';
+      birthdayController.text = widget.pet!.birthday != null
+          ? AppDateFormats.formatDMY(widget.pet!.birthday!)
+          : '';
+      descriptionController.text = widget.pet!.description;
+      colorController.text = widget.pet!.color;
+      genderController.text = widget.pet!.gender;
+      breedController.text = widget.pet!.breedModel.name;
+      statusController.text = widget.pet!.petStatusModel.status;
+      typeController.text = widget.pet!.petType.name;
+
+      petTypeSelected = widget.pet!.petType;
+      breedModelSelected = widget.pet!.breedModel;
+      petStatusSelected = widget.pet!.petStatusModel;
+      // final user = ref.watch(authControllerProvider).value;
+    }
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -74,7 +110,6 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
 
   @override
   Widget build(BuildContext context) {
-    print(petTypeSelected?.name);
     final petController = ref.watch(petControllerProvider);
 
     final currentUser = ref.watch(authControllerProvider).value;
@@ -164,6 +199,12 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               const SizedBox.square(
                 dimension: 20,
               ),
+              TextFieldBirthday(
+                  birthdayController: birthdayController,
+                  callback: callbackSetBirthday),
+              const SizedBox.square(
+                dimension: 20,
+              ),
               GenericSelectableField<BreedModel>(
                   controller: breedController,
                   labelText: context.l10n.addPetScreenBreed,
@@ -208,7 +249,8 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                    labelText: context.l10n.addPetScreenDescription, alignLabelWithHint: true),
+                    labelText: context.l10n.addPetScreenDescription,
+                    alignLabelWithHint: true),
                 minLines: 5,
                 maxLines: 10,
                 controller: descriptionController,
@@ -225,31 +267,61 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                     onTap: () async {
                       if (formKey.currentState?.validate() ?? false) {
                         formKey.currentState?.save();
-                        final success = await ref
-                            .read(petControllerProvider.notifier)
-                            .addPet(PetModel(
-                                id: null,
-                                name: nameController.text,
-                                description: descriptionController.text,
-                                color: colorController.text,
-                                gender: genderController.text,
-                                age: ageController.text.isNotEmpty
-                                    ? int.parse(ageController.text)
-                                    : null,
-                                birthday: birthdaySelected,
-                                height: heightController.text.isNotEmpty
-                                    ? double.parse(heightController.text)
-                                    : null,
-                                weight: weightController.text.isNotEmpty
-                                    ? double.parse(weightController.text)
-                                    : null,
-                                user: currentUser!.user!.parseToModel(),
-                                petType: petTypeSelected!,
-                                petStatusModel: petStatusSelected!,
-                                breedModel: breedModelSelected!));
+
+                        var success = false;
+                        if (widget.edit) {
+                          success = await ref
+                              .read(
+                                  profilePetControllerProvider(widget.pet!.id!)
+                                      .notifier)
+                              .updatePet(PetModel(
+                                  id: widget.pet!.id,
+                                  name: nameController.text,
+                                  description: descriptionController.text,
+                                  color: colorController.text,
+                                  gender: genderController.text,
+                                  age: ageController.text.isNotEmpty
+                                      ? int.parse(ageController.text)
+                                      : null,
+                                  birthday: birthdaySelected,
+                                  height: heightController.text.isNotEmpty
+                                      ? double.parse(heightController.text)
+                                      : null,
+                                  weight: weightController.text.isNotEmpty
+                                      ? double.parse(weightController.text)
+                                      : null,
+                                  user: currentUser!.user!.parseToModel(),
+                                  petType: petTypeSelected!,
+                                  petStatusModel: petStatusSelected!,
+                                  breedModel: breedModelSelected!));
+                        } else {
+                          success = await ref
+                              .read(petControllerProvider.notifier)
+                              .addPet(PetModel(
+                                  id: null,
+                                  name: nameController.text,
+                                  description: descriptionController.text,
+                                  color: colorController.text,
+                                  gender: genderController.text,
+                                  age: ageController.text.isNotEmpty
+                                      ? int.parse(ageController.text)
+                                      : null,
+                                  birthday: birthdaySelected,
+                                  height: heightController.text.isNotEmpty
+                                      ? double.parse(heightController.text)
+                                      : null,
+                                  weight: weightController.text.isNotEmpty
+                                      ? double.parse(weightController.text)
+                                      : null,
+                                  user: currentUser!.user!.parseToModel(),
+                                  petType: petTypeSelected!,
+                                  petStatusModel: petStatusSelected!,
+                                  breedModel: breedModelSelected!));
+                        }
 
                         if (context.mounted && success) {
                           context.pop();
+                          context.showSuccessSnackBar('Ha actualizado el perfil correctamente');
                         }
                       }
                     },

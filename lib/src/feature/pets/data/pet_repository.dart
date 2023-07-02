@@ -23,14 +23,26 @@ class PetRepository {
     return apiResult;
   }
 
-  Future<bool> create(PetModel pet) async {
-    await supabaseClient.from('pet').insert(pet.toJson());
+  Future<bool> update(Pet pet) async {
+  await supabaseClient
+        .from('pet')
+        .update(pet.toJson())
+        .eq('id', pet.id.toString());
+        print('a');
     return true;
   }
 
   Future<bool> delete(int petId) async {
     await supabaseClient.from('pet').delete().eq('id', petId);
     return true;
+  }
+
+  Future<Pet> getById(int petId) async {
+    final response = await supabaseClient
+        .from('pet')
+        .select(QuerySupabase.pet)
+        .eq('id', petId);
+    return PetModel.fromJson(response[0]);
   }
 
   Future<bool> add(Pet pet) async {
@@ -40,17 +52,17 @@ class PetRepository {
   }
 
   Future<List<PetStatusModel>> getAllPetStatus() async {
-   final response = await supabaseClient.from('pet_status').select();
+    final response = await supabaseClient.from('pet_status').select();
     return petStatusFromJson(response);
   }
 
   Future<List<PetType>> getAllPetType() async {
-   final response = await supabaseClient.from('pet_type').select();
+    final response = await supabaseClient.from('pet_type').select();
     return petTypeFromJson(response);
   }
 
   Future<List<BreedModel>> getAllBreeds() async {
-   final response = await supabaseClient.from('breed').select();
+    final response = await supabaseClient.from('breed').select();
     return breedsFromJson(response);
   }
 }
