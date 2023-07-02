@@ -2,6 +2,7 @@ class AppAsset {
   AppAsset._();
 
   static const String noErrorCat = 'assets/images/no_error_cat.png';
+  static const String noImage = 'assets/images/no_photo.png';
 
   //Onboarding
   static const String onboardingScreen1 = 'assets/images/onboarding_screen_1.png';

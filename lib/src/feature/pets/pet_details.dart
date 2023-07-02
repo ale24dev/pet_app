@@ -1,10 +1,10 @@
 import 'package:app_theme/app_theme.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
-import 'package:pet_app/src/core/constants.dart';
 import 'package:pet_app/src/feature/pets/domain/pet.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_detail_box.dart';
 
@@ -20,7 +20,7 @@ class PetDetails extends StatelessWidget {
         height: context.heightPx,
         child: Stack(
           children: [
-            const _HeaderDetails(),
+            _HeaderDetails(pet: pet),
             _FooterDetails(
               pet: pet,
             )
@@ -63,7 +63,10 @@ class _FooterDetails extends StatelessWidget {
                       pet.name,
                       style: AppTextStyle().petDetailsName,
                     ),
-                    SvgPicture.asset(AppAsset.heartSolid, color: Colors.red,)
+                    SvgPicture.asset(
+                      AppAsset.heartSolid,
+                      color: Colors.red,
+                    )
                   ],
                 ),
                 Text(
@@ -108,7 +111,9 @@ class _FooterDetails extends StatelessWidget {
 }
 
 class _HeaderDetails extends StatelessWidget {
-  const _HeaderDetails();
+  const _HeaderDetails({required this.pet});
+
+  final Pet pet;
 
   @override
   Widget build(BuildContext context) {
@@ -118,11 +123,16 @@ class _HeaderDetails extends StatelessWidget {
       width: double.infinity,
       child: Stack(
         children: [
-          Image.network(
-            Constants.MOCK_PET_PROFILE_IMAGE,
-            fit: BoxFit.fitWidth,
-            width: double.infinity,
-          ),
+          pet.hasImage
+              ? CachedNetworkImage(
+                  imageUrl: pet.image!,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const _NoPetImage(),
+                )
+              : Image.asset(AppAsset.noImage),
           Positioned(
             top: 60,
             left: 30,
@@ -179,5 +189,14 @@ class _HeaderDetails extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class _NoPetImage extends StatelessWidget {
+  const _NoPetImage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(AppAsset.noImage);
   }
 }
