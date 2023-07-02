@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import 'package:pet_app/resources/pet_icon.dart';
 
@@ -12,6 +13,9 @@ class GenericTextField extends StatefulWidget {
     required this.textEditingController,
     this.errorText,
     this.maxLines,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.validator,
     this.autofocus = false,
   });
 
@@ -23,6 +27,9 @@ class GenericTextField extends StatefulWidget {
   final String? errorText;
   final int? maxLines;
   final bool autofocus;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final FormFieldValidator<String>? validator;
 
   @override
   State<GenericTextField> createState() => _GenericTextFieldState();
@@ -44,14 +51,16 @@ class _GenericTextFieldState extends State<GenericTextField> {
 
     return SizedBox(
       height: sizeWidget,
-      child: TextField(
+      child: TextFormField(
         keyboardType: widget.textInputType ?? TextInputType.text,
         textInputAction: widget.textInputAction,
+        validator: widget.validator,
         obscureText: showPassword,
         controller: widget.textEditingController,
         autofocus: widget.autofocus,
         decoration: InputDecoration(
             labelText: widget.labelText,
+            prefixIcon: widget.prefixIcon,
             suffixIcon: widget.obscureText == null
                 ? null
                 : IconButton(
@@ -89,7 +98,39 @@ extension GenericTextFieldX on GenericTextField {
 extension TextFieldX on TextField {
   Widget requiredField() {
     return Stack(
-      
+      children: [
+        this,
+        const Positioned(
+            top: 5,
+            right: 5,
+            child: Text(
+              '*',
+              style: TextStyle(color: Colors.red, fontSize: 22),
+            ))
+      ],
+    );
+  }
+}
+
+extension TextFormFieldX on TextFormField {
+  Widget requiredField() {
+    return Stack(
+      children: [
+        this,
+        const Positioned(
+            top: 5,
+            right: 5,
+            child: Text(
+              '*',
+              style: TextStyle(color: Colors.red, fontSize: 22),
+            ))
+      ],
+    );
+  }
+}
+extension TypeAheadFormFieldX on TypeAheadFormField {
+  Widget requiredField() {
+    return Stack(
       children: [
         this,
         const Positioned(

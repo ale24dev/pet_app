@@ -1,6 +1,8 @@
 class AppAsset {
   AppAsset._();
 
+  static const String noErrorCat = 'assets/images/no_error_cat.png';
+
   //Onboarding
   static const String onboardingScreen1 = 'assets/images/onboarding_screen_1.png';
   static const String onboardingScreen2 = 'assets/images/onboarding_screen_2.png';

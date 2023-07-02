@@ -3,10 +3,13 @@
 //     final serverError = serverErrorFromMap(jsonString);
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pet_app/src/core/extension.dart';
 
 part 'pet_type.freezed.dart';
 part 'pet_type.g.dart';
 
+List<PetType> petTypeFromJson(List<dynamic> str) =>
+    str.map((x) => PetType.fromJson(x as Json)).toList();
 
 @freezed
 class PetType with _$PetType {

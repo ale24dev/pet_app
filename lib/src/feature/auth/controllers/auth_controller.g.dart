@@ -21,7 +21,7 @@ final authRepositoryProvider = Provider<AuthRepository>.internal(
 );
 
 typedef AuthRepositoryRef = ProviderRef<AuthRepository>;
-String _$authControllerHash() => r'3920025fa81073f2f280905012fbd7a2d1d3a087';
+String _$authControllerHash() => r'96d367393c28263ac5b188fae3b91925c65222d7';
 
 /// See also [AuthController].
 @ProviderFor(AuthController)
