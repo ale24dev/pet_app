@@ -8,7 +8,6 @@ import 'package:pet_app/src/feature/home/widgets/publication_card.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-//18294
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final publicationController = ref.watch(publicationControllerProvider);

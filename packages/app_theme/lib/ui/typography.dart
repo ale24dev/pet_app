@@ -27,6 +27,12 @@ class AppTextStyle {
         letterSpacing: -0.25,
       );
 
+  TextStyle get snackBar => _default.copyWith(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      );
+
   TextStyle get onboardTitle => _default.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.w600,
@@ -128,6 +134,26 @@ class AppTextStyle {
         fontSize: 16,
         letterSpacing: 0,
         fontWeight: FontWeight.w500,
+      );
+
+  TextStyle get petDetailsName => _default.copyWith(
+        fontSize: 24,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w500,
+      );
+
+  TextStyle get petDetailsBreed => _default.copyWith(
+        fontSize: 14,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w400,
+        color: Colors.grey
+      );
+
+  TextStyle get petDetailsDescription => _default.copyWith(
+        fontSize: 14,
+        letterSpacing: 0,
+        fontWeight: FontWeight.w400,
+        color: Colors.grey
       );
 
   TextStyle get body =>

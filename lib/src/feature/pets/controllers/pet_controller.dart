@@ -24,6 +24,7 @@ class PetController extends _$PetController with SideEffect<ApiResult> {
       mutation: () => ref.watch(petRepositoryProvider).add(pet),
     );
   }
+  
 }
 
 @riverpod

@@ -2,6 +2,8 @@ class AppAsset {
   AppAsset._();
 
   static const String noErrorCat = 'assets/images/no_error_cat.png';
+  static const String noImage = 'assets/images/no_photo.png';
+  static const String loadingPet = 'assets/gif/loading_pet.gif';
 
   //Onboarding
   static const String onboardingScreen1 = 'assets/images/onboarding_screen_1.png';
@@ -17,4 +19,9 @@ class AppAsset {
   static const String dog = 'assets/images/dog.png';
   static const String cat = 'assets/images/cat.png';
   static const String petsEmpty = 'assets/images/pets_empty.png';
+
+  ///Pets Details
+  static const String qr = 'assets/vectors/qr.svg';
+  static const String edit = 'assets/vectors/edit.svg';
+  static const String heartSolid = 'assets/vectors/heart_solid.svg';
 }

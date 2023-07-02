@@ -79,4 +79,6 @@ extension PetX on Pet {
       'user': user.id,
     };
   }
+
+  bool get hasImage => image != null;
 }
