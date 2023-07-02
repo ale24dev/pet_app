@@ -7,6 +7,8 @@ import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/feature/pets/domain/pet.dart';
 import 'package:pet_app/src/feature/pets/widgets/pet_detail_box.dart';
+import 'package:pet_app/src/widgets/generic_button.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class PetDetails extends StatelessWidget {
   const PetDetails({super.key, required this.pet});
@@ -115,6 +117,50 @@ class _HeaderDetails extends StatelessWidget {
 
   final Pet pet;
 
+  showQRDialog(BuildContext context) async {
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Center(child: Text('Codigo QR')),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 130,
+                  width: 150,
+                  child: Center(
+                    child: QrImageView(
+                      data: pet.id.toString(),  
+                      version: QrVersions.auto,
+                      size: 150.0,
+                      embeddedImageStyle: const QrEmbeddedImageStyle(
+                        size: Size(
+                          150,
+                          150,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox.square(dimension: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: GenericButton(
+                          widget: Text(context.l10n.accept),
+                          onPressed: () {
+                            context.pop();
+                          }),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -132,7 +178,11 @@ class _HeaderDetails extends StatelessWidget {
                       const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const _NoPetImage(),
                 )
-              : Center(child: Image.asset(AppAsset.noImage, height: 100,)),
+              : Center(
+                  child: Image.asset(
+                  AppAsset.noImage,
+                  height: 100,
+                )),
           Positioned(
             top: 60,
             left: 30,
@@ -158,17 +208,22 @@ class _HeaderDetails extends StatelessWidget {
             right: 30,
             child: Row(
               children: [
-                Container(
-                    height: 42,
-                    width: 42,
-                    decoration: BoxDecoration(
-                        boxShadow: AppTheme.shortShadow,
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(AppAsset.qr),
-                    )),
+                InkWell(
+                  onTap: () {
+                    showQRDialog(context);
+                  },
+                  child: Container(
+                      height: 42,
+                      width: 42,
+                      decoration: BoxDecoration(
+                          boxShadow: AppTheme.shortShadow,
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SvgPicture.asset(AppAsset.qr),
+                      )),
+                ),
                 const SizedBox.square(
                   dimension: 8,
                 ),
