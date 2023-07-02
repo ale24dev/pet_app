@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_app/resources/l10n/l10n.dart';
 
 class EmptyResultField extends StatelessWidget {
   const EmptyResultField({
@@ -7,9 +8,9 @@ class EmptyResultField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Text('Empty results'),
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Text(context.l10n.emptyResults),
     );
   }
 }

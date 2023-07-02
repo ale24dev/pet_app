@@ -3,19 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pet_app/resources/l10n/l10n.dart';
+import 'package:pet_app/src/core/widgets/generic_selectable_field.dart';
 import 'package:pet_app/src/core/widgets/generic_text_field.dart';
 import 'package:pet_app/src/core/widgets/pet_async_generic_button.dart';
-import 'package:pet_app/src/core/widgets/text_field_birthday.dart';
 import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 import 'package:pet_app/src/feature/auth/domain/user.dart';
+import 'package:pet_app/src/feature/pets/controllers/add_pet_controller.dart';
 import 'package:pet_app/src/feature/pets/controllers/pet_controller.dart';
 import 'package:pet_app/src/feature/pets/data/model/breed_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_status_model.dart';
 import 'package:pet_app/src/feature/pets/data/model/pet_type.dart';
-import 'package:pet_app/src/feature/pets/widgets/breed_field.dart';
-import 'package:pet_app/src/feature/pets/widgets/pet_status_field.dart';
-import 'package:pet_app/src/feature/pets/widgets/pet_type_field.dart';
 
 class AddPetFormModel extends ConsumerStatefulWidget {
   const AddPetFormModel({super.key});
@@ -34,6 +33,9 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
   late final descriptionController = TextEditingController();
   late final colorController = TextEditingController();
   late final genderController = TextEditingController();
+  late final breedController = TextEditingController();
+  late final statusController = TextEditingController();
+  late final typeController = TextEditingController();
 
   DateTime? birthdaySelected;
   BreedModel? breedModelSelected;
@@ -54,6 +56,9 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
       descriptionController,
       colorController,
       genderController,
+      breedController,
+      statusController,
+      typeController,
     ]) {
       controller.dispose();
     }
@@ -69,6 +74,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
 
   @override
   Widget build(BuildContext context) {
+    print(petTypeSelected?.name);
     final petController = ref.watch(petControllerProvider);
 
     final currentUser = ref.watch(authControllerProvider).value;
@@ -83,45 +89,45 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                 dimension: 10,
               ),
               GenericTextField(
-                labelText: 'Nombre',
+                labelText: context.l10n.addPetScreenName,
                 textInputAction: TextInputAction.next,
                 textEditingController: nameController,
                 validator: FormBuilderValidators.required(
-                    errorText: 'Este campo es requerido'),
+                    errorText: context.l10n.requiredField),
                 autofocus: true,
               ).requiredField(),
               const SizedBox.square(
                 dimension: 20,
               ),
               GenericTextField(
-                  labelText: 'Edad',
+                  labelText: context.l10n.addPetScreenAge,
                   textInputAction: TextInputAction.next,
                   textEditingController: ageController),
               const SizedBox.square(
                 dimension: 20,
               ),
               GenericTextField(
-                labelText: 'Color',
+                labelText: context.l10n.addPetScreenColor,
                 textInputAction: TextInputAction.next,
                 textEditingController: colorController,
                 validator: FormBuilderValidators.required(
-                    errorText: 'Este campo es requerido'),
+                    errorText: context.l10n.requiredField),
               ).requiredField(),
               const SizedBox.square(
                 dimension: 20,
               ),
               GenericTextField(
-                labelText: 'Sexo',
+                labelText: context.l10n.addPetScreenGender,
                 textInputAction: TextInputAction.next,
                 textEditingController: genderController,
                 validator: FormBuilderValidators.required(
-                    errorText: 'Este campo es requerido'),
+                    errorText: context.l10n.requiredField),
               ).requiredField(),
               const SizedBox.square(
                 dimension: 20,
               ),
               GenericTextField(
-                labelText: 'Altura',
+                labelText: context.l10n.addPetScreenHeight,
                 textInputAction: TextInputAction.next,
                 textEditingController: heightController,
                 prefixIcon: SizedBox(
@@ -129,7 +135,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'cm',
+                          context.l10n.cm,
                           style: AppTextStyle()
                               .body
                               .copyWith(color: Theme.of(context).primaryColor),
@@ -140,7 +146,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                 dimension: 20,
               ),
               GenericTextField(
-                labelText: 'Peso',
+                labelText: context.l10n.addPetScreenWeight,
                 textInputAction: TextInputAction.next,
                 textEditingController: weightController,
                 prefixIcon: SizedBox(
@@ -148,7 +154,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'kg',
+                          context.l10n.kg,
                           style: AppTextStyle()
                               .body
                               .copyWith(color: Theme.of(context).primaryColor),
@@ -158,44 +164,57 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
               const SizedBox.square(
                 dimension: 20,
               ),
-              BreedField(onSuggestionSelected: (breedSelected) {
-                setState(() {
-                  breedModelSelected = breedSelected;
-                });
-              }),
+              GenericSelectableField<BreedModel>(
+                  controller: breedController,
+                  labelText: context.l10n.addPetScreenBreed,
+                  value: ref.watch(breedProvider.future),
+                  validator: FormBuilderValidators.required(
+                      errorText: context.l10n.requiredField),
+                  onSuggestionSelected: (breedSelected) {
+                    setState(() {
+                      breedModelSelected = breedSelected;
+                    });
+                  }),
               const SizedBox.square(
                 dimension: 20,
               ),
-              PetStatusField(
-                onSuggestionSelected: (petStatusSelected) {
-                  this.petStatusSelected = petStatusSelected;
-                },
-              ),
+              GenericSelectableField<PetType>(
+                  controller: typeController,
+                  labelText: context.l10n.addPetScreenPetType,
+                  value: ref.watch(petTypeProvider.future),
+                  validator: FormBuilderValidators.required(
+                      errorText: context.l10n.requiredField),
+                  onSuggestionSelected: (petTypeSelected) {
+                    setState(() {
+                      this.petTypeSelected = petTypeSelected;
+                    });
+                  }),
               const SizedBox.square(
                 dimension: 20,
               ),
-              PetTypeField(onSuggestionSelected: (petTypeSelected) {
-                this.petTypeSelected = petTypeSelected;
-              }),
-              const SizedBox.square(
-                dimension: 20,
-              ),
-              TextFieldBirthday(
-                  birthdayController: birthdayController,
-                  callback: callbackSetBirthday),
+              GenericSelectableField<PetStatusModel>(
+                  controller: statusController,
+                  labelText: context.l10n.addPetScreenPetStatus,
+                  value: ref.watch(petStatusProvider.future),
+                  validator: FormBuilderValidators.required(
+                      errorText: context.l10n.requiredField),
+                  onSuggestionSelected: (petStatusSelected) {
+                    setState(() {
+                      this.petStatusSelected = petStatusSelected;
+                    });
+                  }),
               const SizedBox.square(
                 dimension: 20,
               ),
               TextFormField(
-                decoration: const InputDecoration(
-                    labelText: 'Descripción', alignLabelWithHint: true),
+                decoration: InputDecoration(
+                    labelText: context.l10n.addPetScreenDescription, alignLabelWithHint: true),
                 minLines: 5,
                 maxLines: 10,
                 controller: descriptionController,
                 textInputAction: TextInputAction.done,
-                validator: 
-                  FormBuilderValidators.required(
-                      errorText: 'Este campo es requerido'),
+                validator: FormBuilderValidators.required(
+                    errorText: context.l10n.requiredField),
               ).requiredField(),
               const SizedBox.square(
                 dimension: 20,
@@ -235,7 +254,7 @@ class _AddPetFormModelState extends ConsumerState<AddPetFormModel> {
                       }
                     },
                     asyncValue: petController,
-                    child: const Text('Guardar')),
+                    child: Text(context.l10n.save)),
               ),
               const SizedBox.square(
                 dimension: 50,
