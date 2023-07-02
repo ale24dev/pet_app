@@ -132,7 +132,7 @@ class _HeaderDetails extends StatelessWidget {
                       const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const _NoPetImage(),
                 )
-              : Image.asset(AppAsset.noImage),
+              : Center(child: Image.asset(AppAsset.noImage, height: 100,)),
           Positioned(
             top: 60,
             left: 30,
