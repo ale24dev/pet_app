@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:pet_app/src/feature/auth/login_screen.dart';
 import 'package:pet_app/src/feature/auth/signup_screen.dart';
 import 'package:pet_app/src/feature/layout/layout_screen.dart';
+import 'package:pet_app/src/feature/pets/domain/pet.dart';
+import 'package:pet_app/src/feature/pets/pet_details.dart';
 import 'package:pet_app/src/feature/splash/splash_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,14 +26,15 @@ enum AppRoute {
   signUp,
   // Authenticated routes
   home,
-  layout
+  layout,
+  petDetails
 }
 
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
   final appPreferences = ref.watch(preferencesProvider);
- 
+
   return GoRouter(
     initialLocation: ((appPreferences.isFirstOpen()) ? '/onboard' : '/splash'),
     debugLogDiagnostics: kDebugMode,
@@ -93,6 +96,24 @@ GoRouter goRouter(GoRouterRef ref, {String? initialLocation}) {
               key: state.pageKey,
               child: const LayoutScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                name: AppRoute.petDetails.name,
+                pageBuilder: (context, state) {
+                  Pet pet;
+                  if (state.extra is Pet) {
+                    pet = state.extra! as Pet;
+                    return adaptivePageRoute(
+                      key: state.pageKey,
+                      child: PetDetails(pet: pet),
+                    );
+                  }
+                  return adaptivePageRoute(
+                      key: state.pageKey, child: const NotFoundScreen());
+                },
+              ),
+            ],
           ),
         ],
       ),
