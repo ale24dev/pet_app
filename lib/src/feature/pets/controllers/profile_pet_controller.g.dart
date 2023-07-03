@@ -7,7 +7,7 @@ part of 'profile_pet_controller.dart';
 // **************************************************************************
 
 String _$profilePetControllerHash() =>
-    r'014e866ae33b7d46b8a6a5984cb6f860d478ec92';
+    r'be06dd02836e8e17de47d4c6df56a306375174d7';
 
 /// Copied from Dart SDK
 class _SystemHash {

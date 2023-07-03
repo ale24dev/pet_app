@@ -6,7 +6,7 @@ part of 'navbar_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$navbarControllerHash() => r'0cd99da1bad678c25fde2aaafe228543f49a371f';
+String _$navbarControllerHash() => r'0594bab09b33e88ba56f457f246ce96c52bf0a98';
 
 /// See also [NavbarController].
 @ProviderFor(NavbarController)

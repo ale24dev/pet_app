@@ -14,4 +14,6 @@ abstract class QuerySupabase {
 
   static String get pet =>
       "id, name, height, weight, age, birthday, description, color, gender, image, pet_type($petType), pet_status($petStatus), breed($breed), user($user)";
+
+  static String get favorite => "id, user($user), pet($pet)";
 }

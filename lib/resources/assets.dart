@@ -29,4 +29,7 @@ class AppAsset {
   static const String qr = 'assets/vectors/qr.svg';
   static const String edit = 'assets/vectors/edit.svg';
   static const String heartSolid = 'assets/vectors/heart_solid.svg';
+
+  ///Favorites Screen
+  static const String petFav = 'assets/images/pet_fav.png';
 }

@@ -26,6 +26,12 @@ class AppTextStyle {
         height: 1.12,
         letterSpacing: -0.25,
       );
+  TextStyle get emptyData => _default.copyWith(
+        fontSize: 19,
+        fontWeight: FontWeight.w500,
+        height: 1.12,
+        letterSpacing: -0.25,
+      );
 
   TextStyle get drawerUsername => _default.copyWith(
         fontSize: 25,
@@ -93,7 +99,6 @@ class AppTextStyle {
         color: AppColor.headerText,
       );
 
-
   TextStyle get profileEmail => _default.copyWith(
         fontSize: 12,
         fontWeight: FontWeight.w400,
@@ -107,7 +112,7 @@ class AppTextStyle {
         color: AppColor.headerText,
         letterSpacing: -.6,
       );
-      
+
   TextStyle get primaryButtonLeading => _default.copyWith(
       fontSize: 15,
       letterSpacing: -.2,
@@ -150,18 +155,16 @@ class AppTextStyle {
       );
 
   TextStyle get petDetailsBreed => _default.copyWith(
-        fontSize: 14,
-        letterSpacing: 0,
-        fontWeight: FontWeight.w400,
-        color: Colors.grey
-      );
+      fontSize: 14,
+      letterSpacing: 0,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey);
 
   TextStyle get petDetailsDescription => _default.copyWith(
-        fontSize: 14,
-        letterSpacing: 0,
-        fontWeight: FontWeight.w400,
-        color: Colors.grey
-      );
+      fontSize: 14,
+      letterSpacing: 0,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey);
 
   TextStyle get body =>
       _default.copyWith(fontSize: 14, fontWeight: FontWeight.w400);
