@@ -29,7 +29,7 @@ class AppTextStyle {
 
   TextStyle get drawerUsername => _default.copyWith(
         fontSize: 25,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
         height: 1.12,
         letterSpacing: -0.25,
       );

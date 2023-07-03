@@ -66,6 +66,11 @@
   "addPetScreenDescription": "Descripción",
   "addPetScreenDontHavePets": "Aún no tienes mascotas. ¿Qué tal si adoptas una?",
   "addPetScreenAdoptPet": "Adoptar un nuevo amigo(a)",
-  "addPetScreenConfirmDelete": "¿Estás seguro(a) de eliminar a esta mascota?"
+  "addPetScreenConfirmDelete": "¿Estás seguro(a) de eliminar a esta mascota?",
+
+  "drawerScreenMyProfile": "Mi perfil",
+  "drawerScreenMyPets": "Mis mascotas",
+  "drawerScreenFavorites": "Favoritos",
+  "drawerScreenLogout": "Cerrar sesión"
 }
 

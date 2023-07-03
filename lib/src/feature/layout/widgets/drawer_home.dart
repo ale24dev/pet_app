@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_app/resources/assets.dart';
+import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/resources/pet_icon.dart';
 import 'package:pet_app/src/core/widgets/async_value.dart';
 import 'package:pet_app/src/core/widgets/avatar_user_image.dart';
@@ -53,20 +54,20 @@ class DrawerHome extends ConsumerWidget {
               ),
               ListTile(
                 leading: SvgPicture.asset(AppAsset.profile),
-                title: const Text('Mi perfil'),
+                title: Text(context.l10n.drawerScreenMyProfile),
               ),
-              const ListTile(
-                leading: Icon(PetIcon.paw),
-                title: Text('Mis mascotas'),
+              ListTile(
+                leading: const Icon(PetIcon.paw),
+                title: Text(context.l10n.drawerScreenMyPets),
               ),
               ListTile(
                 leading: SvgPicture.asset(AppAsset.heart),
-                title: const Text('Favoritos'),
+                title: Text(context.l10n.drawerScreenFavorites),
               ),
               const Spacer(),
               ListTile(
                 leading: SvgPicture.asset(AppAsset.logout),
-                title: const Text('Cerrar sesión'),
+                title: Text(context.l10n.drawerScreenLogout),
               ),
               const SizedBox.square(
                 dimension: 20,
