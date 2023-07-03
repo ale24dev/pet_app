@@ -22,8 +22,7 @@ final favoriteRepositoryProvider = Provider<FavoriteRepository>.internal(
 );
 
 typedef FavoriteRepositoryRef = ProviderRef<FavoriteRepository>;
-String _$favoriteControllerHash() =>
-    r'910c9cf4229a9597181ccf295b7fb2fede9ba1c6';
+String _$checkPetInFavHash() => r'fa194c952615e333c78889aeb80097d299a09aac';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -45,6 +44,99 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+typedef CheckPetInFavRef = AutoDisposeFutureProviderRef<bool>;
+
+/// See also [checkPetInFav].
+@ProviderFor(checkPetInFav)
+const checkPetInFavProvider = CheckPetInFavFamily();
+
+/// See also [checkPetInFav].
+class CheckPetInFavFamily extends Family<AsyncValue<bool>> {
+  /// See also [checkPetInFav].
+  const CheckPetInFavFamily();
+
+  /// See also [checkPetInFav].
+  CheckPetInFavProvider call({
+    required String userId,
+    required Pet pet,
+  }) {
+    return CheckPetInFavProvider(
+      userId: userId,
+      pet: pet,
+    );
+  }
+
+  @override
+  CheckPetInFavProvider getProviderOverride(
+    covariant CheckPetInFavProvider provider,
+  ) {
+    return call(
+      userId: provider.userId,
+      pet: provider.pet,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'checkPetInFavProvider';
+}
+
+/// See also [checkPetInFav].
+class CheckPetInFavProvider extends AutoDisposeFutureProvider<bool> {
+  /// See also [checkPetInFav].
+  CheckPetInFavProvider({
+    required this.userId,
+    required this.pet,
+  }) : super.internal(
+          (ref) => checkPetInFav(
+            ref,
+            userId: userId,
+            pet: pet,
+          ),
+          from: checkPetInFavProvider,
+          name: r'checkPetInFavProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$checkPetInFavHash,
+          dependencies: CheckPetInFavFamily._dependencies,
+          allTransitiveDependencies:
+              CheckPetInFavFamily._allTransitiveDependencies,
+        );
+
+  final String userId;
+  final Pet pet;
+
+  @override
+  bool operator ==(Object other) {
+    return other is CheckPetInFavProvider &&
+        other.userId == userId &&
+        other.pet == pet;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, userId.hashCode);
+    hash = _SystemHash.combine(hash, pet.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$favoriteControllerHash() =>
+    r'910c9cf4229a9597181ccf295b7fb2fede9ba1c6';
 
 abstract class _$FavoriteController
     extends BuildlessAutoDisposeAsyncNotifier<List<FavoriteModel>> {

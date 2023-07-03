@@ -28,7 +28,6 @@ class PetRepository {
         .from('pet')
         .update(pet.toJson())
         .eq('id', pet.id.toString());
-        print('a');
     return true;
   }
 

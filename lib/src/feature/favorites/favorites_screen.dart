@@ -37,15 +37,6 @@ class FavoritesScreen extends ConsumerWidget {
             );
           },
         ),
-        Positioned(
-            bottom: 24,
-            right: 24,
-            child: FloatingActionButton(
-              onPressed: () {
-                // showAddPetBottomSheet(context);
-              },
-              child: const Icon(Icons.add),
-            ))
       ],
     );
   }

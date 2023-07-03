@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/src/core/async_value.dart';
+import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
+import 'package:pet_app/src/feature/favorites/controller/favorite_controller.dart';
 import 'package:pet_app/src/feature/pets/add_or_edit_pet_form_model.dart';
 import 'package:pet_app/src/feature/pets/controllers/profile_pet_controller.dart';
 import 'package:pet_app/src/feature/pets/domain/pet.dart';
@@ -44,13 +46,17 @@ class PetDetails extends ConsumerWidget {
   }
 }
 
-class _FooterDetails extends StatelessWidget {
+class _FooterDetails extends ConsumerWidget {
   const _FooterDetails({required this.pet});
 
   final Pet pet;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.read(authControllerProvider).value;
+    final isInFavController = ref
+        .watch(checkPetInFavProvider(userId: currentUser!.user!.id, pet: pet));
+
     return Positioned(
       top: context.heightPx * .47,
       left: 0,
@@ -75,10 +81,15 @@ class _FooterDetails extends StatelessWidget {
                       pet.name,
                       style: AppTextStyle().petDetailsName,
                     ),
-                    SvgPicture.asset(
-                      AppAsset.heartSolid,
-                      color: Colors.red,
-                    )
+                    AsyncValueWidget(
+                      value: isInFavController,
+                      data: (isInFav) {
+                        return SvgPicture.asset(
+                          AppAsset.heartSolid,
+                          color: isInFav ? Colors.red : null,
+                        );
+                      },
+                    ),
                   ],
                 ),
                 Text(

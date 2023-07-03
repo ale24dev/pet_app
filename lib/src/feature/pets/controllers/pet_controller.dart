@@ -31,3 +31,4 @@ class PetController extends _$PetController with SideEffect<ApiResult> {
 PetRepository petRepository(PetRepositoryRef ref) {
   return PetRepository(supabaseClient: SupabaseService.supabaseClient);
 }
+
