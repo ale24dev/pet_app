@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:pet_app/resources/assets.dart';
 import 'package:pet_app/resources/l10n/l10n.dart';
 import 'package:pet_app/resources/pet_icon.dart';
 import 'package:pet_app/src/core/services/navbar_service.dart';
@@ -19,15 +21,26 @@ class GenericBottomNavbar extends ConsumerWidget {
       currentIndex: navbarController.index,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: const Icon(
-            PetIcon.home_1,
+          icon: SvgPicture.asset(
+            AppAsset.home,
+          ),
+          activeIcon: SvgPicture.asset(
+            AppAsset.homeSolid,
+            color: Theme.of(context).primaryColor,
           ),
           label: context.l10n.home,
         ),
         BottomNavigationBarItem(
-            icon: const Icon(PetIcon.pets), label: context.l10n.pet),
+            icon: const Icon(PetIcon.pet),
+            activeIcon: const Icon(PetIcon.petSolid),
+            label: context.l10n.pet),
         BottomNavigationBarItem(
-            icon: const Icon(PetIcon.shop), label: context.l10n.shop),
+            icon: SvgPicture.asset(AppAsset.heart),
+            activeIcon: SvgPicture.asset(
+              AppAsset.heartSolid,
+              color: Theme.of(context).primaryColor,
+            ),
+            label: context.l10n.drawerScreenFavorites),
       ],
     );
   }

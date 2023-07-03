@@ -7,6 +7,8 @@ class AppAsset {
   static const String profile = 'assets/vectors/profile.svg';
   static const String logout = 'assets/vectors/logout.svg';
   static const String pet = 'assets/images/pet.png';
+  static const String home = 'assets/vectors/home.svg';
+  static const String homeSolid = 'assets/vectors/home_solid.svg';
 
   //Onboarding
   static const String onboardingScreen1 = 'assets/images/onboarding_screen_1.png';

@@ -57,7 +57,7 @@ class DrawerHome extends ConsumerWidget {
                 title: Text(context.l10n.drawerScreenMyProfile),
               ),
               ListTile(
-                leading: const Icon(PetIcon.paw),
+                leading: const Icon(PetIcon.pet),
                 title: Text(context.l10n.drawerScreenMyPets),
               ),
               ListTile(
