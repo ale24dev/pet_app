@@ -84,9 +84,20 @@ class _FooterDetails extends ConsumerWidget {
                     AsyncValueWidget(
                       value: isInFavController,
                       data: (isInFav) {
-                        return SvgPicture.asset(
-                          AppAsset.heartSolid,
-                          color: isInFav ? Colors.red : null,
+                        return InkWell(
+                          onTap: () {
+                            if (!isInFav) {
+                              ref
+                                  .read(favoriteControllerProvider(
+                                          currentUser.user!.id)
+                                      .notifier)
+                                  .addToFavorites(pet: pet);
+                            }
+                          },
+                          child: SvgPicture.asset(
+                            AppAsset.heartSolid,
+                            color: isInFav ? Colors.red : null,
+                          ),
                         );
                       },
                     ),

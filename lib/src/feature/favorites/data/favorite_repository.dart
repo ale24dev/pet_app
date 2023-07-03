@@ -30,4 +30,12 @@ class FavoriteRepository {
 
     return response.isNotEmpty;
   }
+
+  Future<bool> addPetToFav({required String userId, required Pet pet}) async {
+    await supabaseClient
+        .from('favorite')
+        .insert({'user': userId, 'pet': pet.id});
+
+    return true;
+  }
 }

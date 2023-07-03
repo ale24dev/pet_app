@@ -11,7 +11,32 @@ part 'favorite_controller.g.dart';
 class FavoriteController extends _$FavoriteController {
   @override
   FutureOr<List<FavoriteModel>> build(String userId) async {
-    return ref.read(favoriteRepositoryProvider).getFavoritesByUser(userId);
+    final favoriteRepository = ref.watch(favoriteRepositoryProvider);
+
+    return await favoriteRepository.getFavoritesByUser(userId);
+  }
+
+  Future<bool> addToFavorites({required Pet pet}) async {
+    state = const AsyncValue.loading();
+    try {
+      final favoriteRepository = ref.read(favoriteRepositoryProvider);
+
+      final success =
+          await favoriteRepository.addPetToFav(userId: userId, pet: pet);
+
+      if (success) {
+        ref
+            .read(checkPetInFavProvider(userId: userId, pet: pet).notifier)
+            .refreshState();
+      }
+
+      state = await AsyncValue.guard(() async => build(userId));
+
+      return success;
+    } catch (e, s) {
+      state = AsyncError(e, s);
+      return false;
+    }
   }
 }
 
@@ -21,9 +46,17 @@ FavoriteRepository favoriteRepository(FavoriteRepositoryRef ref) {
 }
 
 @riverpod
-Future<bool> checkPetInFav(CheckPetInFavRef ref,
-    {required String userId, required Pet pet}) async {
-  return await ref
-      .read(favoriteRepositoryProvider)
-      .checkPetInFav(userId: userId, pet: pet);
+class CheckPetInFav extends _$CheckPetInFav {
+  @override
+  FutureOr<bool> build({required String userId, required Pet pet}) async {
+    return await ref
+        .read(favoriteRepositoryProvider)
+        .checkPetInFav(userId: userId, pet: pet);
+  }
+
+  Future<void> refreshState() async {
+    state = const AsyncValue.loading();
+
+    state = await AsyncValue.guard(() async => build(pet: pet, userId: userId));
+  }
 }
