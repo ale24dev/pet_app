@@ -92,6 +92,12 @@ class _FooterDetails extends ConsumerWidget {
                                           currentUser.user!.id)
                                       .notifier)
                                   .addToFavorites(pet: pet);
+                            } else {
+                              ref
+                                  .read(favoriteControllerProvider(
+                                          currentUser.user!.id)
+                                      .notifier)
+                                  .removeOfFavorites(pet: pet);
                             }
                           },
                           child: SvgPicture.asset(

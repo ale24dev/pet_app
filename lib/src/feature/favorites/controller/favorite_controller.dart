@@ -38,6 +38,29 @@ class FavoriteController extends _$FavoriteController {
       return false;
     }
   }
+
+  Future<bool> removeOfFavorites({required Pet pet}) async {
+    state = const AsyncValue.loading();
+    try {
+      final favoriteRepository = ref.read(favoriteRepositoryProvider);
+
+      final success =
+          await favoriteRepository.removePetOfFav(userId: userId, pet: pet);
+
+      if (success) {
+        ref
+            .read(checkPetInFavProvider(userId: userId, pet: pet).notifier)
+            .refreshState();
+      }
+
+      state = await AsyncValue.guard(() async => build(userId));
+
+      return success;
+    } catch (e, s) {
+      state = AsyncError(e, s);
+      return false;
+    }
+  }
 }
 
 @Riverpod(keepAlive: true)

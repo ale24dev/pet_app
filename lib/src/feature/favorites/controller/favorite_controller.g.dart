@@ -23,7 +23,7 @@ final favoriteRepositoryProvider = Provider<FavoriteRepository>.internal(
 
 typedef FavoriteRepositoryRef = ProviderRef<FavoriteRepository>;
 String _$favoriteControllerHash() =>
-    r'e9d459da867ac1b62aae36a8b688e8f19f7e78bd';
+    r'd790593191d16b541a9ce685814bb6145c9120c5';
 
 /// Copied from Dart SDK
 class _SystemHash {

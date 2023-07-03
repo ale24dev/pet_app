@@ -38,4 +38,14 @@ class FavoriteRepository {
 
     return true;
   }
+
+  Future<bool> removePetOfFav(
+      {required String userId, required Pet pet}) async {
+    await supabaseClient
+        .from('favorite')
+        .delete()
+        .match({'user': userId, 'pet': pet.id});
+
+    return true;
+  }
 }
