@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class GenericProfileImage extends StatelessWidget {
   const GenericProfileImage({
     super.key,
-    required this.image,
+    required this.image, required this.imageRadius,
   });
-
+  final double imageRadius;
   final String image;
 
   @override
@@ -13,8 +13,8 @@ class GenericProfileImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: Container(
-        height: 40,
-        width: 40,
+        height: imageRadius * 2,
+        width: imageRadius * 2,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Theme.of(context).colorScheme.primary,

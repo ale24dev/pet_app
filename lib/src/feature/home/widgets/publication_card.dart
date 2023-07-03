@@ -31,7 +31,7 @@ class PublicationCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(children: [
-                GenericProfileImage(image: publication.user.avatarUrl),
+                GenericProfileImage(image: publication.user.avatarUrl, imageRadius: 20,),
                 const SizedBox.square(
                   dimension: 10,
                 ),

@@ -4,6 +4,9 @@ class AppAsset {
   static const String noErrorCat = 'assets/images/no_error_cat.png';
   static const String noImage = 'assets/images/no_photo.png';
   static const String loadingPet = 'assets/gif/loading_pet.gif';
+  static const String profile = 'assets/vectors/profile.svg';
+  static const String logout = 'assets/vectors/logout.svg';
+  static const String pet = 'assets/images/pet.png';
 
   //Onboarding
   static const String onboardingScreen1 = 'assets/images/onboarding_screen_1.png';

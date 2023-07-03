@@ -28,6 +28,10 @@
 ///         Author:    Designmodo for Smashing Magazine
 ///         License:   CC BY ()
 ///         Homepage:  http://designmodo.com/linecons-free/
+/// * Linearicons Free, Copyright (C) Linearicons.com
+///         Author:    Perxis
+///         License:   CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+///         Homepage:  https://linearicons.com
 /// * Octicons, Copyright (C) 2020 by GitHub Inc.
 ///         Author:    GitHub
 ///         License:   MIT (http://opensource.org/licenses/mit-license.php)
@@ -46,6 +50,7 @@ class PetIcon {
   static const IconData home_1 = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData user_outline = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData shop = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData paw = IconData(0xe84a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData eye_closed = IconData(0xf366, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData eye = IconData(0xf3a8, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

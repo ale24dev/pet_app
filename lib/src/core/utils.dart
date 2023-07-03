@@ -49,10 +49,18 @@ abstract class Utils {
     return null;
   }
 
-  static Widget getLayoutFromNavbarItem(NavbarItem navbarItem) {
+  static Widget getLayoutFromNavbarItem(
+      {required NavbarItem navbarItem,
+      required double xOffset,
+      required double yOffset,
+      required bool isDrawerOpen}) {
     switch (navbarItem) {
       case NavbarItem.home:
-        return const HomeScreen();
+        return HomeScreen(
+          isDrawerOpen: isDrawerOpen,
+          xOffset: xOffset,
+          yOffset: yOffset,
+        );
       case NavbarItem.pet:
         return const PetsScreen();
 
