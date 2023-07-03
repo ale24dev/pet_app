@@ -27,6 +27,13 @@ class AppTextStyle {
         letterSpacing: -0.25,
       );
 
+  TextStyle get drawerUsername => _default.copyWith(
+        fontSize: 25,
+        fontWeight: FontWeight.w400,
+        height: 1.12,
+        letterSpacing: -0.25,
+      );
+
   TextStyle get snackBar => _default.copyWith(
         fontSize: 14,
         fontWeight: FontWeight.bold,

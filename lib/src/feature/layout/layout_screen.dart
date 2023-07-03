@@ -9,16 +9,34 @@ import 'package:pet_app/src/core/widgets/generic_bottom_navbar.dart';
 import 'package:pet_app/src/core/widgets/pet_settings_tile.dart';
 import 'package:pet_app/src/core/widgets/widget_extensions.dart';
 import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
+import 'package:pet_app/src/feature/home/home_screen.dart';
+import 'package:pet_app/src/feature/layout/widgets/drawer_home.dart';
 import 'package:pet_app/src/feature/layout/widgets/signout_pop.dart';
 import 'package:pet_app/src/feature/profile/controller/profile_controller.dart';
 
-class LayoutScreen extends ConsumerWidget {
+class LayoutScreen extends ConsumerStatefulWidget {
   const LayoutScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _LayoutScreenState();
+}
+
+class _LayoutScreenState extends ConsumerState<LayoutScreen> {
+  ///Info of position to control to drawer
+  bool isDrawerOpen = false;
+  double xOffset = 0;
+  double yOffset = 0;
+
+  @override
+  Widget build(BuildContext context) {
     final navbarController = ref.watch(navbarControllerProvider);
     final authController = ref.watch(authControllerProvider);
+
+    final currentPage = Utils.getLayoutFromNavbarItem(
+        navbarItem: navbarController.navbarItem,
+        isDrawerOpen: isDrawerOpen,
+        xOffset: xOffset,
+        yOffset: yOffset);
 
     return Scaffold(
       appBar: navbarController.index == 0
@@ -27,7 +45,17 @@ class LayoutScreen extends ConsumerWidget {
               leading: IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
-                  ///This is for test
+                  isDrawerOpen
+                      ? setState(() {
+                          xOffset = 0;
+                          yOffset = 0;
+                          isDrawerOpen = false;
+                        })
+                      : setState(() {
+                          xOffset = 290;
+                          yOffset = 80;
+                          isDrawerOpen = true;
+                        });
                 },
               ),
               actions: [
@@ -54,7 +82,14 @@ class LayoutScreen extends ConsumerWidget {
               ],
             )
           : null,
-      body: Utils.getLayoutFromNavbarItem(navbarController.navbarItem),
+      body: currentPage is HomeScreen
+          ? DrawerHome(
+              isDrawerOpen: isDrawerOpen,
+              xOffset: xOffset,
+              yOffset: yOffset,
+              homePage: currentPage,
+            )
+          : currentPage,
       bottomNavigationBar: const GenericBottomNavbar(),
     );
   }

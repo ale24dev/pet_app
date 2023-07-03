@@ -6,9 +6,9 @@ import 'package:pet_app/src/core/widgets/generic_profile_image.dart';
 import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 
 class AvatarUserImage extends ConsumerWidget {
-  const AvatarUserImage({
-    super.key,
-  });
+  const AvatarUserImage({super.key, this.imageRadius = 20});
+
+  final double imageRadius;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,10 +18,11 @@ class AvatarUserImage extends ConsumerWidget {
         value: authController,
         data: (currentUser) {
           return GenericProfileImage(
-              image: currentUser.user == null
-                  ? Constants.DEFAULT_PROFILE_IMAGE
-                  : currentUser.user!.avatarUrl);
+            image: currentUser.user == null
+                ? Constants.DEFAULT_PROFILE_IMAGE
+                : currentUser.user!.avatarUrl,
+            imageRadius: imageRadius,
+          );
         });
   }
 }
-  
