@@ -23,7 +23,7 @@ final favoriteRepositoryProvider = Provider<FavoriteRepository>.internal(
 
 typedef FavoriteRepositoryRef = ProviderRef<FavoriteRepository>;
 String _$favoriteControllerHash() =>
-    r'd790593191d16b541a9ce685814bb6145c9120c5';
+    r'4092564d14da99671ddd7ac1d988f21ce899214b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -48,10 +48,10 @@ class _SystemHash {
 
 abstract class _$FavoriteController
     extends BuildlessAutoDisposeAsyncNotifier<List<FavoriteModel>> {
-  late final String userId;
+  late final String? userId;
 
   FutureOr<List<FavoriteModel>> build(
-    String userId,
+    String? userId,
   );
 }
 
@@ -66,7 +66,7 @@ class FavoriteControllerFamily extends Family<AsyncValue<List<FavoriteModel>>> {
 
   /// See also [FavoriteController].
   FavoriteControllerProvider call(
-    String userId,
+    String? userId,
   ) {
     return FavoriteControllerProvider(
       userId,
@@ -116,7 +116,7 @@ class FavoriteControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
               FavoriteControllerFamily._allTransitiveDependencies,
         );
 
-  final String userId;
+  final String? userId;
 
   @override
   bool operator ==(Object other) {

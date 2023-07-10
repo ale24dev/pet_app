@@ -46,17 +46,37 @@ class PetDetails extends ConsumerWidget {
   }
 }
 
-class _FooterDetails extends ConsumerWidget {
+class _FooterDetails extends ConsumerStatefulWidget {
   const _FooterDetails({required this.pet});
 
   final Pet pet;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentUser = ref.read(authControllerProvider).value;
-    final isInFavController = ref
-        .watch(checkPetInFavProvider(userId: currentUser!.user!.id, pet: pet));
+  ConsumerState<ConsumerStatefulWidget> createState() => _FooterDetailsState();
+}
 
+class _FooterDetailsState extends ConsumerState<_FooterDetails> {
+  bool? isInFav;
+  @override
+  Widget build(BuildContext context) {
+    final currentUser = ref.read(authControllerProvider).value;
+    final isInFavController = ref.watch(
+        checkPetInFavProvider(userId: currentUser!.user!.id, pet: widget.pet));
+
+    ///Refresh state if occurs an error
+    ref.listen(
+      favoriteControllerProvider(currentUser.user!.id),
+      (_, state) {
+        setState(() {
+          if (!state.isLoading && state.hasError) {
+            state.showSnackbarOnError(context);
+            setState(() {
+              isInFav = !isInFav!;
+            });
+          }
+        });
+      },
+    );
     return Positioned(
       top: context.heightPx * .47,
       left: 0,
@@ -78,39 +98,75 @@ class _FooterDetails extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      pet.name,
+                      widget.pet.name,
                       style: AppTextStyle().petDetailsName,
                     ),
-                    AsyncValueWidget(
-                      value: isInFavController,
-                      data: (isInFav) {
-                        return InkWell(
-                          onTap: () {
-                            if (!isInFav) {
-                              ref
-                                  .read(favoriteControllerProvider(
-                                          currentUser.user!.id)
-                                      .notifier)
-                                  .addToFavorites(pet: pet);
-                            } else {
-                              ref
-                                  .read(favoriteControllerProvider(
-                                          currentUser.user!.id)
-                                      .notifier)
-                                  .removeOfFavorites(pet: pet);
-                            }
-                          },
-                          child: SvgPicture.asset(
-                            AppAsset.heartSolid,
-                            color: isInFav ? Colors.red : null,
+                    isInFav != null
+                        ? InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (isInFav!) {
+                                  ref
+                                      .read(favoriteControllerProvider(
+                                              currentUser.user!.id)
+                                          .notifier)
+                                      .removeOfFavorites(pet: widget.pet);
+                                } else {
+                                  ref
+                                      .read(favoriteControllerProvider(
+                                              currentUser.user!.id)
+                                          .notifier)
+                                      .addToFavorites(pet: widget.pet);
+                                }
+                                isInFav = !isInFav!;
+                              });
+                            },
+                            child: SvgPicture.asset(
+                              AppAsset.heartSolid,
+                              color: isInFav! ? Colors.red : null,
+                            ),
+                          )
+                        : AsyncValueWidget(
+                            value: isInFavController,
+                            data: (isInFav) {
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((timeStamp) {
+                                setState(() {
+                                  this.isInFav = isInFav;
+                                });
+                              });
+
+                              return const SizedBox.shrink();
+                              // return InkWell(
+                              //   onTap: () {
+                              //     if (!isInFav) {
+                              //       ref
+                              //           .read(favoriteControllerProvider(
+                              //                   currentUser.user!.id)
+                              //               .notifier)
+                              //           .addToFavorites(pet: widget.pet);
+                              //       setState(() {
+                              //         isInFav = !isInFav;
+                              //       });
+                              //     } else {
+                              //       ref
+                              //           .read(favoriteControllerProvider(
+                              //                   currentUser.user!.id)
+                              //               .notifier)
+                              //           .removeOfFavorites(pet: widget.pet);
+                              //     }
+                              //   },
+                              //   child: SvgPicture.asset(
+                              //     AppAsset.heartSolid,
+                              //     color: this.isInFav ? Colors.red : null,
+                              //   ),
+                              // );
+                            },
                           ),
-                        );
-                      },
-                    ),
                   ],
                 ),
                 Text(
-                  pet.breedModel.name,
+                  widget.pet.breedModel.name,
                   style: AppTextStyle().petDetailsBreed,
                 ),
                 const SizedBox.square(
@@ -121,24 +177,25 @@ class _FooterDetails extends ConsumerWidget {
                   children: [
                     PetDetailBox(
                         title: context.l10n.addPetScreenAge,
-                        description: pet.age?.toString() ?? '?'),
+                        description: widget.pet.age?.toString() ?? '?'),
                     PetDetailBox(
                         title: context.l10n.addPetScreenGender,
-                        description: pet.gender),
+                        description: widget.pet.gender),
                     PetDetailBox(
                         title: context.l10n.addPetScreenColor,
-                        description: pet.color),
+                        description: widget.pet.color),
                     PetDetailBox(
                         title: context.l10n.addPetScreenWeight,
-                        description:
-                            pet.weight != null ? '${pet.weight} kg' : '?'),
+                        description: widget.pet.weight != null
+                            ? '${widget.pet.weight} kg'
+                            : '?'),
                   ],
                 ),
                 const SizedBox.square(
                   dimension: 20,
                 ),
                 Text(
-                  pet.description,
+                  widget.pet.description,
                   style: AppTextStyle().petDetailsDescription,
                 )
               ],

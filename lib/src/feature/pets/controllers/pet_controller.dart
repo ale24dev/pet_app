@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:pet_app/src/core/api_result.dart';
 import 'package:pet_app/src/core/services/supabase_service.dart';
 import 'package:pet_app/src/core/utils/riverpod.dart';
@@ -8,9 +10,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'pet_controller.g.dart';
 
 @riverpod
-class PetController extends _$PetController with SideEffect<ApiResult> {
+// ignore: prefer_void_to_null
+class PetController extends _$PetController with SideEffect<ApiResult, Null> {
   @override
-  FutureOr<ApiResult> build() {
+  FutureOr<ApiResult> build(param) {
     return ref.watch(petRepositoryProvider).getPetsOfUser();
   }
 

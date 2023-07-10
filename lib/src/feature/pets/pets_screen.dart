@@ -48,7 +48,7 @@ class PetsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final petController = ref.watch(petControllerProvider);
+    final petController = ref.watch(petControllerProvider(null));
     return Stack(
       children: [
         AsyncValueWidget(
@@ -125,7 +125,7 @@ class PetsScreen extends ConsumerWidget {
                                   },
                                   onDismissed: (direction) {
                                     ref
-                                        .read(petControllerProvider.notifier)
+                                        .read(petControllerProvider(null).notifier)
                                         .deletePet(pet.id);
                                   },
                                   direction: DismissDirection.endToStart,

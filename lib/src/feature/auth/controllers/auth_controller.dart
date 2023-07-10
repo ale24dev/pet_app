@@ -23,6 +23,7 @@ class AuthController extends _$AuthController {
       {required String email,
       required String password,
       bool rememberEmail = false}) async {
+
     final authRepository = ref.read(authRepositoryProvider);
 
     state = const AsyncValue.loading();
@@ -58,8 +59,6 @@ class AuthController extends _$AuthController {
 
     return success;
   }
-
-  
 }
 
 @Riverpod(keepAlive: true)

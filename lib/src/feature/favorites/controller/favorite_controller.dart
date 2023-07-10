@@ -1,4 +1,5 @@
 import 'package:pet_app/src/core/services/supabase_service.dart';
+import 'package:pet_app/src/core/utils/riverpod.dart';
 import 'package:pet_app/src/feature/favorites/data/favorite_repository.dart';
 import 'package:pet_app/src/feature/favorites/data/model/favorite_model.dart';
 import 'package:pet_app/src/feature/pets/domain/pet.dart';
@@ -8,58 +9,43 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'favorite_controller.g.dart';
 
 @riverpod
-class FavoriteController extends _$FavoriteController {
+class FavoriteController extends _$FavoriteController
+    with SideEffect<List<FavoriteModel>, String> {
   @override
-  FutureOr<List<FavoriteModel>> build(String userId) async {
+  FutureOr<List<FavoriteModel>> build(userId) async {
     final favoriteRepository = ref.watch(favoriteRepositoryProvider);
 
-    return await favoriteRepository.getFavoritesByUser(userId);
+    return await favoriteRepository.getFavoritesByUser(userId!);
   }
 
   Future<bool> addToFavorites({required Pet pet}) async {
-    state = const AsyncValue.loading();
-    try {
-      final favoriteRepository = ref.read(favoriteRepositoryProvider);
+    final favoriteRepository = ref.read(favoriteRepositoryProvider);
 
-      final success =
-          await favoriteRepository.addPetToFav(userId: userId, pet: pet);
+    final success =
+        await favoriteRepository.addPetToFav(userId: userId!, pet: pet);
 
-      if (success) {
-        ref
-            .read(checkPetInFavProvider(userId: userId, pet: pet).notifier)
-            .refreshState();
-      }
-
-      state = await AsyncValue.guard(() async => build(userId));
-
-      return success;
-    } catch (e, s) {
-      state = AsyncError(e, s);
-      return false;
+    if (success) {
+      ref
+          .read(checkPetInFavProvider(userId: userId!, pet: pet).notifier)
+          .refreshState();
     }
+
+    return success;
   }
 
   Future<bool> removeOfFavorites({required Pet pet}) async {
-    state = const AsyncValue.loading();
-    try {
-      final favoriteRepository = ref.read(favoriteRepositoryProvider);
+    final favoriteRepository = ref.read(favoriteRepositoryProvider);
 
-      final success =
-          await favoriteRepository.removePetOfFav(userId: userId, pet: pet);
+    final success =
+        await favoriteRepository.removePetOfFav(userId: userId!, pet: pet);
 
-      if (success) {
-        ref
-            .read(checkPetInFavProvider(userId: userId, pet: pet).notifier)
-            .refreshState();
-      }
-
-      state = await AsyncValue.guard(() async => build(userId));
-
-      return success;
-    } catch (e, s) {
-      state = AsyncError(e, s);
-      return false;
+    if (success) {
+      ref
+          .read(checkPetInFavProvider(userId: userId!, pet: pet).notifier)
+          .refreshState();
     }
+
+    return success;
   }
 }
 
