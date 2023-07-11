@@ -131,6 +131,8 @@ class AppTheme {
     );
   }
 
+  static final defaultRadius = BorderRadius.circular(12); 
+
   static final defaultShadow = [
     const BoxShadow(
         color: AppColor.shadow, blurRadius: 15, offset: Offset(0, 15))
