@@ -12,7 +12,7 @@ class Navbar {
       index: index ?? this.index, navbarItem: navbarItem ?? this.navbarItem);
 }
 
-enum NavbarItem { home, pet, shop }
+enum NavbarItem { home, pet, favs }
 
 @riverpod
 class NavbarController extends _$NavbarController {
@@ -33,7 +33,7 @@ class NavbarController extends _$NavbarController {
       case 1:
         return NavbarItem.pet;
       default:
-        return NavbarItem.shop;
+        return NavbarItem.favs;
     }
   }
 }

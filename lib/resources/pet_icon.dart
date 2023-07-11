@@ -46,11 +46,11 @@ class PetIcon {
   static const String? _kFontPkg = null;
 
   static const IconData cog = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData pets = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData petSolid = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData home_1 = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData user_outline = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData shop = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData paw = IconData(0xe84a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData pet = IconData(0xe84a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData eye_closed = IconData(0xf366, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData eye = IconData(0xf3a8, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
