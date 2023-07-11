@@ -23,7 +23,7 @@ final favoriteRepositoryProvider = Provider<FavoriteRepository>.internal(
 
 typedef FavoriteRepositoryRef = ProviderRef<FavoriteRepository>;
 String _$favoriteControllerHash() =>
-    r'910c9cf4229a9597181ccf295b7fb2fede9ba1c6';
+    r'4092564d14da99671ddd7ac1d988f21ce899214b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -48,10 +48,10 @@ class _SystemHash {
 
 abstract class _$FavoriteController
     extends BuildlessAutoDisposeAsyncNotifier<List<FavoriteModel>> {
-  late final String userId;
+  late final String? userId;
 
   FutureOr<List<FavoriteModel>> build(
-    String userId,
+    String? userId,
   );
 }
 
@@ -66,7 +66,7 @@ class FavoriteControllerFamily extends Family<AsyncValue<List<FavoriteModel>>> {
 
   /// See also [FavoriteController].
   FavoriteControllerProvider call(
-    String userId,
+    String? userId,
   ) {
     return FavoriteControllerProvider(
       userId,
@@ -116,7 +116,7 @@ class FavoriteControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
               FavoriteControllerFamily._allTransitiveDependencies,
         );
 
-  final String userId;
+  final String? userId;
 
   @override
   bool operator ==(Object other) {
@@ -137,6 +137,115 @@ class FavoriteControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   ) {
     return notifier.build(
       userId,
+    );
+  }
+}
+
+String _$checkPetInFavHash() => r'18d017e40fe110dfc4bf498472e4b80db2e92882';
+
+abstract class _$CheckPetInFav extends BuildlessAutoDisposeAsyncNotifier<bool> {
+  late final String userId;
+  late final Pet pet;
+
+  FutureOr<bool> build({
+    required String userId,
+    required Pet pet,
+  });
+}
+
+/// See also [CheckPetInFav].
+@ProviderFor(CheckPetInFav)
+const checkPetInFavProvider = CheckPetInFavFamily();
+
+/// See also [CheckPetInFav].
+class CheckPetInFavFamily extends Family<AsyncValue<bool>> {
+  /// See also [CheckPetInFav].
+  const CheckPetInFavFamily();
+
+  /// See also [CheckPetInFav].
+  CheckPetInFavProvider call({
+    required String userId,
+    required Pet pet,
+  }) {
+    return CheckPetInFavProvider(
+      userId: userId,
+      pet: pet,
+    );
+  }
+
+  @override
+  CheckPetInFavProvider getProviderOverride(
+    covariant CheckPetInFavProvider provider,
+  ) {
+    return call(
+      userId: provider.userId,
+      pet: provider.pet,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'checkPetInFavProvider';
+}
+
+/// See also [CheckPetInFav].
+class CheckPetInFavProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<CheckPetInFav, bool> {
+  /// See also [CheckPetInFav].
+  CheckPetInFavProvider({
+    required this.userId,
+    required this.pet,
+  }) : super.internal(
+          () => CheckPetInFav()
+            ..userId = userId
+            ..pet = pet,
+          from: checkPetInFavProvider,
+          name: r'checkPetInFavProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$checkPetInFavHash,
+          dependencies: CheckPetInFavFamily._dependencies,
+          allTransitiveDependencies:
+              CheckPetInFavFamily._allTransitiveDependencies,
+        );
+
+  final String userId;
+  final Pet pet;
+
+  @override
+  bool operator ==(Object other) {
+    return other is CheckPetInFavProvider &&
+        other.userId == userId &&
+        other.pet == pet;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, userId.hashCode);
+    hash = _SystemHash.combine(hash, pet.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+
+  @override
+  FutureOr<bool> runNotifierBuild(
+    covariant CheckPetInFav notifier,
+  ) {
+    return notifier.build(
+      userId: userId,
+      pet: pet,
     );
   }
 }

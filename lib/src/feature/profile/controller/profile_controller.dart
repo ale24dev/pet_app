@@ -5,9 +5,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'profile_controller.g.dart';
 
 @riverpod
-class LogoutController extends _$LogoutController with SideEffect<void> {
+// ignore: prefer_void_to_null
+class LogoutController extends _$LogoutController with SideEffect<void, Null> {
   @override
-  Future<void> build() async {}
+  Future<void> build(param) async {}
 
   Future<bool> logout() => mutation(
         mutation: () async {

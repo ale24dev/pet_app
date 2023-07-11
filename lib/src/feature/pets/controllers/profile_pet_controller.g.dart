@@ -7,7 +7,7 @@ part of 'profile_pet_controller.dart';
 // **************************************************************************
 
 String _$profilePetControllerHash() =>
-    r'be06dd02836e8e17de47d4c6df56a306375174d7';
+    r'63a3d5988a08ae86f75cb4fa752062af74680057';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,10 +32,10 @@ class _SystemHash {
 
 abstract class _$ProfilePetController
     extends BuildlessAutoDisposeAsyncNotifier<Pet> {
-  late final int id;
+  late final int? id;
 
   FutureOr<Pet> build(
-    int id,
+    int? id,
   );
 }
 
@@ -50,7 +50,7 @@ class ProfilePetControllerFamily extends Family<AsyncValue<Pet>> {
 
   /// See also [ProfilePetController].
   ProfilePetControllerProvider call(
-    int id,
+    int? id,
   ) {
     return ProfilePetControllerProvider(
       id,
@@ -100,7 +100,7 @@ class ProfilePetControllerProvider
               ProfilePetControllerFamily._allTransitiveDependencies,
         );
 
-  final int id;
+  final int? id;
 
   @override
   bool operator ==(Object other) {

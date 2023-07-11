@@ -110,7 +110,7 @@ class _AddOrEditPetFormModelState extends ConsumerState<AddOrEditPetFormModel> {
 
   @override
   Widget build(BuildContext context) {
-    final petController = ref.watch(petControllerProvider);
+    final petController = ref.watch(petControllerProvider(null));
 
     final currentUser = ref.watch(authControllerProvider).value;
 
@@ -296,7 +296,7 @@ class _AddOrEditPetFormModelState extends ConsumerState<AddOrEditPetFormModel> {
                                   breedModel: breedModelSelected!));
                         } else {
                           success = await ref
-                              .read(petControllerProvider.notifier)
+                              .read(petControllerProvider(null).notifier)
                               .addPet(PetModel(
                                   id: null,
                                   name: nameController.text,

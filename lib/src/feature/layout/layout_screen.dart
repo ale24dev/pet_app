@@ -107,7 +107,7 @@ class LogoutSettingTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final logoutController = ref.watch(logoutControllerProvider);
+    final logoutController = ref.watch(logoutControllerProvider(null));
     return PetSettingsTile(
       contentPadding: contentPadding,
       leading: logoutController
@@ -120,7 +120,7 @@ class LogoutSettingTile extends ConsumerWidget {
       title: Text(context.l10n.profileScreenLogout),
       onTap: () async {
         final didLogout =
-            await ref.read(logoutControllerProvider.notifier).logout();
+            await ref.read(logoutControllerProvider(null).notifier).logout();
 
         onLogout?.call(didLogout);
         if (context.mounted) {

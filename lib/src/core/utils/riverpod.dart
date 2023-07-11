@@ -4,17 +4,22 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class AsyncNotifierInterface<T> {
+class AsyncValueParams<T>{
+  T param;
+
+  AsyncValueParams({required this.param});
+}
+
+abstract class AsyncNotifierInterface<T, S> {
   AsyncValue<T> get state;
   set state(AsyncValue<T> value);
   AutoDisposeRef<AsyncValue<T>> get ref;
-  FutureOr<T> build();
+  FutureOr<T> build(S? param);
 }
-
 
 // This file has useful extensions, mixins and utilities for riverpod notifiers/async notifiers
 
-mixin SideEffect<T> implements AsyncNotifierInterface<T> {
+mixin SideEffect<T, S> implements AsyncNotifierInterface<T, S> {
   /// Handles the loading success and error states of <[T]> of an AsyncNotifier.
   /// When performing side effects like updating, removing or editing an object or item in a collection
   /// its very common to have duplicate code handling, a loading state before the mutation (if [showLoading]),
@@ -25,7 +30,10 @@ mixin SideEffect<T> implements AsyncNotifierInterface<T> {
   /// return mutation(mutation: () => ref.watch(repo).create(item));
   /// ```
 
-  Future<bool> mutation({bool showLoading = true, required AsyncValueGetter<bool?> mutation}) async {
+  Future<bool> mutation(
+      {bool showLoading = true,
+      required AsyncValueGetter<bool?> mutation,
+      S? param}) async {
     final initialState = state;
 
     if (showLoading) state = AsyncLoading<T>();
@@ -35,8 +43,12 @@ mixin SideEffect<T> implements AsyncNotifierInterface<T> {
 
       if (!success) return false;
 
-      // ignore: invalid_use_of_visible_for_overriding_member
-      state = await AsyncValue.guard(() async => build());
+      // if (param != null) {
+      //   state = await AsyncValue.guard(() async => buildWithParam(param));
+      // } else {
+        // ignore: invalid_use_of_visible_for_overriding_member
+        state = await AsyncValue.guard(() async => build(param));
+      // }
 
       return success;
     } catch (e, st) {
