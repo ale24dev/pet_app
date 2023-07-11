@@ -14,8 +14,6 @@ class PetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130,
-      // margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: Theme.of(context).cardTheme.shape!,

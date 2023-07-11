@@ -137,30 +137,6 @@ class _FooterDetailsState extends ConsumerState<_FooterDetails> {
                               });
 
                               return const SizedBox.shrink();
-                              // return InkWell(
-                              //   onTap: () {
-                              //     if (!isInFav) {
-                              //       ref
-                              //           .read(favoriteControllerProvider(
-                              //                   currentUser.user!.id)
-                              //               .notifier)
-                              //           .addToFavorites(pet: widget.pet);
-                              //       setState(() {
-                              //         isInFav = !isInFav;
-                              //       });
-                              //     } else {
-                              //       ref
-                              //           .read(favoriteControllerProvider(
-                              //                   currentUser.user!.id)
-                              //               .notifier)
-                              //           .removeOfFavorites(pet: widget.pet);
-                              //     }
-                              //   },
-                              //   child: SvgPicture.asset(
-                              //     AppAsset.heartSolid,
-                              //     color: this.isInFav ? Colors.red : null,
-                              //   ),
-                              // );
                             },
                           ),
                   ],

@@ -5,6 +5,7 @@ import 'package:pet_app/src/core/async_value.dart';
 import 'package:pet_app/src/core/widgets/empty_data.dart';
 import 'package:pet_app/src/feature/auth/controllers/auth_controller.dart';
 import 'package:pet_app/src/feature/favorites/controller/favorite_controller.dart';
+import 'package:pet_app/src/feature/favorites/widgets/favorite_card.dart';
 
 class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({super.key});
@@ -30,7 +31,7 @@ class FavoritesScreen extends ConsumerWidget {
                         itemCount: favorites.length,
                         itemBuilder: (context, index) {
                           final favorite = favorites[index];
-                          return Text(favorite.pet.name);
+                          return FavoriteCard(favorite: favorite);
                         },
                       );
               },
@@ -41,3 +42,4 @@ class FavoritesScreen extends ConsumerWidget {
     );
   }
 }
+
