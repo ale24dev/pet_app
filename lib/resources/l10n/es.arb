@@ -11,9 +11,19 @@
   "success": "Operación exitosa",
   "cm": "cm",
   "kg": "kg",
-  "requiredField": "Este campo es obligatorio",
   "save": "Guardar",
   "cancel": "Cancelar",
+  
+  "invalidEmail": "Ingrese un correo electrónico válido",
+  "requiredField": "Este campo es obligatorio",
+  "minLength": "La cantidad mínma de caracteres es {count}",
+  "@minLength": {
+    "description": "Minimum amount of haracters of field",
+    "placeholders": {
+      "count": {}
+    }
+  },
+
   "profileUpdatedSuccess": "Se ha actualizado el perfil correctamente",
 
   "onboardingScreenFirstPageTitle": "Bienvenido a Pet Care",
